@@ -1,11 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { DateTime } from 'luxon'
 
 import Layout from './layout'
 import Calendar from './calendar'
 import Time from './time'
 
 Vue.use(VueRouter)
+
+Vue.filter(`hoursMinutesSeconds`, value => {
+  const isLuxonDateTime = value instanceof DateTime
+  if (!isLuxonDateTime) return `00:00:00`
+  return value.toLocaleString(DateTime.TIME_24_WITH_SECONDS)
+})
 
 const routes = [
   {
