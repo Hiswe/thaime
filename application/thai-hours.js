@@ -62,7 +62,7 @@ export function toThaiTime(luxonDate) {
     }
   }
   const { hour } = luxonDate
-  if (hour < 0) {
+  if (hour < 1) {
     return {
       period: `midnight`,
       rtgs: `tiang kheun`,
@@ -71,23 +71,27 @@ export function toThaiTime(luxonDate) {
     }
   }
   if (hour < 6) {
+    const thaiHour = hour
+    const thaiNumber = THAI_NUMBERS[thaiHour]
     return {
-      period: `early morning`,
-      rtgs: `ti`,
-      thai: `ตี`,
+      period: `late night`,
+      rtgs: `ti ${thaiNumber.rtgs}`,
+      thai: `ตี${thaiNumber.th}`,
       hour: hour,
     }
   }
 
-  if (hour < 11) {
+  if (hour < 12) {
+    const thaiHour = hour
+    const thaiNumber = THAI_NUMBERS[thaiHour]
     return {
       period: `morning`,
-      rtgs: `mong chao`,
-      thai: `โมงเช้า`,
+      rtgs: `${thaiNumber.rtgs} mong chao`,
+      thai: `${thaiNumber.th}โมงเช้า`,
       hour: hour,
     }
   }
-  if (hour < 12) {
+  if (hour < 13) {
     return {
       period: `noon`,
       rtgs: `tiang`,
@@ -95,7 +99,7 @@ export function toThaiTime(luxonDate) {
       hour: false,
     }
   }
-  if (hour < 16) {
+  if (hour < 17) {
     const thaiHour = hour === 13 ? false : hour - 12
     const thaiNumber = thaiHour ? THAI_NUMBERS[thaiHour] : false
     return {
@@ -106,7 +110,7 @@ export function toThaiTime(luxonDate) {
     }
   }
   if (hour < 19) {
-    const thaiHour = hour === 13 ? false : hour - 12
+    const thaiHour = hour - 12
     const thaiNumber = thaiHour ? THAI_NUMBERS[thaiHour] : false
     return {
       period: `sunset`,
@@ -119,7 +123,7 @@ export function toThaiTime(luxonDate) {
     const thaiHour = hour - 18
     const thaiNumber = thaiHour ? THAI_NUMBERS[thaiHour] : false
     return {
-      period: `sunset`,
+      period: `night`,
       rtgs: `${thaiNumber.rtgs}  (${thaiHour}) toom`,
       thai: `${thaiNumber.th}ทุ่ม`,
       hour: thaiHour,
