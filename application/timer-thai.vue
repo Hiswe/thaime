@@ -10,7 +10,7 @@
 <script>
 import { DateTime } from 'luxon'
 
-import { toThaiTime } from './thai-hours'
+import { toThaiTime, getThaiTime } from './thai-hours'
 
 export default {
   name: `timer-thai`,
@@ -18,7 +18,7 @@ export default {
     currentTime: DateTime,
   },
   data: function() {
-    const thaiTime = toThaiTime(this.currentTime)
+    const thaiTime = getThaiTime(this.currentTime)
     return {
       rtgs: thaiTime.rtgs,
       thai: thaiTime.thai,

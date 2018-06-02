@@ -1,4 +1,7 @@
 import { DateTime } from 'luxon'
+import clone from './clone'
+
+/* spell-checker: disable */
 
 const THAI_NUMBERS = {
   0: {
@@ -49,6 +52,158 @@ const THAI_NUMBERS = {
     th: `สิบเอ็ด`,
     rtgs: `sip et`,
   },
+}
+
+function hourToThaiStringNumber(hour) {
+  if (!Number.isFinite(hour)) return ``
+  return THAI_NUMBERS[hour].th
+}
+
+function hourToRtgsNumber(hour, { padStart = false, padEnd = false }) {
+  const thaiHour = Number.isFinite(hour)
+    ? `${THAI_NUMBERS[hour].rtgs} (${hour})`
+    : ``
+  padStart = padStart ? ` ` : ``
+  padStart = padEnd ? ` ` : ``
+  return `${padStart}${thaiHour}${padStart}`
+}
+
+export const thaiPeriods = [
+  {
+    period: `midnight`,
+    from: 0,
+    to: 1,
+    get rtgs() {
+      return `tiang kheun`
+    },
+    get thai() {
+      return `เทียงคืน`
+    },
+  },
+  {
+    period: `late night`,
+    from: 1,
+    to: 6,
+    get thaiHourCount() {
+      if (!Number.isFinite(this.hour)) return false
+      return this.hour
+    },
+    get rtgs() {
+      const rtgsHour = hourToRtgsNumber(this.thaiHourCount, { padStart: true })
+      return `ti${rtgsHour}`
+    },
+    get thai() {
+      const thaiHour = hourToThaiStringNumber(this.thaiHourCount)
+      return `ตี${hourToThaiStringNumber(this.hour)}`
+    },
+  },
+  {
+    period: `morning`,
+    from: 6,
+    to: 12,
+    get thaiHourCount() {
+      if (!Number.isFinite(this.hour)) return false
+      return this.hour
+    },
+    get rtgs() {
+      const rtgsHour = hourToRtgsNumber(this.thaiHourCount, { padEnd: true })
+      return `${rtgsHour}mong chao`
+    },
+    get thai() {
+      const thaiHour = hourToThaiStringNumber(this.thaiHourCount)
+      return `${thaiHour}โมงเช้า`
+    },
+  },
+  {
+    period: `noon`,
+    from: 12,
+    to: 13,
+    get rtgs() {
+      return `tiang`
+    },
+    get thai() {
+      return `เทียง`
+    },
+  },
+  {
+    period: `afternoon`,
+    from: 13,
+    to: 17,
+    get thaiHourCount() {
+      if (!Number.isFinite(this.hour)) return false
+      return this.hour - 12
+    },
+    get isFirstHour() {
+      return Number.isFinite(this.thaiHourCount) && this.thaiHourCount === 1
+    },
+    get rtgs() {
+      const rtgsHour = hourToRtgsNumber(
+        this.isFirstHour ? false : this.thaiHourCount,
+        {
+          padStart: true,
+          padEnd: true,
+        }
+      )
+      return `bai${rtgsHour}mong`
+    },
+    get thai() {
+      const thaiHour = hourToThaiStringNumber(this.thaiHourCount)
+      return `${thaiHour}โมงเย็น`
+    },
+  },
+  {
+    period: `sunset`,
+    from: 17,
+    to: 19,
+    get thaiHourCount() {
+      if (!Number.isFinite(this.hour)) return false
+      return this.hour - 12
+    },
+    get rtgs() {
+      const rtgsHour = hourToRtgsNumber(this.thaiHourCount, {
+        padEnd: true,
+      })
+      return `${rtgsHour}mong yen`
+    },
+    get thai() {
+      const thaiHour = hourToThaiStringNumber(this.thaiHourCount)
+      return `${thaiHour}โมงเย็น`
+    },
+  },
+  {
+    period: `night`,
+    from: 19,
+    to: 24,
+    get thaiHourCount() {
+      if (!Number.isFinite(this.hour)) return false
+      return this.hour - 18
+    },
+    get rtgs() {
+      const rtgsHour = hourToRtgsNumber(this.thaiHourCount, {
+        padEnd: true,
+      })
+      return `${rtgsHour}toom`
+    },
+    get thai() {
+      const thaiHour = hourToThaiStringNumber(this.thaiHourCount)
+      return `${thaiHour}ทุ่ม`
+    },
+  },
+]
+
+export function getThaiTime(luxonDate) {
+  const isLuxonDateTime = luxonDate instanceof DateTime
+  if (!isLuxonDateTime) {
+    return {
+      period: ``,
+      rtgs: ``,
+      thai: ``,
+      hour: false,
+    }
+  }
+  const { hour } = luxonDate
+  const period = thaiPeriods.find(p => hour >= p.from && hour < p.to)
+  return clone(period, { hour })
 }
 
 export function toThaiTime(luxonDate) {
