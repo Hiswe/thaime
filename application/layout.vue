@@ -18,9 +18,11 @@
 <style>
 :root {
   --navigation-height: 50px;
+  --c-text: hsl(0, 0%, 20%);
   --c-primary: hsl(272, 100%, 31%);
   --c-primary-lighter: hsl(272, 50%, 45%);
   --c-primary-contrast: white;
+  --gutter: 1.5rem;
 }
 html,
 body {
@@ -29,12 +31,23 @@ body {
   /* http://markdotto.com/2018/02/07/github-system-fonts/ */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 18px;
+  color: var(--c-text);
 }
 main {
   min-height: 100vh;
 }
+section {
+  padding: var(--gutter);
+}
+h2 {
+  font-weight: 300;
+  text-transform: uppercase;
+}
+.thai-text {
+  font-size: 1.1em;
+}
 </style>
-
 
 <style scoped>
 ul {

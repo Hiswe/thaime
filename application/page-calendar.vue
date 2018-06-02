@@ -1,15 +1,13 @@
 <template>
   <section>
-    <h2>Calendar</h2>
     <dl>
       <dt>english</dt>
       <dd>{{englishDate}}</dd>
       <dt>Thai</dt>
-      <dd>{{thaiDate}}</dd>
+      <dd class="thai-text">{{thaiDate}}</dd>
     </dl>
   </section>
 </template>
-
 
 <script>
 import { DateTime } from 'luxon'

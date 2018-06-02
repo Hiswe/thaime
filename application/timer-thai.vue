@@ -3,7 +3,7 @@
     <dt>RTGS</dt>
     <dd>{{ rtgs }}</dd>
     <dt>Thaï</dt>
-    <dd>{{ thai }}</dd>
+    <dd class="thai-text">{{ thai }}</dd>
   </dl>
 </template>
 
