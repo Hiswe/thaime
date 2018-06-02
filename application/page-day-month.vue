@@ -2,20 +2,21 @@
   <section>
     <h2>days</h2>
     <ul>
-      <li v-for="(day, index) in days" :key="day.rtgs" :class="{ active: currentDay === index + 1 }">
-        <p class="english-name">{{ day.en }}</p>
-        <p class="thai-name">
-          <span class="thai-text">{{ day.th }} </span>
-          <small class="rtgs">{{ day.rtgs }}</small>
-        </p>
-      </li>
+      <t-day-or-month-item
+        v-for="(day, index) in days"
+        :key="day.rtgs"
+        :dayOrMonth="day"
+        :isCurrentDayOrMonth="currentDay === index + 1"
+      ></t-day-or-month-item>
     </ul>
     <h2>months</h2>
     <ul>
-      <li v-for="(month, index) in months" :key="month.rtgs" :class="{ active: currentMonth  === index + 1}">
-        <p class="english-name">{{ month.en }}</p>
-        <p class="thai-name">{{ month.th }} <small>{{ month.rtgs }}</small>  </p>
-      </li>
+      <t-day-or-month-item
+        v-for="(month, index) in months"
+        :key="month.rtgs"
+        :dayOrMonth="month"
+        :isCurrentDayOrMonth="currentDay === index + 1"
+      ></t-day-or-month-item>
     </ul>
   </section>
 </template>
@@ -26,23 +27,6 @@ ul {
   margin: 0;
   padding: 0;
 }
-li {
-  padding: 0.25rem 0;
-  display: flex;
-}
-p {
-  margin: 0;
-}
-p:first-child {
-  width: 6rem;
-  color: var(--c-primary);
-}
-small {
-  display: block;
-}
-.active {
-  color: red;
-}
 </style>
 
 
@@ -50,9 +34,13 @@ small {
 import { DateTime } from 'luxon'
 
 import { days, months } from './day-month-names'
+import DayOrMonthItem from './day-month-item'
 
 export default {
   name: `page-day-month`,
+  components: {
+    't-day-or-month-item': DayOrMonthItem,
+  },
   data() {
     const currentDay = DateTime.local()
     return {
