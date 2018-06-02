@@ -1,6 +1,6 @@
 <template>
   <section>
-    Time
+    <h1>Time</h1>
     <t-timer-24 :currentTime="currentTime"></t-timer-24>
     <t-timer-thai :currentTime="currentTime"></t-timer-thai>
   </section>

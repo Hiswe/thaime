@@ -3,8 +3,9 @@ import VueRouter from 'vue-router'
 import { DateTime } from 'luxon'
 
 import Layout from './layout'
-import Calendar from './calendar'
-import Time from './time'
+import TimePage from './page-time'
+import CalendarPage from './page-calendar'
+import DayMonthPage from './page-day-month'
 
 Vue.use(VueRouter)
 
@@ -17,11 +18,15 @@ Vue.filter(`hoursMinutesSeconds`, value => {
 const routes = [
   {
     path: `/`,
-    component: Time,
+    component: TimePage,
   },
   {
     path: `/calendar`,
-    component: Calendar,
+    component: CalendarPage,
+  },
+  {
+    path: `/day-month`,
+    component: DayMonthPage,
   },
 ]
 

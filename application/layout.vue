@@ -7,6 +7,9 @@
       <li>
         <router-link to="/calendar">date</router-link>
       </li>
+      <li>
+        <router-link to="/day-month">days & months</router-link>
+      </li>
     </ul>
     <router-view></router-view>
   </main>
