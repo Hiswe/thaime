@@ -22,13 +22,25 @@
 </template>
 
 <style scoped>
+section {
+  display: grid;
+  grid-template-areas:
+    'titleDay titleMonth'
+    'listDay listMonth';
+  grid-column-gap: var(--two-gutter);
+}
 ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
+h2 {
+  grid-area: titleDay;
+}
+h2 ~ h2 {
+  grid-area: titleMonth;
+}
 </style>
-
 
 <script>
 import { DateTime } from 'luxon'
@@ -52,4 +64,3 @@ export default {
   },
 }
 </script>
-

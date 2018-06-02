@@ -19,10 +19,15 @@
 :root {
   --navigation-height: 50px;
   --c-text: hsl(0, 0%, 20%);
-  --c-primary: hsl(272, 100%, 31%);
+  --c-text-lighter: hsl(0, 0%, 40%);
+  --c-primary: hsl(272, 100%, 30%);
   --c-primary-lighter: hsl(272, 50%, 45%);
   --c-primary-contrast: white;
+  --c-accent: hsl(187, 100%, 45%);
+  --c-accent-lighter: hsl(187, 60%, 70%);
+  --c-accent-lightest: hsl(187, 60%, 95%);
   --gutter: 1.5rem;
+  --two-gutter: calc(var(--gutter) * 2);
 }
 html,
 body {
