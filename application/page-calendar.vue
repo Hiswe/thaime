@@ -15,6 +15,7 @@
 import { DateTime } from 'luxon'
 
 export default {
+  name: `page-calendar`,
   data() {
     return {
       currentDate: false,

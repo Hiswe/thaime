@@ -25,22 +25,22 @@ export const days = [
     rtgs: `wan jan`,
   },
   {
-    rtgs: `wan angkan`,
+    rtgs: `wan angkhaan`,
   },
   {
-    rtgs: `wan put`,
+    rtgs: `	wan phoot`,
   },
   {
-    rtgs: `wan phreuruhat`,
+    rtgs: `wan phareuhat`,
   },
   {
-    rtgs: `wan wan suk`,
+    rtgs: `wan sook`,
   },
   {
-    rtgs: `wan sai`,
+    rtgs: `wan sao`,
   },
   {
-    rtgs: `wan athit`,
+    rtgs: `	wan aathit`,
   },
 ].map((day, index) => ({
   ...getDay(index),

@@ -57,3 +57,10 @@ a {
   background: var(--c-primary-lighter);
 }
 </style>
+
+<script>
+export default {
+  name: `layout`,
+}
+</script>
+

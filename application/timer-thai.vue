@@ -13,12 +13,12 @@ import { DateTime } from 'luxon'
 import { toThaiTime } from './thai-hours'
 
 export default {
+  name: `timer-thai`,
   props: {
     currentTime: DateTime,
   },
   data: function() {
     const thaiTime = toThaiTime(this.currentTime)
-    console.log(thaiTime)
     return {
       rtgs: thaiTime.rtgs,
       thai: thaiTime.thai,

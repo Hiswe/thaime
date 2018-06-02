@@ -13,6 +13,7 @@ import Timer24 from './timer-24'
 import TimerThai from './timer-thai'
 
 export default {
+  name: `page-time`,
   components: {
     't-timer-24': Timer24,
     't-timer-thai': TimerThai,
