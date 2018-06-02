@@ -1,6 +1,7 @@
 <template>
   <section>
     <t-timer-24 :currentTime="currentTime"></t-timer-24>
+    <t-clock :currentTime="currentTime"></t-clock>
     <t-timer-thai :currentTime="currentTime"></t-timer-thai>
   </section>
 </template>
@@ -9,23 +10,24 @@
 import { DateTime } from 'luxon'
 
 import Timer24 from './timer-24'
+import Clock from './clock'
 import TimerThai from './timer-thai'
 
 export default {
   name: `page-time`,
   components: {
     't-timer-24': Timer24,
+    't-clock': Clock,
     't-timer-thai': TimerThai,
   },
   data() {
     return {
-      currentTime: false,
+      currentTime: DateTime.local(),
       timerId: false,
       intervalId: false,
     }
   },
   created() {
-    this.setCurrentTime()
     this.planFirstTimeUpdate()
   },
   beforeDestroy() {
