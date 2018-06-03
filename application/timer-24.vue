@@ -4,6 +4,15 @@
   </div>
 </template>
 
+<style scoped>
+div {
+  font-family: monospace;
+  font-size: 2rem;
+  margin-top: var(--gutter);
+}
+</style>
+
+
 <script>
 import { DateTime } from 'luxon'
 

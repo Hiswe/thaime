@@ -20,8 +20,20 @@
 </template>
 
 <style scoped>
+ul {
+  display: grid;
+  list-style: none;
+  padding: 0;
+  grid-gap: var(--gutter);
+  grid-template-columns: repeat(4, 1fr);
+}
+li {
+  border: 1px solid #eee;
+  padding: 0 var(--gutter) var(--gutter);
+}
+
 .active {
-  color: red;
+  background: var(--c-accent-lightest);
 }
 </style>
 

@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
 import clone from './clone'
+import { shallowClone } from './clone'
 
 /* spell-checker: disable */
 
@@ -54,23 +55,56 @@ const THAI_NUMBERS = {
   },
 }
 
-function hourToThaiStringNumber(hour) {
-  if (!Number.isFinite(hour)) return ``
-  return THAI_NUMBERS[hour].th
+const basePeriod = {
+  _numbers: THAI_NUMBERS,
+  name: `period`,
+  start: 0,
+  end: 0,
+  rtgs: ``,
+  thai: ``,
+  thaiPeriodHourResetAt: 0,
+  hideFirstThaiHour: false,
+  hour: false,
+  rtgsPadStart: false,
+  rtgsPadEnd: false,
+  isFirstHourInPeriod() {
+    const thaiHour = this.getThaiHourCount()
+    if (!Number.isFinite(thaiHour)) return false
+    if (this.thaiPeriodHourResetAt === 0) return thaiHour === this.start
+    return thaiHour === 0
+  },
+  isHourInPeriod(hour) {
+    return hour >= this.start && hour < this.end
+  },
+  getThaiHourCount() {
+    if (!Number.isFinite(this.hour)) return false
+    if (!this.thaiPeriodHourResetAt) return this.hour
+    return this.hour - this.thaiPeriodHourResetAt
+  },
+  hourToThaiStringNumber() {
+    const thaiHour = this.getThaiHourCount()
+    if (!Number.isFinite(thaiHour)) return ``
+    const isFirstHourInPeriod = this.isFirstHourInPeriod()
+    if (isFirstHourInPeriod && this.hideFirstThaiHour) return ``
+    return this._numbers[thaiHour].th
+  },
+  hourToRtgsNumber() {
+    const thaiHour = this.getThaiHourCount()
+    const isFirstHourInPeriod = this.isFirstHourInPeriod()
+    const displayHour = !Number.isFinite(thaiHour)
+      ? ``
+      : isFirstHourInPeriod && this.hideFirstThaiHour
+        ? ``
+        : `${this._numbers[thaiHour].rtgs} (${thaiHour})`
+    const padStart = this.rtgsPadStart ? ` ` : ``
+    const padEnd = this.rtgsPadEnd ? ` ` : ``
+    return `${padStart}${displayHour}${padEnd}`
+  },
 }
 
-function hourToRtgsNumber(hour, { padStart = false, padEnd = false }) {
-  const thaiHour = Number.isFinite(hour)
-    ? `${THAI_NUMBERS[hour].rtgs} (${hour})`
-    : ``
-  padStart = padStart ? ` ` : ``
-  padStart = padEnd ? ` ` : ``
-  return `${padStart}${thaiHour}${padStart}`
-}
-
-function isHourInPeriod(hour) {
-  return hour >= this.start && hour < this.end
-}
+// function isHourInPeriod(hour) {
+//   return hour >= this.start && hour < this.end
+// }
 
 export const thaiPeriods = [
   {
@@ -84,33 +118,29 @@ export const thaiPeriods = [
     name: `late night`,
     start: 1,
     end: 6,
-    get thaiHourCount() {
-      if (!Number.isFinite(this.hour)) return false
-      return this.hour
-    },
+    thaiPeriodHourResetAt: 0,
+    rtgsPadStart: true,
     get rtgs() {
-      const rtgsHour = hourToRtgsNumber(this.thaiHourCount, { padStart: true })
+      const rtgsHour = this.hourToRtgsNumber()
       return `ti${rtgsHour}`
     },
     get thai() {
-      const thaiHour = hourToThaiStringNumber(this.thaiHourCount)
-      return `ตี${hourToThaiStringNumber(this.hour)}`
+      const thaiHour = this.hourToThaiStringNumber()
+      return `ตี${thaiHour}`
     },
   },
   {
     name: `morning`,
     start: 6,
     end: 12,
-    get thaiHourCount() {
-      if (!Number.isFinite(this.hour)) return false
-      return this.hour
-    },
+    thaiPeriodHourReset: 0,
+    rtgsPadEnd: true,
     get rtgs() {
-      const rtgsHour = hourToRtgsNumber(this.thaiHourCount, { padEnd: true })
+      const rtgsHour = this.hourToRtgsNumber()
       return `${rtgsHour}mong chao`
     },
     get thai() {
-      const thaiHour = hourToThaiStringNumber(this.thaiHourCount)
+      const thaiHour = this.hourToThaiStringNumber()
       return `${thaiHour}โมงเช้า`
     },
   },
@@ -120,30 +150,22 @@ export const thaiPeriods = [
     end: 13,
     rtgs: `tiang`,
     thai: `เทียง`,
+    thaiPeriodHourReset: 0,
   },
   {
     name: `afternoon`,
     start: 13,
     end: 17,
-    get thaiHourCount() {
-      if (!Number.isFinite(this.hour)) return false
-      return this.hour - 12
-    },
-    get isFirstHour() {
-      return Number.isFinite(this.thaiHourCount) && this.thaiHourCount === 1
-    },
+    thaiPeriodHourReset: 12,
+    hideFirstThaiHour: true,
+    rtgsPadStart: true,
+    rtgsPadEnd: true,
     get rtgs() {
-      const rtgsHour = hourToRtgsNumber(
-        this.isFirstHour ? false : this.thaiHourCount,
-        {
-          padStart: true,
-          padEnd: true,
-        }
-      )
+      const rtgsHour = this.hourToRtgsNumber()
       return `bai${rtgsHour}mong`
     },
     get thai() {
-      const thaiHour = hourToThaiStringNumber(this.thaiHourCount)
+      const thaiHour = this.hourToThaiStringNumber()
       return `ปาย${thaiHour}โมง`
     },
   },
@@ -151,18 +173,14 @@ export const thaiPeriods = [
     name: `sunset`,
     start: 17,
     end: 19,
-    get thaiHourCount() {
-      if (!Number.isFinite(this.hour)) return false
-      return this.hour - 12
-    },
+    thaiPeriodHourReset: 12,
+    rtgsPadEnd: true,
     get rtgs() {
-      const rtgsHour = hourToRtgsNumber(this.thaiHourCount, {
-        padEnd: true,
-      })
+      const rtgsHour = this.hourToRtgsNumber()
       return `${rtgsHour}mong yen`
     },
     get thai() {
-      const thaiHour = hourToThaiStringNumber(this.thaiHourCount)
+      const thaiHour = this.hourToThaiStringNumber()
       return `${thaiHour}โมงเย็น`
     },
   },
@@ -170,25 +188,19 @@ export const thaiPeriods = [
     name: `night`,
     start: 19,
     end: 24,
-    get thaiHourCount() {
-      console.log(this.hour)
-      if (!Number.isFinite(this.hour)) return false
-      return this.hour - 18
-    },
+    thaiPeriodHourReset: 18,
+    rtgsPadEnd: true,
     get rtgs() {
-      const rtgsHour = hourToRtgsNumber(this.thaiHourCount, {
-        padEnd: true,
-      })
+      const rtgsHour = this.hourToRtgsNumber()
       return `${rtgsHour}toom`
     },
     get thai() {
-      const thaiHour = hourToThaiStringNumber(this.thaiHourCount)
+      const thaiHour = this.hourToThaiStringNumber()
       return `${thaiHour}ทุ่ม`
     },
   },
 ].map(period => {
-  period.isHourInPeriod = isHourInPeriod.bind(period)
-  return period
+  return Object.create(basePeriod, Object.getOwnPropertyDescriptors(period))
 })
 
 export function getThaiTime(luxonDate) {
@@ -203,85 +215,11 @@ export function getThaiTime(luxonDate) {
   }
   const { hour } = luxonDate
   const period = thaiPeriods.find(p => p.isHourInPeriod(hour))
-  return clone(period, { hour })
+  // console.log(hour)
+  // console.log(period)
+  const updatedPeriod = shallowClone(period)
+  updatedPeriod.hour = hour
+  // console.log(hour)
+  // console.log(updatedPeriod)
+  return updatedPeriod
 }
-
-// export function toThaiTime(luxonDate) {
-//   const isLuxonDateTime = luxonDate instanceof DateTime
-//   if (!isLuxonDateTime) {
-//     return {
-//       period: ``,
-//       rtgs: ``,
-//       thai: ``,
-//       hour: false,
-//     }
-//   }
-//   const { hour } = luxonDate
-//   if (hour < 1) {
-//     return {
-//       period: `midnight`,
-//       rtgs: `tiang kheun`,
-//       thai: `เทียงคืน`,
-//       hour: false,
-//     }
-//   }
-//   if (hour < 6) {
-//     const thaiHour = hour
-//     const thaiNumber = THAI_NUMBERS[thaiHour]
-//     return {
-//       period: `late night`,
-//       rtgs: `ti ${thaiNumber.rtgs}`,
-//       thai: `ตี${thaiNumber.th}`,
-//       hour: hour,
-//     }
-//   }
-
-//   if (hour < 12) {
-//     const thaiHour = hour
-//     const thaiNumber = THAI_NUMBERS[thaiHour]
-//     return {
-//       period: `morning`,
-//       rtgs: `${thaiNumber.rtgs} mong chao`,
-//       thai: `${thaiNumber.th}โมงเช้า`,
-//       hour: hour,
-//     }
-//   }
-//   if (hour < 13) {
-//     return {
-//       period: `noon`,
-//       rtgs: `tiang`,
-//       thai: `เทียง`,
-//       hour: false,
-//     }
-//   }
-//   if (hour < 17) {
-//     const thaiHour = hour === 13 ? false : hour - 12
-//     const thaiNumber = thaiHour ? THAI_NUMBERS[thaiHour] : false
-//     return {
-//       period: `afternoon`,
-//       rtgs: `bai${thaiHour ? ` ${thaiNumber.rtgs} (${thaiHour}) ` : ``}mong`,
-//       thai: `ปาย${thaiHour ? thaiNumber.th : ``}โมง`,
-//       hour: thaiHour,
-//     }
-//   }
-//   if (hour < 19) {
-//     const thaiHour = hour - 12
-//     const thaiNumber = thaiHour ? THAI_NUMBERS[thaiHour] : false
-//     return {
-//       period: `sunset`,
-//       rtgs: `${thaiNumber.rtgs} (${thaiHour}) mong yen`,
-//       thai: `${thaiNumber.th}โมงเย็น`,
-//       hour: thaiHour,
-//     }
-//   }
-//   if (hour < 24) {
-//     const thaiHour = hour - 18
-//     const thaiNumber = thaiHour ? THAI_NUMBERS[thaiHour] : false
-//     return {
-//       period: `night`,
-//       rtgs: `${thaiNumber.rtgs}  (${thaiHour}) toom`,
-//       thai: `${thaiNumber.th}ทุ่ม`,
-//       hour: thaiHour,
-//     }
-//   }
-// }
