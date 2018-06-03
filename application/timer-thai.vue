@@ -20,16 +20,16 @@ export default {
   data: function() {
     const thaiTime = getThaiTime(this.currentTime)
     return {
-      rtgs: thaiTime.rtgs,
-      thai: thaiTime.thai,
+      rtgs: thaiTime.rtgs(),
+      thai: thaiTime.thai(),
     }
   },
   watch: {
     currentTime: function(newVal, oldVal) {
       // console.log(newVal.hour)
       const thaiTime = getThaiTime(newVal)
-      this.rtgs = thaiTime.rtgs
-      this.thai = thaiTime.thai
+      this.rtgs = thaiTime.rtgs()
+      this.thai = thaiTime.thai()
     },
   },
 }

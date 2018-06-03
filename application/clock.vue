@@ -7,12 +7,13 @@
       :class="{active: period.isHourInPeriod(currentTime.hour)}"
     >
       <h3>{{ period.name }}</h3>
-      <h4>{{ period.start }} – {{ period.end }}</h4>
       <dl>
+        <dt>period</dt>
+        <dd>{{ period.start }} – {{ period.end }}</dd>
         <dt>RTGS</dt>
-        <dd>{{ period.rtgs }}</dd>
+        <dd>{{ period.rtgs() }}</dd>
         <dt>Thaï</dt>
-        <dd class="thai-text">{{ period.thai }}</dd>
+        <dd class="thai-text">{{ period.thai() }}</dd>
       </dl>
     </li>
   </ul>

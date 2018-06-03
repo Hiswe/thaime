@@ -105,8 +105,12 @@ export const thaiPeriods = [
     name: `midnight`,
     start: 0,
     end: 1,
-    rtgs: `tiang kheun`,
-    thai: `เทียงคืน`,
+    rtgs() {
+      return `tiang kheun`
+    },
+    thai() {
+      return `เทียงคืน`
+    },
   },
   {
     name: `late night`,
@@ -114,10 +118,10 @@ export const thaiPeriods = [
     end: 6,
     thaiHourShift: 0,
     rtgsPadStart: true,
-    get rtgs() {
+    rtgs() {
       return `ti${this.thaiHourRtgs}`
     },
-    get thai() {
+    thai() {
       return `ตี${this.thaiHourString}`
     },
   },
@@ -127,10 +131,10 @@ export const thaiPeriods = [
     end: 12,
     thaiHourShift: 0,
     rtgsPadEnd: true,
-    get rtgs() {
+    rtgs() {
       return `${this.thaiHourRtgs}mong chao`
     },
-    get thai() {
+    thai() {
       return `${this.thaiHourString}โมงเช้า`
     },
   },
@@ -138,35 +142,39 @@ export const thaiPeriods = [
     name: `noon`,
     start: 12,
     end: 13,
-    rtgs: `tiang`,
-    thai: `เทียง`,
+    rtgs() {
+      return `tiang`
+    },
+    thai() {
+      return `เทียง`
+    },
     thaiHourShift: 0,
   },
   {
     name: `afternoon`,
     start: 13,
-    end: 17,
+    end: 16,
     thaiHourShift: 12,
     hideFirstThaiHour: true,
     rtgsPadStart: true,
     rtgsPadEnd: true,
-    get rtgs() {
+    rtgs() {
       return `bai${this.thaiHourRtgs}mong`
     },
-    get thai() {
+    thai() {
       return `ปาย${this.thaiHourString}โมง`
     },
   },
   {
     name: `sunset`,
-    start: 17,
+    start: 16,
     end: 19,
     thaiHourShift: 12,
     rtgsPadEnd: true,
-    get rtgs() {
+    rtgs() {
       return `${this.thaiHourRtgs}mong yen`
     },
-    get thai() {
+    thai() {
       return `${this.thaiHourString}โมงเย็น`
     },
   },
@@ -176,10 +184,10 @@ export const thaiPeriods = [
     end: 24,
     thaiHourShift: 18,
     rtgsPadEnd: true,
-    get rtgs() {
+    rtgs() {
       return `${this.thaiHourRtgs}toom`
     },
-    get thai() {
+    thai() {
       return `${this.thaiHourString}ทุ่ม`
     },
   },
@@ -201,7 +209,5 @@ export function getThaiTime(luxonDate) {
   const period = thaiPeriods.find(p => p.isHourInPeriod(hour))
   const updatedPeriod = shallowClone(period)
   updatedPeriod.hour = hour
-  // need to call the getter to update it…
-  updatedPeriod.thaiHour
   return updatedPeriod
 }
