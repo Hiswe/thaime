@@ -9,10 +9,16 @@
     <g clip-path="url(#clip-clock)">
       <circle cx="0" cy="0" r="1" class="svg-clock__background" />
       <path
-        class="svg-clock__arc"
+        :class="`svg-clock__arc svg-clock__arc--${index + 1}`"
         v-for="(arc, index) of arcs"
         :key="index"
-        :d="arc"
+        :d="arc.pathData"
+      />
+      <path
+        :class="`svg-clock__marker`"
+        v-for="marker of hourMarkers"
+        :key="marker.id"
+        :d="marker.pathData"
       />
       <circle
         class="svg-clock__current-time"
@@ -77,29 +83,34 @@ li {
   stroke-width: 0.5;
   fill: none;
 }
-.svg-clock__arc:nth-of-type(1) {
-  stroke: red;
+.svg-clock__arc--1 {
+  stroke: hsl(261, 53%, 34%);
 }
-.svg-clock__arc:nth-of-type(2) {
-  stroke: blue;
+.svg-clock__arc--2 {
+  stroke: hsl(283, 47%, 53%);
 }
-.svg-clock__arc:nth-of-type(3) {
-  stroke: green;
+.svg-clock__arc--3 {
+  stroke: hsl(73, 67%, 53%);
 }
-.svg-clock__arc:nth-of-type(4) {
-  stroke: orange;
+.svg-clock__arc--4 {
+  stroke: hsl(12, 100%, 55%);
 }
-.svg-clock__arc:nth-of-type(5) {
-  stroke: purple;
+.svg-clock__arc--5 {
+  stroke: hsl(34, 100%, 55%);
 }
-.svg-clock__arc:nth-of-type(6) {
-  stroke: mediumvioletred;
+.svg-clock__arc--6 {
+  stroke: hsl(199, 90%, 68%);
 }
-.svg-clock__arc:nth-of-type(7) {
-  stroke: mediumturquoise;
+.svg-clock__arc--7 {
+  stroke: hsl(226, 53%, 51%);
 }
 .svg-clock__current-time {
   fill: black;
+}
+.svg-clock__marker {
+  stroke-width: 0.01;
+  stroke: black;
+  fill: none;
 }
 .active {
   background: var(--c-accent-lightest);
@@ -110,25 +121,13 @@ li {
 import { DateTime } from 'luxon'
 import round from 'lodash.round'
 
+import * as clockSegments from './clock-segments'
 import { thaiPeriods } from './thai-hours'
 
 function getCoordinates(percent) {
   const x = Math.cos(2 * Math.PI * percent)
   const y = Math.sin(2 * Math.PI * percent)
   return [round(x, 8), round(y, 8)]
-}
-
-function periodToPercent(period) {
-  const start = period.start / 24
-  const end = period.end / 24
-  const [startX, startY] = getCoordinates(start)
-  const [endX, endY] = getCoordinates(end)
-  const largeArcFlag = end - start > 0.5 ? 1 : 0
-  const pathData = `
-    M ${startX} ${startY}
-    A 1 1 0 ${largeArcFlag} 1 ${endX} ${endY}
-  `
-  return pathData
 }
 
 const DAY_LENGTH = 24 * 60
@@ -147,7 +146,8 @@ export default {
   data() {
     return {
       periods: thaiPeriods,
-      arcs: thaiPeriods.map(periodToPercent),
+      arcs: clockSegments.arcs,
+      hourMarkers: clockSegments.hourMarkers,
     }
   },
   computed: {
