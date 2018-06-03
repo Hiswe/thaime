@@ -48,7 +48,7 @@ export default {
   },
   watch: {
     userTime: function(newVal, oldVal) {
-      if (!newVal) return
+      if (!newVal) return this.beginAutomaticTimeUpdate()
       this.stopTimers()
       const [hour, minute] = newVal.split(`:`).map(val => ~~val)
       // console.log({ hour, minute })
@@ -77,7 +77,6 @@ export default {
     restartAutomaticUpdate() {
       if (!this.userTime) return
       this.userTime = void 0
-      this.beginAutomaticTimeUpdate()
     },
     planReccuringTimeUpdate() {
       this.intervalId = window.setInterval(() => {
