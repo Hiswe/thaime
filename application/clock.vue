@@ -6,7 +6,7 @@
         <circle cx="0" cy="0" r="100" />
       </clipPath>
     </defs>
-    <g clip-path="url(#clip-clock)">
+    <g id="arcs-with-marker" clip-path="url(#clip-clock)">
       <circle cx="0" cy="0" r="100" class="svg-clock__background" />
       <path
         v-for="arc of arcs"
@@ -21,7 +21,7 @@
         v-for="marker of hourMarkers"
         :key="marker.id"
         :class="[
-          `svg-clock__marker `,
+          `svg-clock__marker`,
           `svg-clock__marker--${marker.name}`,
           `${ marker.isFirstPeriodMarker ? `svg-clock__marker--is-first` : `` }`
         ]"
@@ -68,6 +68,33 @@
         text-anchor="middle"
       >
         {{i18nHour.hour}}
+      </text>
+    </g>
+    <g id="periods-name">
+      <path
+        v-for="periodName of periodNames"
+        :id="periodName.pathId"
+        :key="periodName.pathId"
+        :class="[
+          `svg-clock__period-name_path`,
+        ]"
+        :d="periodName.pathData"
+      />
+      <text
+        v-for="periodName of periodNames"
+        :key="periodName.nameId"
+        :class="[
+          `svg-clock__period-name_text`,
+          `svg-clock__period-name_text--${periodName.id}`,
+        ]"
+        text-anchor="middle"
+      >
+        <textPath
+          :href="`#${periodName.pathId}`"
+          startOffset="50%"
+        >
+          {{periodName.text}}
+        </textPath>
       </text>
     </g>
   </svg>
@@ -196,6 +223,24 @@ li {
       fill: white;
     }
   }
+  &__period-name {
+    &_path {
+      fill: none;
+      stroke-width: 0;
+    }
+    &_text {
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 0.8em;
+      font-weight: bold;
+
+      @each $period in $periods {
+        &--#{$period} {
+          fill: var(--c-#{$period}-darker);
+        }
+      }
+    }
+  }
 }
 
 .active {
@@ -227,6 +272,7 @@ export default {
       arcs: clockSegments.arcs,
       hourMarkers: clockSegments.hourMarkers,
       internationalHours: clockSegments.internationalHours,
+      periodNames: clockSegments.periodNames,
     }
   },
   computed: {

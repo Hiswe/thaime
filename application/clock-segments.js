@@ -12,6 +12,24 @@ function getCoordinates(percent) {
   return [round(x, 8), round(y, 8)]
 }
 
+function createPeriodArcPath(period, shift = 1, reverse = false) {
+  const start = period.start / 24
+  const end = period.end / 24
+  const [startX, startY] = getCoordinates(start)
+  const [endX, endY] = getCoordinates(end)
+  const largeArcFlag = end - start > 0.5 ? 1 : 0
+  const startCoords = `${startX * shift} ${startY * shift}`
+  const endCoords = `${endX * shift} ${endY * shift}`
+  const arcCenter = `${SVG_SIZE * shift} ${SVG_SIZE * shift}`
+  const pathData = `
+    M ${reverse ? endCoords : startCoords}
+    A ${arcCenter} 0 ${largeArcFlag} ${reverse ? 0 : 1} ${
+    reverse ? startCoords : endCoords
+  }
+  `
+  return pathData
+}
+
 const DAY_LENGTH = 24 * 60
 const CURRENT_TIME_SHIFT = 1
 export function currentTimeToCoordinates(currentTime) {
@@ -21,17 +39,8 @@ export function currentTimeToCoordinates(currentTime) {
 }
 
 export const arcs = thaiPeriods.map(function periodToPercent(period) {
-  const start = period.start / 24
-  const end = period.end / 24
-  const [startX, startY] = getCoordinates(start)
-  const [endX, endY] = getCoordinates(end)
-  const largeArcFlag = end - start > 0.5 ? 1 : 0
-  const pathData = `
-    M ${startX} ${startY}
-    A ${SVG_SIZE} ${SVG_SIZE} 0 ${largeArcFlag} 1 ${endX} ${endY}
-  `
   return {
-    pathData,
+    pathData: createPeriodArcPath(period),
     id: `arc-${period.id}`,
     name: period.id,
   }
@@ -83,3 +92,47 @@ export const internationalHours = thaiPeriods.map(period => {
     bgSize: INTERNATIONAL_HOUR_BG_SIZE,
   }
 })
+
+const PERIOD_NAME_SHIFT = 1.25
+const PERIOD_NAME_HEIGHT = 12
+const midnightPosition = SVG_SIZE * PERIOD_NAME_SHIFT
+const midnightPath = `
+  M ${midnightPosition * -1} ${midnightPosition * -1}
+  L ${midnightPosition} ${midnightPosition * -1}
+`
+const noonPosition = SVG_SIZE * PERIOD_NAME_SHIFT + PERIOD_NAME_HEIGHT
+const noonPath = `
+  M ${noonPosition * -1} ${noonPosition}
+  L ${noonPosition} ${noonPosition}
+`
+export const periodNames = thaiPeriods.map((period, index) => {
+  const text =
+    period.rtgsPadStart && period.rtgsPadEnd
+      ? period.rtgs().replace(` `, ` * `)
+      : !period.rtgsPadStart && period.rtgsPadEnd
+        ? `* ${period.rtgs()}`
+        : period.rtgsPadStart && !period.rtgsPadEnd
+          ? `${period.rtgs()} *`
+          : period.rtgs()
+  const isMidnight = index === 0
+  const isNoon = index === 3
+  const isReversedText = index === 2 || index === 4
+  const shift = isReversedText
+    ? PERIOD_NAME_SHIFT + PERIOD_NAME_HEIGHT / 100
+    : PERIOD_NAME_SHIFT
+  const pathData = isMidnight
+    ? midnightPath
+    : isNoon
+      ? noonPath
+      : createPeriodArcPath(period, shift, isReversedText)
+  return {
+    // text: isMidnight ? text.split(` `) : [text.replace(`  `, ` `)],
+    text: text.replace(`  `, ` `),
+    id: period.id,
+    pathId: `period-path-${period.id}`,
+    textId: `period-name-${period.id}`,
+    pathData,
+  }
+})
+
+console.log(periodNames)
