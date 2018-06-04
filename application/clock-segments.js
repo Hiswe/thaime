@@ -3,10 +3,21 @@ import round from 'lodash.round'
 
 import { thaiPeriods } from './thai-hours'
 
+export const SVG_SIZE = 100
+
 function getCoordinates(percent) {
-  const x = Math.cos(2 * Math.PI * percent)
-  const y = Math.sin(2 * Math.PI * percent)
+  // -0.25 is for not rotate the whole svg by 90˚
+  const x = Math.cos(2 * Math.PI * (percent - 0.25)) * SVG_SIZE
+  const y = Math.sin(2 * Math.PI * (percent - 0.25)) * SVG_SIZE
   return [round(x, 8), round(y, 8)]
+}
+
+const DAY_LENGTH = 24 * 60
+const CURRENT_TIME_SHIFT = 0.8775
+export function currentTimeToCoordinates(currentTime) {
+  const minutesSinceMidnight = currentTime.hour * 60 + currentTime.minute
+  const [x, y] = getCoordinates(minutesSinceMidnight / DAY_LENGTH)
+  return { x: x * CURRENT_TIME_SHIFT, y: y * CURRENT_TIME_SHIFT }
 }
 
 export const arcs = thaiPeriods.map(function periodToPercent(period) {
@@ -17,12 +28,17 @@ export const arcs = thaiPeriods.map(function periodToPercent(period) {
   const largeArcFlag = end - start > 0.5 ? 1 : 0
   const pathData = `
     M ${startX} ${startY}
-    A 1 1 0 ${largeArcFlag} 1 ${endX} ${endY}
+    A ${SVG_SIZE} ${SVG_SIZE} 0 ${largeArcFlag} 1 ${endX} ${endY}
   `
-  return { pathData, name: period.name }
+  return {
+    pathData,
+    id: `arc-${period.name.replace(` `, `-`)}`,
+    name: period.name.replace(` `, `-`),
+  }
 })
 
-const MARKER_SIZE = 0.9
+const MARKER_SIZE = 0.75
+const TEXT_SHIFT = 1.1
 export const hourMarkers = thaiPeriods
   .map(function periodToMarkers(period) {
     return Array.from({ length: period.end - period.start }).map(
@@ -40,7 +56,11 @@ export const hourMarkers = thaiPeriods
           thaiHour,
           pathData,
           id: `${period.name}-${hour}`,
-          name: period.name,
+          name: period.name.replace(` `, `-`),
+          x: startX,
+          y: startY,
+          textX: startX * TEXT_SHIFT,
+          textY: startY * TEXT_SHIFT,
         }
       }
     )
@@ -48,5 +68,3 @@ export const hourMarkers = thaiPeriods
   .reduce(function flattenMarkers(accumulator, periodMarkers) {
     return accumulator.concat(periodMarkers)
   }, [])
-
-// console.log(hourMarkers)
