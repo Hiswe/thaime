@@ -133,3 +133,14 @@ export const periodNames = thaiPeriods.map((period, index) => {
     pathData,
   }
 })
+
+export const nightSky = (() => {
+  const SHIFT = 0.75
+  const [startX, startY] = getCoordinates(19 / 24).map(v => v * SHIFT)
+  const [endX, endY] = getCoordinates(6 / 24).map(v => v * SHIFT)
+  return `
+    M ${startX} ${startY}
+    A ${SVG_SIZE * 2} ${SVG_SIZE * 2} 0 0 0 ${endX} ${endY}
+    A ${SVG_SIZE * SHIFT} ${SVG_SIZE * SHIFT} 0 0 0 ${startX} ${startY}
+  `
+})()

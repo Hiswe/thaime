@@ -6,8 +6,32 @@
         <circle cx="0" cy="0" r="100" />
       </clipPath>
     </defs>
+    <g id="clock-background" clip-path="url(#clip-clock)">
+      <circle cx="0" cy="0" r="75" class="svg-clock__day-sky" />
+      <path
+        class="svg-clock__night-sky"
+        :d="nightSky"
+      />
+      <path id="moon" d="M5,0.862c-2.284,0 -4.138,1.854 -4.138,4.138c0,2.284 1.854,4.138 4.138,4.138c-1.142,-0.69 -2.069,-2.306 -2.069,-4.138c0,-1.832 0.927,-3.448 2.069,-4.138Z"/>
+      <g id="stars">
+        <path class="star" d="M5,0.914c0.622,0 1.009,3.106 1.009,3.106c0,0 3.073,-0.596 3.266,0c0.192,0.591 -2.642,1.92 -2.642,1.92c0,0 1.516,2.738 1.009,3.106c-0.503,0.365 -2.642,-1.92 -2.642,-1.92c0,0 -2.135,2.288 -2.642,1.92c-0.503,-0.365 1.009,-3.106 1.009,-3.106c0,0 -2.836,-1.324 -2.642,-1.92c0.192,-0.591 3.266,0 3.266,0c0,0 0.382,-3.106 1.009,-3.106Z"/>
+        <path class="star" d="M5,0.914c0.622,0 1.009,3.106 1.009,3.106c0,0 3.073,-0.596 3.266,0c0.192,0.591 -2.642,1.92 -2.642,1.92c0,0 1.516,2.738 1.009,3.106c-0.503,0.365 -2.642,-1.92 -2.642,-1.92c0,0 -2.135,2.288 -2.642,1.92c-0.503,-0.365 1.009,-3.106 1.009,-3.106c0,0 -2.836,-1.324 -2.642,-1.92c0.192,-0.591 3.266,0 3.266,0c0,0 0.382,-3.106 1.009,-3.106Z"/>
+        <path class="star" d="M5,0.914c0.622,0 1.009,3.106 1.009,3.106c0,0 3.073,-0.596 3.266,0c0.192,0.591 -2.642,1.92 -2.642,1.92c0,0 1.516,2.738 1.009,3.106c-0.503,0.365 -2.642,-1.92 -2.642,-1.92c0,0 -2.135,2.288 -2.642,1.92c-0.503,-0.365 1.009,-3.106 1.009,-3.106c0,0 -2.836,-1.324 -2.642,-1.92c0.192,-0.591 3.266,0 3.266,0c0,0 0.382,-3.106 1.009,-3.106Z"/>
+        <path class="star" d="M5,0.914c0.622,0 1.009,3.106 1.009,3.106c0,0 3.073,-0.596 3.266,0c0.192,0.591 -2.642,1.92 -2.642,1.92c0,0 1.516,2.738 1.009,3.106c-0.503,0.365 -2.642,-1.92 -2.642,-1.92c0,0 -2.135,2.288 -2.642,1.92c-0.503,-0.365 1.009,-3.106 1.009,-3.106c0,0 -2.836,-1.324 -2.642,-1.92c0.192,-0.591 3.266,0 3.266,0c0,0 0.382,-3.106 1.009,-3.106Z"/>
+        <path class="star" d="M5,0.914c0.622,0 1.009,3.106 1.009,3.106c0,0 3.073,-0.596 3.266,0c0.192,0.591 -2.642,1.92 -2.642,1.92c0,0 1.516,2.738 1.009,3.106c-0.503,0.365 -2.642,-1.92 -2.642,-1.92c0,0 -2.135,2.288 -2.642,1.92c-0.503,-0.365 1.009,-3.106 1.009,-3.106c0,0 -2.836,-1.324 -2.642,-1.92c0.192,-0.591 3.266,0 3.266,0c0,0 0.382,-3.106 1.009,-3.106Z"/>
+        <path class="star" d="M5,0.914c0.622,0 1.009,3.106 1.009,3.106c0,0 3.073,-0.596 3.266,0c0.192,0.591 -2.642,1.92 -2.642,1.92c0,0 1.516,2.738 1.009,3.106c-0.503,0.365 -2.642,-1.92 -2.642,-1.92c0,0 -2.135,2.288 -2.642,1.92c-0.503,-0.365 1.009,-3.106 1.009,-3.106c0,0 -2.836,-1.324 -2.642,-1.92c0.192,-0.591 3.266,0 3.266,0c0,0 0.382,-3.106 1.009,-3.106Z"/>
+      </g>
+      <g id="sun">
+        <path d="M5.769,0.68l0,8.64" />
+        <path d="M10.004,5l-8.469,0" />
+        <path d="M8.53,2.184l-5.521,5.632" />
+        <path d="M8.41,7.693l-5.281,-5.386" />
+        <ellipse cx="5.769" cy="5" rx="2.761" ry="2.816"/>
+      </g>
+      <circle cx="0" cy="0" r="75" class="svg-clock__inner-ring" />
+    </g>
+
     <g id="arcs-with-marker" clip-path="url(#clip-clock)">
-      <circle cx="0" cy="0" r="100" class="svg-clock__background" />
       <path
         v-for="arc of arcs"
         :key="arc.id"
@@ -153,8 +177,16 @@ $periods: 'midnight', 'late-night', 'morning', 'noon', 'afternoon', 'sunset',
     stroke-width: 1px;
     stroke: white;
   }
-  &__background {
-    fill: #dcf5ff;
+  &__day-sky {
+    fill: hsl(39, 100%, 92%);
+  }
+  &__inner-ring {
+    stroke: white;
+    fill: none;
+    stroke-width: 3;
+  }
+  &__night-sky {
+    fill: hsl(197, 100%, 93%);
   }
   &__arc {
     stroke-width: 50;
@@ -223,6 +255,47 @@ $periods: 'midnight', 'late-night', 'morning', 'noon', 'afternoon', 'sunset',
     }
   }
 }
+#moon {
+  fill: white;
+  transform: translate(-45px, -45px) scale(4.5) rotate(-15deg);
+}
+#sun {
+  --sun-color: hsl(51, 98%, 66%);
+  transform: translate(10px, 18px) scale(6.5) rotate(2deg);
+  path {
+    stroke: var(--sun-color);
+    stroke-width: 1px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 1.5;
+  }
+  ellipse {
+    fill: var(--sun-color);
+  }
+}
+#stars {
+  path {
+    fill: white;
+  }
+  path:nth-child(1) {
+    transform: translate(25px, -35px) scale(1.5) rotate(-15deg);
+  }
+  path:nth-child(2) {
+    transform: translate(-40px, -60px) scale(1) rotate(-5deg);
+  }
+  path:nth-child(3) {
+    transform: translate(11px, -27px) scale(2) rotate(24deg);
+  }
+  path:nth-child(4) {
+    transform: translate(57px, -27px) scale(1.2) rotate(28deg);
+  }
+  path:nth-child(5) {
+    transform: translate(-3px, -57px) scale(1) rotate(3deg);
+  }
+  path:nth-child(6) {
+    transform: translate(-53px, -42px) scale(1.5) rotate(32deg);
+  }
+}
 </style>
 
 <script>
@@ -249,6 +322,7 @@ export default {
       hourMarkers: clockSegments.hourMarkers,
       internationalHours: clockSegments.internationalHours,
       periodNames: clockSegments.periodNames,
+      nightSky: clockSegments.nightSky,
     }
   },
   computed: {
