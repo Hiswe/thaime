@@ -95,7 +95,7 @@ export const internationalHours = thaiPeriods.map(period => {
 
 const PERIOD_NAME_SHIFT = 1.25
 const PERIOD_NAME_HEIGHT = 12
-const midnightPosition = SVG_SIZE * PERIOD_NAME_SHIFT
+const midnightPosition = SVG_SIZE * PERIOD_NAME_SHIFT + PERIOD_NAME_HEIGHT
 const midnightPath = `
   M ${midnightPosition * -1} ${midnightPosition * -1}
   L ${midnightPosition} ${midnightPosition * -1}
@@ -126,8 +126,7 @@ export const periodNames = thaiPeriods.map((period, index) => {
       ? noonPath
       : createPeriodArcPath(period, shift, isReversedText)
   return {
-    // text: isMidnight ? text.split(` `) : [text.replace(`  `, ` `)],
-    text: text.replace(`  `, ` `),
+    text: isMidnight ? text.split(` `) : [text.replace(`  `, ` `)],
     id: period.id,
     pathId: `period-path-${period.id}`,
     textId: `period-name-${period.id}`,
