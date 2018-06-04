@@ -67,6 +67,9 @@ const basePeriod = {
   hour: false,
   rtgsPadStart: false,
   rtgsPadEnd: false,
+  get id() {
+    return this.name.replace(` `, `-`)
+  },
   get isFirstHourInPeriod() {
     const { thaiHour } = this
     if (!Number.isFinite(thaiHour)) return false

@@ -27,27 +27,49 @@
         ]"
         :d="marker.pathData"
       />
-      <circle
-        class="svg-clock__current-time"
-        :cx="nowCoordinates.x"
-        :cy="nowCoordinates.y"
-        r="5"
-      />
     </g>
-    <text
-      v-for="(marker) of hourMarkers"
-      :key="`${marker.id}-th`"
-      :class="[
-        `svg-clock__thai-hour`,
-        `svg-clock__thai-hour--${marker.name}`,
-        `${ marker.isFirstPeriodMarker ? `svg-clock__thai-hour--is-first` : `` }`
-      ]"
-      :x="marker.textX"
-      :y="marker.textY"
-      text-anchor="middle"
-    >
-      {{marker.thaiHour}}
-    </text>
+    <circle
+      class="svg-clock__current-time"
+      :cx="nowCoordinates.x"
+      :cy="nowCoordinates.y"
+      r="5"
+    />
+    <g id="thai-numbers">
+      <text
+        v-for="(marker) of hourMarkers"
+        :key="`${marker.id}-th`"
+        :class="[
+          `svg-clock__thai-hour`,
+          `svg-clock__thai-hour--${marker.name}`,
+          `${ marker.isFirstPeriodMarker ? `svg-clock__thai-hour--is-first` : `` }`
+        ]"
+        :x="marker.textX"
+        :y="marker.textY"
+        text-anchor="middle"
+      >
+        {{marker.thaiHour}}
+      </text>
+    </g>
+    <g id="24-hour-numbers">
+      <circle
+        v-for="i18nHour of internationalHours"
+        :key="`${i18nHour.id}-bg`"
+        class="svg-clock__24-hour-background"
+        :cx="i18nHour.cx"
+        :cy="i18nHour.cy"
+        :r="i18nHour.bgSize"
+      />
+      <text
+        v-for="i18nHour of internationalHours"
+        :key="`${i18nHour.id}`"
+        class="svg-clock__24-hour"
+        :x="i18nHour.x"
+        :y="i18nHour.y"
+        text-anchor="middle"
+      >
+        {{i18nHour.hour}}
+      </text>
+    </g>
   </svg>
   <ul>
     <li
@@ -89,7 +111,9 @@
 }
 </style>
 
-<style scoped>
+<style scoped lang="scss">
+$periods: 'midnight', 'late-night', 'morning', 'noon', 'afternoon', 'sunset',
+  'night';
 ul {
   display: grid;
   list-style: none;
@@ -115,72 +139,65 @@ li {
   width: 100%;
   max-width: 400px;
   border: 1px solid black;
+
+  &__current-time {
+    fill: red;
+    stroke-width: 1px;
+    stroke: white;
+  }
+  &__background {
+    fill: #dcf5ff;
+  }
+  &__arc {
+    stroke-width: 50;
+    fill: none;
+
+    @each $period in $periods {
+      &--arc-#{$period} {
+        stroke: var(--c-#{$period});
+      }
+    }
+  }
+  &__marker {
+    stroke-width: 1;
+    fill: none;
+
+    @each $period in $periods {
+      &--#{$period} {
+        stroke: var(--c-#{$period}-darker);
+      }
+    }
+    &--is-first {
+      stroke-width: 2;
+      stroke: white;
+    }
+  }
+  &__thai-hour {
+    font-size: 0.6em;
+    /* translate for taking care of the letter height */
+    transform: translateY(0.4em);
+
+    @each $period in $periods {
+      &--#{$period} {
+        fill: var(--c-#{$period}-darker);
+      }
+    }
+
+    &--is-first {
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+  }
+  &__24-hour {
+    font-size: 0.6em;
+    /* translate for taking care of the letter height */
+    transform: translateY(0.35em);
+    &-background {
+      fill: white;
+    }
+  }
 }
-.svg-clock__background {
-  fill: aliceblue;
-}
-.svg-clock__arc {
-  stroke-width: 50;
-  fill: none;
-}
-.svg-clock__arc--arc-midnight {
-  stroke: var(--c-midnight);
-}
-.svg-clock__arc--arc-late-night {
-  stroke: var(--c-late-night);
-}
-.svg-clock__arc--arc-morning {
-  stroke: var(--c-morning);
-}
-.svg-clock__arc--arc-noon {
-  stroke: var(--c-noon);
-}
-.svg-clock__arc--arc-afternoon {
-  stroke: var(--c-afternoon);
-}
-.svg-clock__arc--arc-sunset {
-  stroke: var(--c-sunset);
-}
-.svg-clock__arc--arc-night {
-  stroke: var(--c-night);
-}
-.svg-clock__current-time {
-  fill: black;
-}
-.svg-clock__marker {
-  stroke-width: 1;
-  fill: none;
-}
-.svg-clock__marker--midnight {
-  stroke: var(--c-midnight-darker);
-}
-.svg-clock__marker--late-night {
-  stroke: var(--c-late-night-darker);
-}
-.svg-clock__marker--morning {
-  stroke: var(--c-morning-darker);
-}
-.svg-clock__marker--noon {
-  stroke: var(--c-noon-darker);
-}
-.svg-clock__marker--afternoon {
-  stroke: var(--c-afternoon-darker);
-}
-.svg-clock__marker--sunset {
-  stroke: var(--c-sunset-darker);
-}
-.svg-clock__marker--night {
-  stroke: var(--c-night-darker);
-}
-.svg-clock__marker--is-first {
-  stroke-width: 2;
-  stroke: white;
-}
-.svg-clock__thai-hour {
-  font-size: 0.8em;
-  /* translate fro taking care of the letter height */
-  transform: translateY(0.4em);
-}
+
 .active {
   background: var(--c-accent-lightest);
 }
@@ -193,7 +210,7 @@ import round from 'lodash.round'
 import * as clockSegments from './clock-segments'
 import { thaiPeriods } from './thai-hours'
 
-const SVG_MARGIN = 0.25
+const SVG_MARGIN = 0.5
 const viewbox = [-1, -1, 2, 2].map(
   val => val * clockSegments.SVG_SIZE * (1 + SVG_MARGIN)
 )
@@ -209,6 +226,7 @@ export default {
       viewbox: viewbox.join(` `),
       arcs: clockSegments.arcs,
       hourMarkers: clockSegments.hourMarkers,
+      internationalHours: clockSegments.internationalHours,
     }
   },
   computed: {

@@ -13,7 +13,7 @@ function getCoordinates(percent) {
 }
 
 const DAY_LENGTH = 24 * 60
-const CURRENT_TIME_SHIFT = 0.8775
+const CURRENT_TIME_SHIFT = 1
 export function currentTimeToCoordinates(currentTime) {
   const minutesSinceMidnight = currentTime.hour * 60 + currentTime.minute
   const [x, y] = getCoordinates(minutesSinceMidnight / DAY_LENGTH)
@@ -32,13 +32,13 @@ export const arcs = thaiPeriods.map(function periodToPercent(period) {
   `
   return {
     pathData,
-    id: `arc-${period.name.replace(` `, `-`)}`,
-    name: period.name.replace(` `, `-`),
+    id: `arc-${period.id}`,
+    name: period.id,
   }
 })
 
 const MARKER_SIZE = 0.75
-const TEXT_SHIFT = 1.1
+const THAI_HOUR_SHIFT = 1.1
 export const hourMarkers = thaiPeriods
   .map(function periodToMarkers(period) {
     return Array.from({ length: period.end - period.start }).map(
@@ -55,12 +55,12 @@ export const hourMarkers = thaiPeriods
           isFirstPeriodMarker,
           thaiHour,
           pathData,
-          id: `${period.name}-${hour}`,
-          name: period.name.replace(` `, `-`),
+          id: `${period.id}-${hour}`,
+          name: period.id,
           x: startX,
           y: startY,
-          textX: startX * TEXT_SHIFT,
-          textY: startY * TEXT_SHIFT,
+          textX: startX * THAI_HOUR_SHIFT,
+          textY: startY * THAI_HOUR_SHIFT,
         }
       }
     )
@@ -68,3 +68,18 @@ export const hourMarkers = thaiPeriods
   .reduce(function flattenMarkers(accumulator, periodMarkers) {
     return accumulator.concat(periodMarkers)
   }, [])
+
+const INTERNATIONAL_HOUR_SHIFT = 0.75
+const INTERNATIONAL_HOUR_BG_SIZE = 8.5
+export const internationalHours = thaiPeriods.map(period => {
+  const [startX, startY] = getCoordinates(period.start / 24)
+  return {
+    hour: period.start ? period.start : 24,
+    id: `24-${period.id}`,
+    x: startX * INTERNATIONAL_HOUR_SHIFT,
+    y: startY * INTERNATIONAL_HOUR_SHIFT,
+    cx: startX * INTERNATIONAL_HOUR_SHIFT,
+    cy: startY * INTERNATIONAL_HOUR_SHIFT,
+    bgSize: INTERNATIONAL_HOUR_BG_SIZE,
+  }
+})
