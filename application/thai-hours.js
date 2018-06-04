@@ -109,7 +109,7 @@ export const thaiPeriods = [
     start: 0,
     end: 1,
     rtgs() {
-      return `tiang kheun`
+      return `thiiang kheuun`
     },
     thai() {
       return `เทียงคืน`
@@ -122,7 +122,7 @@ export const thaiPeriods = [
     thaiHourShift: 0,
     rtgsPadStart: true,
     rtgs() {
-      return `ti${this.thaiHourRtgs}`
+      return `dtee${this.thaiHourRtgs}`
     },
     thai() {
       return `ตี${this.thaiHourString}`
@@ -135,7 +135,7 @@ export const thaiPeriods = [
     thaiHourShift: 0,
     rtgsPadEnd: true,
     rtgs() {
-      return `${this.thaiHourRtgs}mong chao`
+      return `${this.thaiHourRtgs}mohng chaao`
     },
     thai() {
       return `${this.thaiHourString}โมงเช้า`
@@ -146,7 +146,7 @@ export const thaiPeriods = [
     start: 12,
     end: 13,
     rtgs() {
-      return `tiang`
+      return `thiiang`
     },
     thai() {
       return `เทียง`
@@ -162,7 +162,7 @@ export const thaiPeriods = [
     rtgsPadStart: true,
     rtgsPadEnd: true,
     rtgs() {
-      return `bai${this.thaiHourRtgs}mong`
+      return `baai${this.thaiHourRtgs}mohng`
     },
     thai() {
       return `ปาย${this.thaiHourString}โมง`
@@ -175,7 +175,7 @@ export const thaiPeriods = [
     thaiHourShift: 12,
     rtgsPadEnd: true,
     rtgs() {
-      return `${this.thaiHourRtgs}mong yen`
+      return `${this.thaiHourRtgs}mohng yen`
     },
     thai() {
       return `${this.thaiHourString}โมงเย็น`
@@ -188,7 +188,7 @@ export const thaiPeriods = [
     thaiHourShift: 18,
     rtgsPadEnd: true,
     rtgs() {
-      return `${this.thaiHourRtgs}toom`
+      return `${this.thaiHourRtgs}thoom`
     },
     thai() {
       return `${this.thaiHourString}ทุ่ม`

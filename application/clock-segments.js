@@ -94,7 +94,7 @@ export const internationalHours = thaiPeriods.map(period => {
 })
 
 const PERIOD_NAME_SHIFT = 1.25
-const PERIOD_NAME_HEIGHT = 12
+const PERIOD_NAME_HEIGHT = 10
 const midnightPosition = SVG_SIZE * PERIOD_NAME_SHIFT + PERIOD_NAME_HEIGHT
 const midnightPath = `
   M ${midnightPosition * -1} ${midnightPosition * -1}
@@ -133,5 +133,3 @@ export const periodNames = thaiPeriods.map((period, index) => {
     pathData,
   }
 })
-
-console.log(periodNames)

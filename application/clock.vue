@@ -96,7 +96,7 @@
           <tspan
             v-if="periodName.text.length > 1"
             v-for="(line, index) of periodName.text"
-            :x="`${9.5 - index}%`"
+            x="9.5%"
             :dy="`${index * 1 }em`"
             :key="`${line}-${index}`"
           >
@@ -109,24 +109,6 @@
       </text>
     </g>
   </svg>
-  <ul>
-    <li
-      v-for="period of periods"
-      :key="period.name"
-      :class="{active: period.isHourInPeriod(currentTime.hour)}"
-    >
-      <h3>{{ period.name }}</h3>
-      <dl>
-        <dt>period</dt>
-        <dd>{{ period.start }} – {{ period.end }}</dd>
-        <dt>RTGS</dt>
-        <dd>{{ period.rtgs() }}</dd>
-        <dt>Thaï</dt>
-        <dd class="thai-text">{{ period.thai() }}</dd>
-      </dl>
-    </li>
-  </ul>
-
 </div>
 </template>
 
@@ -152,17 +134,6 @@
 <style scoped lang="scss">
 $periods: 'midnight', 'late-night', 'morning', 'noon', 'afternoon', 'sunset',
   'night';
-ul {
-  display: grid;
-  list-style: none;
-  padding: 0;
-  grid-gap: var(--gutter);
-  grid-template-columns: repeat(4, 1fr);
-}
-li {
-  border: 1px solid #eee;
-  padding: 0 var(--gutter) var(--gutter);
-}
 .svg-defs {
   border: 0 !important;
   clip: rect(0 0 0 0) !important;
@@ -176,7 +147,6 @@ li {
 .svg-clock {
   width: 100%;
   max-width: 400px;
-  border: 1px solid black;
 
   &__current-time {
     fill: red;
@@ -242,7 +212,7 @@ li {
     &_text {
       text-align: center;
       text-transform: uppercase;
-      font-size: 0.8em;
+      font-size: 0.7em;
       font-weight: bold;
 
       @each $period in $periods {
@@ -252,10 +222,6 @@ li {
       }
     }
   }
-}
-
-.active {
-  background: var(--c-accent-lightest);
 }
 </style>
 
@@ -278,7 +244,6 @@ export default {
   },
   data() {
     return {
-      periods: thaiPeriods,
       viewbox: viewbox.join(` `),
       arcs: clockSegments.arcs,
       hourMarkers: clockSegments.hourMarkers,
