@@ -132,6 +132,14 @@
         </textPath>
       </text>
     </g>
+    <g id="hours-arcs">
+      <path
+        v-for="i18nArc of internationalHoursArcs"
+        :key="i18nArc.id"
+        class="i18n-arc"
+        :d="i18nArc.pathData"
+      />
+    </g>
   </svg>
 </div>
 </template>
@@ -255,6 +263,17 @@ $periods: 'midnight', 'late-night', 'morning', 'noon', 'afternoon', 'sunset',
     }
   }
 }
+
+.i18n-arc {
+  fill: none;
+  stroke: blue;
+  stroke-width: 60;
+  opacity: 0;
+
+  &:nth-child(odd) {
+    stroke: red;
+  }
+}
 #moon {
   fill: white;
   transform: translate(-45px, -45px) scale(4.5) rotate(-15deg);
@@ -323,6 +342,7 @@ export default {
       internationalHours: clockSegments.internationalHours,
       periodNames: clockSegments.periodNames,
       nightSky: clockSegments.nightSky,
+      internationalHoursArcs: clockSegments.internationalHoursArcs,
     }
   },
   computed: {

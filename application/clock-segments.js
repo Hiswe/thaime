@@ -5,6 +5,10 @@ import { thaiPeriods } from './thai-hours'
 
 export const SVG_SIZE = 100
 
+function flattenArray(accumulator, array) {
+  return accumulator.concat(array)
+}
+
 function getCoordinates(percent) {
   // -0.25 is for not rotate the whole svg by 90˚
   const x = Math.cos(2 * Math.PI * (percent - 0.25)) * SVG_SIZE
@@ -74,9 +78,7 @@ export const hourMarkers = thaiPeriods
       }
     )
   })
-  .reduce(function flattenMarkers(accumulator, periodMarkers) {
-    return accumulator.concat(periodMarkers)
-  }, [])
+  .reduce(flattenArray, [])
 
 const INTERNATIONAL_HOUR_SHIFT = 0.75
 const INTERNATIONAL_HOUR_BG_SIZE = 8.5
@@ -144,3 +146,28 @@ export const nightSky = (() => {
     A ${SVG_SIZE * SHIFT} ${SVG_SIZE * SHIFT} 0 0 0 ${startX} ${startY}
   `
 })()
+
+const I18N_HOUR_SHIFT = 0.9
+export const internationalHoursArcs = thaiPeriods
+  .map(function periodToMarkers(period) {
+    return Array.from({ length: period.end - period.start }).map(
+      (value, index) => {
+        const hour = index + period.start
+        return {
+          hour,
+          pathData: createPeriodArcPath(
+            {
+              start: hour,
+              end: hour + 1,
+            },
+            I18N_HOUR_SHIFT
+          ),
+          id: `international-hour-arc-${hour}`,
+          name: period.id,
+        }
+      }
+    )
+  })
+  .reduce(flattenArray, [])
+
+console.log(internationalHoursArcs)

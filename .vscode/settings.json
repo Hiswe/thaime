@@ -1,5 +1,8 @@
 {
   "editor.formatOnSave": true,
-  "cSpell.words": ["luxon"],
+  "cSpell.words": [
+    "luxon",
+    "rtgs"
+  ],
   "prettier.disableLanguages": ["vue", "markdown"]
 }

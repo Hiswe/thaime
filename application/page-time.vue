@@ -1,7 +1,6 @@
 <template>
   <section>
     <div>
-      <h2>set a current time</h2>
       <input type="time" v-model="userTime" />
       <button type="button" @click="restartAutomaticUpdate">
         now
