@@ -1,14 +1,16 @@
 <template>
   <section>
     <div>
-      <input type="time" v-model="userTime" />
       <button type="button" @click="restartAutomaticUpdate">
         now
       </button>
     </div>
     <t-timer-24 :currentTime="currentTime"></t-timer-24>
     <t-timer-thai :currentTime="currentTime"></t-timer-thai>
-    <t-clock :currentTime="currentTime"></t-clock>
+    <t-clock
+      :currentTime="currentTime"
+      @change="setHour"
+    />
   </section>
 </template>
 
@@ -42,18 +44,9 @@ export default {
       currentTime: DateTime.local(),
       timerId: false,
       intervalId: false,
-      userTime: void 0,
     }
   },
-  watch: {
-    userTime: function(newVal, oldVal) {
-      if (!newVal) return this.beginAutomaticTimeUpdate()
-      this.stopTimers()
-      const [hour, minute] = newVal.split(`:`).map(val => ~~val)
-      // console.log({ hour, minute })
-      this.currentTime = DateTime.fromObject({ hour, minute })
-    },
-  },
+  watch: {},
   created() {
     this.beginAutomaticTimeUpdate()
   },
@@ -63,6 +56,13 @@ export default {
   methods: {
     setCurrentTime() {
       this.currentTime = DateTime.local()
+    },
+    setHour(hour) {
+      if (hour === false) return this.beginAutomaticTimeUpdate()
+      const isValidHour = Number.isInteger(hour) && hour >= 0 && hour < 24
+      if (!isValidHour) return
+      this.stopTimers()
+      this.currentTime = DateTime.fromObject({ hour, minutes: 30 })
     },
     beginAutomaticTimeUpdate() {
       this.setCurrentTime()

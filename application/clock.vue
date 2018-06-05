@@ -132,12 +132,20 @@
         </textPath>
       </text>
     </g>
-    <g id="hours-arcs">
+    <g id="interactive-shapes">
       <path
         v-for="i18nArc of internationalHoursArcs"
         :key="i18nArc.id"
-        class="i18n-arc"
+        class="interactive-arc"
         :d="i18nArc.pathData"
+        @click="$emit(`change`, i18nArc.hour)"
+      />
+      <circle
+        cx="0"
+        cy="0"
+        r="60"
+        class="interactive-center"
+        @click="$emit(`change`, false)"
       />
     </g>
   </svg>
@@ -263,16 +271,15 @@ $periods: 'midnight', 'late-night', 'morning', 'noon', 'afternoon', 'sunset',
     }
   }
 }
-
-.i18n-arc {
+.interactive-arc {
   fill: none;
-  stroke: blue;
+  stroke: red;
   stroke-width: 60;
   opacity: 0;
-
-  &:nth-child(odd) {
-    stroke: red;
-  }
+}
+.interactive-center {
+  fill: greenyellow;
+  fill-opacity: 0;
 }
 #moon {
   fill: white;
