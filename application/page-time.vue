@@ -1,27 +1,45 @@
 <template>
   <section>
-    <div>
-      <button type="button" @click="restartAutomaticUpdate">
-        now
-      </button>
-    </div>
     <t-timer-24 :currentTime="currentTime"></t-timer-24>
     <t-timer-thai :currentTime="currentTime"></t-timer-thai>
     <t-clock
       :currentTime="currentTime"
       @change="setHour"
-    />
+    >
+      <transition name="fade">
+        <t-svg-icons
+          name="restore"
+          class="restore-button"
+          :scale="3"
+          v-if="isManualHour"
+        />
+      </transition>
+    </t-clock>
   </section>
 </template>
 
-<style scoped>
-input {
-  font-size: 1.5rem;
+<style lang="scss">
+.restore-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
+  color: var(--c-accent);
+
+  path {
+    stroke-width: 0.5;
+    stroke: white;
+  }
 }
-button {
-  font-size: 1.5rem;
-  background: var(--c-primary);
-  color: white;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
 
@@ -31,6 +49,7 @@ import { DateTime } from 'luxon'
 import Timer24 from './timer-24'
 import Clock from './clock'
 import TimerThai from './timer-thai'
+import svgIcons from './svg-icons'
 
 export default {
   name: `page-time`,
@@ -38,6 +57,7 @@ export default {
     't-timer-24': Timer24,
     't-clock': Clock,
     't-timer-thai': TimerThai,
+    't-svg-icons': svgIcons,
   },
   data() {
     return {
@@ -46,7 +66,11 @@ export default {
       intervalId: false,
     }
   },
-  watch: {},
+  computed: {
+    isManualHour() {
+      return !this.timerId && !this.intervalId
+    },
+  },
   created() {
     this.beginAutomaticTimeUpdate()
   },
@@ -85,6 +109,8 @@ export default {
     stopTimers() {
       if (this.timerId) window.clearTimeout(this.timerId)
       if (this.intervalId) window.clearInterval(this.intervalId)
+      this.timerId = false
+      this.intervalId = false
     },
   },
 }

@@ -58,7 +58,7 @@ h2 {
 .thai-text {
   font-size: 1.1em;
 }
-.svg-icon svg {
+.svg-icon {
   fill: currentColor;
 }
 </style>

@@ -1,19 +1,19 @@
 <template>
-<div>
-  <svg :viewBox="viewbox" class="svg-clock">
+<div class="clock">
+  <svg :viewBox="viewbox" class="clock-svg">
     <defs>
       <clipPath id="clip-clock">
         <circle cx="0" cy="0" r="100" />
       </clipPath>
     </defs>
-    <g id="clock-background" clip-path="url(#clip-clock)">
-      <circle cx="0" cy="0" r="75" class="svg-clock__day-sky" />
+    <g class="clock-center" clip-path="url(#clip-clock)">
+      <circle cx="0" cy="0" r="75" class="clock-center__day-sky" />
       <path
-        class="svg-clock__night-sky"
+        class="clock-center__night-sky"
         :d="nightSky"
       />
-      <path id="moon" d="M5,0.862c-2.284,0 -4.138,1.854 -4.138,4.138c0,2.284 1.854,4.138 4.138,4.138c-1.142,-0.69 -2.069,-2.306 -2.069,-4.138c0,-1.832 0.927,-3.448 2.069,-4.138Z"/>
-      <g id="stars">
+      <path class="clock-center__moon" d="M5,0.862c-2.284,0 -4.138,1.854 -4.138,4.138c0,2.284 1.854,4.138 4.138,4.138c-1.142,-0.69 -2.069,-2.306 -2.069,-4.138c0,-1.832 0.927,-3.448 2.069,-4.138Z"/>
+      <g class="clock-center__stars">
         <path class="star" d="M5,0.914c0.622,0 1.009,3.106 1.009,3.106c0,0 3.073,-0.596 3.266,0c0.192,0.591 -2.642,1.92 -2.642,1.92c0,0 1.516,2.738 1.009,3.106c-0.503,0.365 -2.642,-1.92 -2.642,-1.92c0,0 -2.135,2.288 -2.642,1.92c-0.503,-0.365 1.009,-3.106 1.009,-3.106c0,0 -2.836,-1.324 -2.642,-1.92c0.192,-0.591 3.266,0 3.266,0c0,0 0.382,-3.106 1.009,-3.106Z"/>
         <path class="star" d="M5,0.914c0.622,0 1.009,3.106 1.009,3.106c0,0 3.073,-0.596 3.266,0c0.192,0.591 -2.642,1.92 -2.642,1.92c0,0 1.516,2.738 1.009,3.106c-0.503,0.365 -2.642,-1.92 -2.642,-1.92c0,0 -2.135,2.288 -2.642,1.92c-0.503,-0.365 1.009,-3.106 1.009,-3.106c0,0 -2.836,-1.324 -2.642,-1.92c0.192,-0.591 3.266,0 3.266,0c0,0 0.382,-3.106 1.009,-3.106Z"/>
         <path class="star" d="M5,0.914c0.622,0 1.009,3.106 1.009,3.106c0,0 3.073,-0.596 3.266,0c0.192,0.591 -2.642,1.92 -2.642,1.92c0,0 1.516,2.738 1.009,3.106c-0.503,0.365 -2.642,-1.92 -2.642,-1.92c0,0 -2.135,2.288 -2.642,1.92c-0.503,-0.365 1.009,-3.106 1.009,-3.106c0,0 -2.836,-1.324 -2.642,-1.92c0.192,-0.591 3.266,0 3.266,0c0,0 0.382,-3.106 1.009,-3.106Z"/>
@@ -21,23 +21,22 @@
         <path class="star" d="M5,0.914c0.622,0 1.009,3.106 1.009,3.106c0,0 3.073,-0.596 3.266,0c0.192,0.591 -2.642,1.92 -2.642,1.92c0,0 1.516,2.738 1.009,3.106c-0.503,0.365 -2.642,-1.92 -2.642,-1.92c0,0 -2.135,2.288 -2.642,1.92c-0.503,-0.365 1.009,-3.106 1.009,-3.106c0,0 -2.836,-1.324 -2.642,-1.92c0.192,-0.591 3.266,0 3.266,0c0,0 0.382,-3.106 1.009,-3.106Z"/>
         <path class="star" d="M5,0.914c0.622,0 1.009,3.106 1.009,3.106c0,0 3.073,-0.596 3.266,0c0.192,0.591 -2.642,1.92 -2.642,1.92c0,0 1.516,2.738 1.009,3.106c-0.503,0.365 -2.642,-1.92 -2.642,-1.92c0,0 -2.135,2.288 -2.642,1.92c-0.503,-0.365 1.009,-3.106 1.009,-3.106c0,0 -2.836,-1.324 -2.642,-1.92c0.192,-0.591 3.266,0 3.266,0c0,0 0.382,-3.106 1.009,-3.106Z"/>
       </g>
-      <g id="sun">
+      <g class="clock-center__sun">
         <path d="M5.769,0.68l0,8.64" />
         <path d="M10.004,5l-8.469,0" />
         <path d="M8.53,2.184l-5.521,5.632" />
         <path d="M8.41,7.693l-5.281,-5.386" />
         <ellipse cx="5.769" cy="5" rx="2.761" ry="2.816"/>
       </g>
-      <circle cx="0" cy="0" r="75" class="svg-clock__inner-ring" />
+      <circle cx="0" cy="0" r="75" class="clock-center__inner-ring" />
     </g>
-
     <g id="arcs-with-marker" clip-path="url(#clip-clock)">
       <path
         v-for="arc of arcs"
         :key="arc.id"
         :class="[
-          `svg-clock__arc`,
-          `svg-clock__arc--${arc.id}`
+          `period-arc`,
+          `period-arc--${arc.id}`
         ]"
         :d="arc.pathData"
       />
@@ -45,27 +44,27 @@
         v-for="marker of hourMarkers"
         :key="marker.id"
         :class="[
-          `svg-clock__marker`,
-          `svg-clock__marker--${marker.name}`,
-          `${ marker.isFirstPeriodMarker ? `svg-clock__marker--is-first` : `` }`
+          `period-marker`,
+          `period-marker--${marker.name}`,
+          `${ marker.isFirstPeriodMarker ? `period-marker--is-first` : `` }`
         ]"
         :d="marker.pathData"
       />
     </g>
     <circle
-      class="svg-clock__current-time"
+      class="current-time"
       :cx="nowCoordinates.x"
       :cy="nowCoordinates.y"
       r="5"
     />
-    <g id="thai-numbers">
+    <g id="thai-hours">
       <text
         v-for="(marker) of hourMarkers"
         :key="`${marker.id}-th`"
         :class="[
-          `svg-clock__thai-hour`,
-          `svg-clock__thai-hour--${marker.name}`,
-          `${ marker.isFirstPeriodMarker ? `svg-clock__thai-hour--is-first` : `` }`
+          `thai-hour`,
+          `thai-hour--${marker.name}`,
+          `${ marker.isFirstPeriodMarker ? `thai-hour--is-first` : `` }`
         ]"
         :x="marker.textX"
         :y="marker.textY"
@@ -74,11 +73,11 @@
         {{marker.thaiHour}}
       </text>
     </g>
-    <g id="24-hour-numbers">
+    <g id="military-time">
       <circle
         v-for="i18nHour of internationalHours"
         :key="`${i18nHour.id}-bg`"
-        class="svg-clock__24-hour-background"
+        class="military-time__background"
         :cx="i18nHour.cx"
         :cy="i18nHour.cy"
         :r="i18nHour.bgSize"
@@ -86,7 +85,7 @@
       <text
         v-for="i18nHour of internationalHours"
         :key="`${i18nHour.id}`"
-        class="svg-clock__24-hour"
+        class="military-time__text"
         :x="i18nHour.x"
         :y="i18nHour.y"
         text-anchor="middle"
@@ -100,7 +99,7 @@
         :id="periodName.pathId"
         :key="periodName.pathId"
         :class="[
-          `svg-clock__period-name_path`,
+          `period-name__path`,
         ]"
         :d="periodName.pathData"
       />
@@ -108,8 +107,8 @@
         v-for="periodName of periodNames"
         :key="periodName.nameId"
         :class="[
-          `svg-clock__period-name_text`,
-          `svg-clock__period-name_text--${periodName.id}`,
+          `period-name__text`,
+          `period-name__text--${periodName.id}`,
         ]"
         text-anchor="middle"
       >
@@ -149,6 +148,7 @@
       />
     </g>
   </svg>
+  <slot></slot>
 </div>
 </template>
 
@@ -174,6 +174,7 @@
 <style scoped lang="scss">
 $periods: 'midnight', 'late-night', 'morning', 'noon', 'afternoon', 'sunset',
   'night';
+
 .svg-defs {
   border: 0 !important;
   clip: rect(0 0 0 0) !important;
@@ -184,27 +185,15 @@ $periods: 'midnight', 'late-night', 'morning', 'noon', 'afternoon', 'sunset',
   position: absolute !important;
   width: 1px !important;
 }
-.svg-clock {
-  width: 100%;
+.clock {
+  position: relative;
   max-width: 400px;
-
-  &__current-time {
-    fill: red;
-    stroke-width: 1px;
-    stroke: white;
-  }
-  &__day-sky {
-    fill: hsl(39, 100%, 92%);
-  }
-  &__inner-ring {
-    stroke: white;
-    fill: none;
-    stroke-width: 3;
-  }
-  &__night-sky {
-    fill: hsl(197, 100%, 93%);
-  }
-  &__arc {
+}
+.clock-svg {
+  width: 100%;
+}
+.period {
+  &-arc {
     stroke-width: 50;
     fill: none;
 
@@ -214,7 +203,7 @@ $periods: 'midnight', 'late-night', 'morning', 'noon', 'afternoon', 'sunset',
       }
     }
   }
-  &__marker {
+  &-marker {
     stroke-width: 1;
     fill: none;
 
@@ -228,98 +217,121 @@ $periods: 'midnight', 'late-night', 'morning', 'noon', 'afternoon', 'sunset',
       stroke: white;
     }
   }
-  &__thai-hour {
+}
+.military-time {
+  &__text {
     font-size: 0.6em;
     /* translate for taking care of the letter height */
-    transform: translateY(0.4em);
+    transform: translateY(0.35em);
+  }
+  &__background {
+    fill: white;
+  }
+}
+.current-time {
+  fill: red;
+  stroke-width: 1px;
+  stroke: white;
+}
+.period-name {
+  &__path {
+    fill: none;
+    stroke-width: 0;
+  }
+  &__text {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 0.7em;
+    font-weight: bold;
 
     @each $period in $periods {
       &--#{$period} {
         fill: var(--c-#{$period}-darker);
       }
     }
+  }
+}
+.thai-hour {
+  font-size: 0.6em;
+  /* translate for taking care of the letter height */
+  transform: translateY(0.4em);
 
-    &--is-first {
-      font-size: 0.8em;
-      font-weight: bold;
+  @each $period in $periods {
+    &--#{$period} {
+      fill: var(--c-#{$period}-darker);
     }
   }
-  &__24-hour {
-    font-size: 0.6em;
-    /* translate for taking care of the letter height */
-    transform: translateY(0.35em);
-    &-background {
+
+  &--is-first {
+    font-size: 0.8em;
+    font-weight: bold;
+  }
+}
+.clock-center {
+  &__inner-ring {
+    stroke: white;
+    fill: none;
+    stroke-width: 3;
+  }
+  &__day-sky {
+    fill: hsl(39, 100%, 92%);
+  }
+  &__night-sky {
+    fill: hsl(197, 100%, 93%);
+  }
+  &__moon {
+    fill: white;
+    transform: translate(-45px, -45px) scale(4.5) rotate(-15deg);
+  }
+  &__sun {
+    --sun-color: hsl(51, 98%, 66%);
+    transform: translate(10px, 18px) scale(6.5) rotate(2deg);
+    path {
+      stroke: var(--sun-color);
+      stroke-width: 1px;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 1.5;
+    }
+    ellipse {
+      fill: var(--sun-color);
+    }
+  }
+  &__stars {
+    path {
       fill: white;
     }
-  }
-  &__period-name {
-    &_path {
-      fill: none;
-      stroke-width: 0;
+    path:nth-child(1) {
+      transform: translate(25px, -35px) scale(1.5) rotate(-15deg);
     }
-    &_text {
-      text-align: center;
-      text-transform: uppercase;
-      font-size: 0.7em;
-      font-weight: bold;
+    path:nth-child(2) {
+      transform: translate(-40px, -60px) scale(1) rotate(-5deg);
+    }
+    path:nth-child(3) {
+      transform: translate(11px, -27px) scale(2) rotate(24deg);
+    }
+    path:nth-child(4) {
+      transform: translate(57px, -27px) scale(1.2) rotate(28deg);
+    }
+    path:nth-child(5) {
+      transform: translate(-3px, -57px) scale(1) rotate(3deg);
+    }
+    path:nth-child(6) {
+      transform: translate(-53px, -42px) scale(1.5) rotate(32deg);
+    }
+  }
+}
 
-      @each $period in $periods {
-        &--#{$period} {
-          fill: var(--c-#{$period}-darker);
-        }
-      }
-    }
+.interactive {
+  &-arc {
+    fill: none;
+    stroke: red;
+    stroke-width: 60;
+    opacity: 0;
   }
-}
-.interactive-arc {
-  fill: none;
-  stroke: red;
-  stroke-width: 60;
-  opacity: 0;
-}
-.interactive-center {
-  fill: greenyellow;
-  fill-opacity: 0;
-}
-#moon {
-  fill: white;
-  transform: translate(-45px, -45px) scale(4.5) rotate(-15deg);
-}
-#sun {
-  --sun-color: hsl(51, 98%, 66%);
-  transform: translate(10px, 18px) scale(6.5) rotate(2deg);
-  path {
-    stroke: var(--sun-color);
-    stroke-width: 1px;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-miterlimit: 1.5;
-  }
-  ellipse {
-    fill: var(--sun-color);
-  }
-}
-#stars {
-  path {
-    fill: white;
-  }
-  path:nth-child(1) {
-    transform: translate(25px, -35px) scale(1.5) rotate(-15deg);
-  }
-  path:nth-child(2) {
-    transform: translate(-40px, -60px) scale(1) rotate(-5deg);
-  }
-  path:nth-child(3) {
-    transform: translate(11px, -27px) scale(2) rotate(24deg);
-  }
-  path:nth-child(4) {
-    transform: translate(57px, -27px) scale(1.2) rotate(28deg);
-  }
-  path:nth-child(5) {
-    transform: translate(-3px, -57px) scale(1) rotate(3deg);
-  }
-  path:nth-child(6) {
-    transform: translate(-53px, -42px) scale(1.5) rotate(32deg);
+  &-center {
+    fill: greenyellow;
+    fill-opacity: 0;
   }
 }
 </style>

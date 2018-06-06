@@ -35,6 +35,10 @@ exports.icons = () => {
     )
     .pipe(
       $.svgSymbols({
+        svgAttrs: {
+          class: `svg-icon-wrapper`,
+          xmlns: false,
+        },
         templates: [
           `default-demo`,
           path.join(__dirname, `./source/icons/svg-icons.vue`),
