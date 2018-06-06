@@ -7,11 +7,13 @@
         </router-link>
       </li>
       <li>
-        <router-link to="/calendar">date</router-link>
+        <router-link to="/calendar">
+          <t-svg-icons name="insert-invitation"/>
+        </router-link>
       </li>
       <li>
-        <router-link to="/day-month">
-          <t-svg-icons name="insert-invitation"/>
+        <router-link to="/information">
+          <t-svg-icons name="info"/>
         </router-link>
       </li>
     </ul>

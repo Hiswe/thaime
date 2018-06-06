@@ -5,7 +5,8 @@ import { DateTime } from 'luxon'
 import Layout from './layout'
 import TimePage from './page-time'
 import CalendarPage from './page-calendar'
-import DayMonthPage from './page-day-month'
+import InformationPage from './page-information'
+import NotFound from './page-not-found'
 
 Vue.use(VueRouter)
 
@@ -25,8 +26,12 @@ const routes = [
     component: CalendarPage,
   },
   {
-    path: `/day-month`,
-    component: DayMonthPage,
+    path: `/information`,
+    component: InformationPage,
+  },
+  {
+    path: `/*`,
+    component: NotFound,
   },
 ]
 

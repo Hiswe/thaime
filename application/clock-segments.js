@@ -169,5 +169,3 @@ export const internationalHoursArcs = thaiPeriods
     )
   })
   .reduce(flattenArray, [])
-
-console.log(internationalHoursArcs)
