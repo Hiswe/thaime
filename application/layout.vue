@@ -2,13 +2,17 @@
   <main>
     <ul>
       <li>
-        <router-link to="/" exact>time</router-link>
+        <router-link to="/" exact>
+          <t-svg-icons name="access-time"/>
+        </router-link>
       </li>
       <li>
         <router-link to="/calendar">date</router-link>
       </li>
       <li>
-        <router-link to="/day-month">days & months</router-link>
+        <router-link to="/day-month">
+          <t-svg-icons name="insert-invitation"/>
+        </router-link>
       </li>
     </ul>
     <router-view></router-view>
@@ -52,6 +56,9 @@ h2 {
 .thai-text {
   font-size: 1.1em;
 }
+.svg-icon svg {
+  fill: currentColor;
+}
 </style>
 
 <style scoped>
@@ -77,8 +84,12 @@ a {
 </style>
 
 <script>
+import svgIcons from './svg-icons'
 export default {
   name: `layout`,
+  components: {
+    't-svg-icons': svgIcons,
+  },
 }
 </script>
 
