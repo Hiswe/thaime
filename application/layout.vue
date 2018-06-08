@@ -46,8 +46,6 @@ body {
 }
 main {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column-reverse;
 }
 .page-content {
   flex: 1 0 auto;
@@ -71,6 +69,11 @@ nav {
   margin: 0;
   padding: 0;
   background: var(--c-primary);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--navigation-height);
 }
 a {
   height: var(--navigation-height);

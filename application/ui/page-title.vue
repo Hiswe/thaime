@@ -8,7 +8,7 @@
 
 <style scoped lang="scss">
 header {
-  --round-size: 1rem;
+  --round-size: 0.75rem;
   --c-background: var(--c-primary-lightest);
   background: var(--c-background);
   position: relative;
@@ -17,7 +17,6 @@ header {
   &::after {
     content: '';
     display: block;
-
     position: absolute;
     top: 100%;
     width: var(--round-size);

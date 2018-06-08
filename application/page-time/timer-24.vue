@@ -1,17 +1,17 @@
 <template>
-  <div>
+  <div class="timer-24">
     {{ currentTime | hoursMinutesSeconds }}
   </div>
 </template>
 
 <style scoped lang="scss">
-div {
-  font-family: monospace;
+.timer-24 {
   font-size: 2rem;
-  margin-top: var(--gutter);
+  margin-top: var(--half-gutter);
+  text-align: center;
+  font-weight: 200;
 }
 </style>
-
 
 <script>
 import { DateTime } from 'luxon'

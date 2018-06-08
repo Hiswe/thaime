@@ -179,7 +179,7 @@ $periods: 'midnight', 'late-night', 'morning', 'noon', 'afternoon', 'sunset',
   position: relative;
   max-width: 400px;
   margin: 0 auto;
-  border: 1px solid black;
+  // border: 1px solid black;
 }
 .clock-svg {
   width: 100%;

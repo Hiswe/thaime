@@ -1,11 +1,16 @@
 <template>
-  <dl>
-    <dt>RTGS</dt>
-    <dd>{{ rtgs }}</dd>
-    <dt>Thaï</dt>
-    <dd class="thai-text">{{ thai }}</dd>
-  </dl>
+  <div class="timer-text">
+    <p>{{ rtgs }}</p>
+    <p class="thai-text">{{ thai }}</p>
+  </div>
 </template>
+
+<style scope lang="scss">
+p {
+  margin: 0;
+  text-align: center;
+}
+</style>
 
 <script>
 import { DateTime } from 'luxon'

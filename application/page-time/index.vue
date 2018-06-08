@@ -3,21 +3,23 @@
     <t-page-title>
       Clock
     </t-page-title>
-    <t-timer-24 :currentTime="currentTime"></t-timer-24>
-    <t-timer-thai :currentTime="currentTime"></t-timer-thai>
-    <t-clock
-      :currentTime="currentTime"
-      @change="setHour"
-    >
-      <transition name="fade">
-        <t-svg-icons
-          name="restore"
-          class="restore-button"
-          :scale="3"
-          v-if="isManualHour"
-        />
-      </transition>
-    </t-clock>
+    <div>
+      <t-timer-24 :currentTime="currentTime"></t-timer-24>
+      <t-clock
+        :currentTime="currentTime"
+        @change="setHour"
+      >
+        <transition name="fade">
+          <t-svg-icons
+            name="restore"
+            class="restore-button"
+            :scale="3"
+            v-if="isManualHour"
+          />
+        </transition>
+      </t-clock>
+      <t-timer-thai :currentTime="currentTime"></t-timer-thai>
+    </div>
   </section>
 </template>
 
@@ -43,6 +45,28 @@
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+</style>
+
+<style scoped lang="scss">
+.page-content {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--navigation-height));
+}
+div {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.clock {
+  width: 100%;
+}
+.timer-24 {
+  margin-bottom: auto;
+}
+.timer-text {
+  margin-top: auto;
 }
 </style>
 
