@@ -1,7 +1,6 @@
-import { DateTime } from 'luxon'
 import round from 'lodash.round'
 
-import { thaiPeriods } from './thai-hours'
+import { thaiPeriods } from '../thai-hours'
 
 export const SVG_SIZE = 100
 

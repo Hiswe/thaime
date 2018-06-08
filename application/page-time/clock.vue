@@ -175,19 +175,10 @@
 $periods: 'midnight', 'late-night', 'morning', 'noon', 'afternoon', 'sunset',
   'night';
 
-.svg-defs {
-  border: 0 !important;
-  clip: rect(0 0 0 0) !important;
-  height: 1px !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  padding: 0 !important;
-  position: absolute !important;
-  width: 1px !important;
-}
 .clock {
   position: relative;
   max-width: 400px;
+  border: 1px solid black;
 }
 .clock-svg {
   width: 100%;
@@ -338,12 +329,10 @@ $periods: 'midnight', 'late-night', 'morning', 'noon', 'afternoon', 'sunset',
 
 <script>
 import { DateTime } from 'luxon'
-import round from 'lodash.round'
 
 import * as clockSegments from './clock-segments'
-import { thaiPeriods } from './thai-hours'
 
-const SVG_MARGIN = 0.5
+const SVG_MARGIN = 0.45
 const viewbox = [-1, -1, 2, 2].map(
   val => val * clockSegments.SVG_SIZE * (1 + SVG_MARGIN)
 )

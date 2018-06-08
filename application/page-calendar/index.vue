@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-content">
     <section class="curent-date">
       <dl>
         <dt>english</dt>

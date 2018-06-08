@@ -1,22 +1,18 @@
 <template>
   <main>
-    <ul>
-      <li>
-        <router-link to="/" exact>
-          <t-svg-icons name="access-time"/>
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/calendar">
-          <t-svg-icons name="insert-invitation"/>
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/information">
-          <t-svg-icons name="info"/>
-        </router-link>
-      </li>
-    </ul>
+    <nav>
+      <router-link to="/" exact>
+        <t-svg-icons name="access-time"/>
+      </router-link>
+
+      <router-link to="/calendar">
+        <t-svg-icons name="insert-invitation"/>
+      </router-link>
+
+      <router-link to="/information">
+        <t-svg-icons name="info"/>
+      </router-link>
+    </nav>
     <router-view></router-view>
   </main>
 </template>
@@ -47,6 +43,11 @@ body {
 }
 main {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.page-content {
+  flex: 1 0 auto;
 }
 section {
   padding: var(--gutter);
@@ -64,7 +65,7 @@ h2 {
 </style>
 
 <style scoped>
-ul {
+nav {
   display: flex;
   list-style: none;
   margin: 0;
@@ -74,6 +75,7 @@ ul {
 a {
   height: var(--navigation-height);
   display: flex;
+  flex: 1 0 auto;
   align-items: center;
   justify-content: center;
   padding: 0 2em;

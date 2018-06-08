@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section class="page-content">
     <h1>informations</h1>
-  </div>
+  </section>
 </template>
