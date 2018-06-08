@@ -17,13 +17,6 @@ export default {
   props: {
     currentTime: DateTime,
   },
-  // data: function() {
-  //   const thaiTime = getThaiTime(this.currentTime)
-  //   return {
-  //     rtgs: thaiTime.rtgs(),
-  //     thai: thaiTime.thai(),
-  //   }
-  // },
   computed: {
     rtgs() {
       const thaiTime = getThaiTime(this.currentTime)

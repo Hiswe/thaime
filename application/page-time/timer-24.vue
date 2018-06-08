@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 div {
   font-family: monospace;
   font-size: 2rem;

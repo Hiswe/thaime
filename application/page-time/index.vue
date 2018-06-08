@@ -1,5 +1,8 @@
 <template>
   <section class="page-content">
+    <t-page-title>
+      Clock
+    </t-page-title>
     <t-timer-24 :currentTime="currentTime"></t-timer-24>
     <t-timer-thai :currentTime="currentTime"></t-timer-thai>
     <t-clock
@@ -46,7 +49,8 @@
 <script>
 import { DateTime } from 'luxon'
 
-import svgIcons from '../svg-icons'
+import svgIcons from '../ui/svg-icons'
+import pageTitle from '../ui/page-title'
 import Timer24 from './timer-24'
 import Clock from './clock'
 import TimerThai from './timer-thai'
@@ -58,6 +62,7 @@ export default {
     't-clock': Clock,
     't-timer-thai': TimerThai,
     't-svg-icons': svgIcons,
+    't-page-title': pageTitle,
   },
   data() {
     return {

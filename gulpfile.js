@@ -45,6 +45,6 @@ exports.icons = () => {
         ],
       })
     )
-    .pipe($.if(/[.]vue$/, gulp.dest(`application`)))
+    .pipe($.if(/[.]vue$/, gulp.dest(`application/ui`)))
     .pipe($.if(/[.]html$/, gulp.dest(`source/icons`)))
 }

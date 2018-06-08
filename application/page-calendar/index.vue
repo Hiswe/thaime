@@ -1,5 +1,8 @@
 <template>
   <div class="page-content">
+    <t-page-title>
+      Days & months
+    </t-page-title>
     <section class="curent-date">
       <dl>
         <dt>english</dt>
@@ -55,6 +58,7 @@
 <script>
 import { DateTime } from 'luxon'
 
+import pageTitle from '../ui/page-title'
 import DayOrMonthItem from './day-month-item'
 import { days, months } from './day-month-names'
 
@@ -62,6 +66,7 @@ export default {
   name: `page-calendar`,
   components: {
     't-day-or-month-item': DayOrMonthItem,
+    't-page-title': pageTitle,
   },
   data() {
     return {

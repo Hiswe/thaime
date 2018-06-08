@@ -24,11 +24,14 @@
   --c-text-lighter: hsl(0, 0%, 40%);
   --c-primary: hsl(272, 100%, 30%);
   --c-primary-lighter: hsl(272, 50%, 45%);
+  --c-primary-lightest: hsl(272, 50%, 95%);
   --c-primary-contrast: white;
   --c-accent: hsl(187, 100%, 45%);
   --c-accent-lighter: hsl(187, 60%, 70%);
   --c-accent-lightest: hsl(187, 60%, 95%);
   --gutter: 1.5rem;
+  --quarter-gutter: calc(var(--gutter) / 4);
+  --half-gutter: calc(var(--gutter) / 2);
   --two-gutter: calc(var(--gutter) * 2);
 }
 html,
@@ -48,9 +51,6 @@ main {
 }
 .page-content {
   flex: 1 0 auto;
-}
-section {
-  padding: var(--gutter);
 }
 h2 {
   font-weight: 300;
@@ -88,7 +88,7 @@ a {
 </style>
 
 <script>
-import svgIcons from './svg-icons'
+import svgIcons from './ui/svg-icons'
 export default {
   name: `layout`,
   components: {
