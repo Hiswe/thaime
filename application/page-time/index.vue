@@ -3,7 +3,7 @@
     <t-page-title>
       Clock
     </t-page-title>
-    <div>
+    <div class="content-body">
       <t-timer-24 :currentTime="currentTime"></t-timer-24>
       <t-clock
         :currentTime="currentTime"
@@ -52,9 +52,9 @@
 .page-content {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - var(--navigation-height));
+  height: calc(100vh - var(--navigation-total-height));
 }
-div {
+.content-body {
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;

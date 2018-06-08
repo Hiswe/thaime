@@ -1,25 +1,12 @@
 <template>
   <main>
-    <nav>
-      <router-link to="/" exact>
-        <t-svg-icons name="access-time"/>
-      </router-link>
-
-      <router-link to="/calendar">
-        <t-svg-icons name="insert-invitation"/>
-      </router-link>
-
-      <router-link to="/information">
-        <t-svg-icons name="info"/>
-      </router-link>
-    </nav>
+    <t-nav />
     <router-view></router-view>
   </main>
 </template>
 
 <style>
 :root {
-  --navigation-height: 50px;
   --c-text: hsl(0, 0%, 20%);
   --c-text-lighter: hsl(0, 0%, 40%);
   --c-primary: hsl(272, 100%, 30%);
@@ -33,6 +20,8 @@
   --quarter-gutter: calc(var(--gutter) / 4);
   --half-gutter: calc(var(--gutter) / 2);
   --two-gutter: calc(var(--gutter) * 2);
+
+  --border-radius-size: 0.75rem;
 }
 html,
 body {
@@ -62,40 +51,15 @@ h2 {
 }
 </style>
 
-<style scoped>
-nav {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  background: var(--c-primary);
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: var(--navigation-height);
-}
-a {
-  height: var(--navigation-height);
-  display: flex;
-  flex: 1 0 auto;
-  align-items: center;
-  justify-content: center;
-  padding: 0 2em;
-  text-decoration: none;
-  color: var(--c-primary-contrast);
-}
-.router-link-active {
-  background: var(--c-primary-lighter);
-}
-</style>
-
 <script>
 import svgIcons from './ui/svg-icons'
+import mainNav from './navigation'
+
 export default {
   name: `layout`,
   components: {
     't-svg-icons': svgIcons,
+    't-nav': mainNav,
   },
 }
 </script>
