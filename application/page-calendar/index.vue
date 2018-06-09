@@ -4,12 +4,8 @@
       Days & months
     </t-page-title>
     <section class="curent-date">
-      <dl>
-        <dt>english</dt>
-        <dd>{{englishDate}}</dd>
-        <dt>Thai</dt>
-        <dd class="thai-text">{{thaiDate}}</dd>
-      </dl>
+      <p class="curent-date__text curent-date__text--en">{{englishDate}}</p>
+      <p class="curent-date__text curent-date__text--th thai-text">{{thaiDate}}</p>
     </section>
     <section class="day-month-listing">
       <h2>days</h2>
@@ -36,7 +32,7 @@
 
 <style scoped lang="scss">
 .day-month-listing {
-  display: grid;
+  // display: grid;
   grid-template-areas:
     'titleDay titleMonth'
     'listDay listMonth';

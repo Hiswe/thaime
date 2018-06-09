@@ -1,58 +1,9 @@
 import { DateTime } from 'luxon'
 import { shallowClone } from './clone'
 
-/* spell-checker: disable */
+import THAI_NUMBERS from './thai-numbers'
 
-const THAI_NUMBERS = {
-  0: {
-    th: `ศูนย์`,
-    rtgs: `soon`,
-  },
-  1: {
-    th: `หนึ่ง`,
-    rtgs: `nung`,
-  },
-  2: {
-    th: `สอง`,
-    rtgs: `song`,
-  },
-  3: {
-    th: `สาม`,
-    rtgs: `sam`,
-  },
-  4: {
-    th: `สี่`,
-    rtgs: `si`,
-  },
-  5: {
-    th: `ห้า`,
-    rtgs: `ha`,
-  },
-  6: {
-    th: `หก`,
-    rtgs: `hock`,
-  },
-  7: {
-    th: `เจ็ด`,
-    rtgs: `jet`,
-  },
-  8: {
-    th: `แปด`,
-    rtgs: `pet`,
-  },
-  9: {
-    th: `เก้า`,
-    rtgs: `kao`,
-  },
-  10: {
-    th: `สิบ`,
-    rtgs: `sip`,
-  },
-  11: {
-    th: `สิบเอ็ด`,
-    rtgs: `sip et`,
-  },
-}
+/* spell-checker: disable */
 
 const basePeriod = {
   _numbers: THAI_NUMBERS,
