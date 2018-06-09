@@ -18,7 +18,10 @@
           />
         </transition>
       </t-clock>
-      <t-timer-thai :currentTime="currentTime"></t-timer-thai>
+      <t-timer-thai
+        :currentTime="currentTime"
+        :currentPeriod="currentPeriod"
+      />
     </div>
   </section>
 </template>
@@ -73,6 +76,7 @@
 <script>
 import { DateTime } from 'luxon'
 
+import { getThaiTime } from '../thai-hours'
 import svgIcons from '../ui/svg-icons'
 import pageTitle from '../ui/page-title'
 import Timer24 from './timer-24'
@@ -91,6 +95,7 @@ export default {
   data() {
     return {
       currentTime: DateTime.local(),
+      currentPeriod: {},
       timerId: false,
       intervalId: false,
     }
@@ -107,21 +112,22 @@ export default {
     this.stopTimers()
   },
   methods: {
-    setCurrentTime() {
-      this.currentTime = DateTime.local()
+    setCurrentTime(luxonTime) {
+      this.currentTime = luxonTime
+      this.currentPeriod = getThaiTime(luxonTime)
     },
     setHour(hour) {
       if (hour === false) return this.beginAutomaticTimeUpdate()
       const isValidHour = Number.isInteger(hour) && hour >= 0 && hour < 24
       if (!isValidHour) return
       this.stopTimers()
-      this.currentTime = DateTime.fromObject({ hour, minutes: 30 })
+      this.setCurrentTime(DateTime.fromObject({ hour, minutes: 30 }))
     },
     beginAutomaticTimeUpdate() {
-      this.setCurrentTime()
+      this.setCurrentTime(DateTime.local())
       // first minute may not be full
       this.timerId = window.setTimeout(() => {
-        this.setCurrentTime()
+        this.setCurrentTime(DateTime.local())
         this.planReccuringTimeUpdate()
         this.timerId = false
       }, this.currentTime.millisecond)
@@ -132,7 +138,7 @@ export default {
     },
     planReccuringTimeUpdate() {
       this.intervalId = window.setInterval(() => {
-        this.setCurrentTime()
+        this.setCurrentTime(DateTime.local())
       }, 1000)
     },
     stopTimers() {

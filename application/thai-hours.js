@@ -1,5 +1,4 @@
 import { DateTime } from 'luxon'
-import clone from './clone'
 import { shallowClone } from './clone'
 
 /* spell-checker: disable */

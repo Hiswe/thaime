@@ -1,0 +1,35 @@
+:root {
+  // theme
+  --c-text: hsl(0, 0%, 20%);
+  --c-text-lighter: hsl(0, 0%, 40%);
+  --c-primary: hsl(272, 100%, 30%);
+  --c-primary-lighter: hsl(272, 50%, 45%);
+  --c-primary-lightest: hsl(272, 50%, 95%);
+  --c-primary-contrast: white;
+  --c-accent: hsl(187, 100%, 45%);
+  --c-accent-lighter: hsl(187, 60%, 70%);
+  --c-accent-lightest: hsl(187, 60%, 95%);
+
+  // sizes
+  --gutter: 1.5rem;
+  --quarter-gutter: calc(var(--gutter) / 4);
+  --half-gutter: calc(var(--gutter) / 2);
+  --two-gutter: calc(var(--gutter) * 2);
+  --border-radius-size: 0.75rem;
+
+  // period colors
+  --c-midnight: rgb(60, 57, 125);
+  --c-midnight-darker: hsl(243, 37%, 36%);
+  --c-late-night: hsl(266, 37%, 56%);
+  --c-late-night-darker: hsl(266, 37%, 45%);
+  --c-morning: hsl(55, 53%, 58%);
+  --c-morning-darker: hsl(55, 53%, 45%);
+  --c-noon: hsl(12, 68%, 56%);
+  --c-noon-darker: hsl(12, 68%, 40%);
+  --c-afternoon: hsl(32, 77%, 61%);
+  --c-afternoon-darker: hsl(32, 76%, 55%);
+  --c-sunset: hsl(339, 91%, 83%);
+  --c-sunset-darker: hsl(339, 94%, 75%);
+  --c-night: hsl(209, 47%, 50%);
+  --c-night-darker: hsl(209, 48%, 40%);
+}

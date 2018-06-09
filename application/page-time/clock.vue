@@ -152,28 +152,8 @@
 </div>
 </template>
 
-<style>
-:root {
-  --c-midnight: rgb(60, 57, 125);
-  --c-midnight-darker: hsl(243, 37%, 36%);
-  --c-late-night: hsl(266, 37%, 56%);
-  --c-late-night-darker: hsl(266, 37%, 45%);
-  --c-morning: hsl(55, 53%, 58%);
-  --c-morning-darker: hsl(55, 53%, 45%);
-  --c-noon: hsl(12, 68%, 56%);
-  --c-noon-darker: hsl(12, 68%, 40%);
-  --c-afternoon: hsl(32, 77%, 61%);
-  --c-afternoon-darker: hsl(32, 76%, 55%);
-  --c-sunset: hsl(339, 91%, 83%);
-  --c-sunset-darker: hsl(339, 94%, 75%);
-  --c-night: hsl(209, 47%, 50%);
-  --c-night-darker: hsl(209, 48%, 40%);
-}
-</style>
-
 <style scoped lang="scss">
-$periods: 'midnight', 'late-night', 'morning', 'noon', 'afternoon', 'sunset',
-  'night';
+@import '../config.scss';
 
 .clock {
   position: relative;
