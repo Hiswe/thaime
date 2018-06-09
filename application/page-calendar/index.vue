@@ -4,8 +4,15 @@
       Days & months
     </t-page-title>
     <section class="curent-date">
-      <p class="curent-date__text curent-date__text--en">{{englishDate}}</p>
-      <p class="curent-date__text curent-date__text--th thai-text">{{thaiDate}}</p>
+      <p class="curent-date__text curent-date__text--en">
+        {{englishDate}}
+      </p>
+      <p class="curent-date__text curent-date__text--th thai-text">
+        {{thaiDate}}
+      </p>
+      <p class="curent-date__text curent-date__text--rtgs thai-text">
+        {{rtgsDate}}
+      </p>
     </section>
     <section class="day-month-listing">
       <h2>days</h2>
@@ -54,9 +61,12 @@
 <script>
 import { DateTime } from 'luxon'
 
+import THAI_NUMBERS from '../thai-numbers'
 import pageTitle from '../ui/page-title'
 import DayOrMonthItem from './day-month-item'
 import { days, months } from './day-month-names'
+
+const YEAR_DIFFERENCE = 2561 - 2018
 
 export default {
   name: `page-calendar`,
@@ -80,6 +90,13 @@ export default {
     thaiDate() {
       if (!this.currentDate) return ``
       return this.currentDate.setLocale(`th`).toLocaleString(DateTime.DATE_HUGE)
+    },
+    rtgsDate() {
+      if (!this.currentDate) return ``
+      const { weekday, day, month } = this.currentDate
+      return `${days[weekday].rtgs} ${THAI_NUMBERS[day].rtgs} ${
+        months[month].rtgs
+      }`
     },
     currentDay() {
       if (!this.currentDate) return 0
