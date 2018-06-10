@@ -6,6 +6,7 @@ import Layout from './layout'
 import TimePage from './page-time'
 import CalendarPage from './page-calendar'
 import InformationPage from './page-information'
+import YearPage from './page-year'
 import NotFound from './page-not-found'
 
 Vue.use(VueRouter)
@@ -28,6 +29,10 @@ const routes = [
   {
     path: `/information`,
     component: InformationPage,
+  },
+  {
+    path: `/year`,
+    component: YearPage,
   },
   {
     path: `/*`,
