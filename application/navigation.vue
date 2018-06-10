@@ -61,7 +61,7 @@ a {
 <script>
 import { DateTime } from 'luxon'
 
-import * as YEARS from './thai-years'
+import * as years from './thai-years'
 import svgIcons from './ui/svg-icons'
 
 const now = DateTime.local()
@@ -75,8 +75,8 @@ export default {
   },
   data() {
     return {
-      i10lYear: YEARS.i10l,
-      thaiYear: YEARS.thai,
+      i10lYear: years.i10l,
+      thaiYear: years.thai,
     }
   },
 }
