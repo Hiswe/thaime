@@ -1,12 +1,13 @@
 :root {
   // theme
   --c-text: hsl(0, 0%, 20%);
-  --c-text-lighter: hsl(0, 0%, 40%);
+  --c-text-lighter: hsl(0, 0%, 60%);
   --c-primary: hsl(272, 100%, 30%);
   --c-primary-lighter: hsl(272, 50%, 45%);
   --c-primary-lightest: hsl(272, 50%, 95%);
   --c-primary-contrast: white;
   --c-accent: hsl(187, 100%, 45%);
+  --c-accent-darker: hsl(187, 60%, 40%);
   --c-accent-lighter: hsl(187, 60%, 70%);
   --c-accent-lightest: hsl(187, 60%, 95%);
 
@@ -15,10 +16,17 @@
   --quarter-gutter: calc(var(--gutter) / 4);
   --half-gutter: calc(var(--gutter) / 2);
   --two-gutter: calc(var(--gutter) * 2);
-  --border-radius-size: 0.75rem;
+  --border-radius: 0.75rem;
+  --border-radius-small: calc(var(--border-radius) * 0.75);
+
+  --navigation-height: 50px;
+  --navigation-margin: var(--half-gutter);
+  --navigation-total-height: calc(
+    var(--navigation-height) + var(--navigation-margin) * 2
+  );
 
   // period colors
-  --c-midnight: rgb(60, 57, 125);
+  --c-midnight: hsl(243, 37%, 36%);
   --c-midnight-darker: hsl(243, 37%, 36%);
   --c-late-night: hsl(266, 37%, 56%);
   --c-late-night-darker: hsl(266, 37%, 45%);

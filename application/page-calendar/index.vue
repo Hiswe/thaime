@@ -16,7 +16,7 @@
     </section>
     <section class="day-month-listing">
       <h2>days</h2>
-      <ul>
+      <ul class="listing listing--days">
         <t-day-or-month-item
           v-for="(day, index) in days"
           :key="day.rtgs"
@@ -25,7 +25,7 @@
         ></t-day-or-month-item>
       </ul>
       <h2>months</h2>
-      <ul>
+      <ul class="listing listing--months">
         <t-day-or-month-item
           v-for="(month, index) in months"
           :key="month.rtgs"
@@ -38,22 +38,58 @@
 </template>
 
 <style scoped lang="scss">
+.page-content {
+  padding-bottom: var(--navigation-total-height);
+}
+.curent-date {
+  padding: var(--gutter) 0 0;
+
+  &__text {
+    &--en {
+      font-weight: 300;
+    }
+    &--th {
+      font-size: 1.35em;
+      padding: 0.5em 0;
+      margin: 0.25em var(--half-gutter);
+      background: var(--c-accent-lightest);
+      border-radius: var(--border-radius-small);
+    }
+    &--rtgs {
+      color: var(--c-text-lighter);
+    }
+  }
+}
 .day-month-listing {
-  // display: grid;
   grid-template-areas:
     'titleDay titleMonth'
     'listDay listMonth';
   grid-column-gap: var(--two-gutter);
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
   h2 {
     grid-area: titleDay;
+    text-align: center;
+    border-top: 2px solid var(--c-primary-lightest);
+    padding-top: var(--half-gutter);
+    border-radius: var(--border-radius);
+    color: var(--c-primary);
   }
   h2 ~ h2 {
     grid-area: titleMonth;
+  }
+}
+.listing {
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--half-gutter);
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 0.25em;
+
+  &--days {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  &--months {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 }
 </style>
@@ -82,7 +118,6 @@ export default {
     }
   },
   computed: {
-    // a computed getter
     englishDate() {
       if (!this.currentDate) return ``
       return this.currentDate.toLocaleString(DateTime.DATE_HUGE)
@@ -94,8 +129,8 @@ export default {
     rtgsDate() {
       if (!this.currentDate) return ``
       const { weekday, day, month } = this.currentDate
-      return `${days[weekday].rtgs} ${THAI_NUMBERS[day].rtgs} ${
-        months[month].rtgs
+      return `${days[weekday - 1].rtgs} ${THAI_NUMBERS[day].rtgs} ${
+        months[month - 1].rtgs
       }`
     },
     currentDay() {

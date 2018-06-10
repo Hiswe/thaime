@@ -14,21 +14,9 @@
 </nav>
 </template>
 
-<style>
-:root {
-  --navigation-height: 50px;
-  --navigation-margin: var(--half-gutter);
-  --navigation-total-height: calc(
-    var(--navigation-height) + var(--navigation-margin) * 2
-  );
-}
-</style>
-
-
-<style lang="sass" scoped>
-
+<style lang="scss" scoped>
 nav {
-  --nav-border-radius: calc(var(--border-radius-size) * 0.75);
+  --nav-border-radius: var(--border-radius-small);
   display: flex;
   list-style: none;
   margin: 0;
@@ -55,7 +43,7 @@ a {
     border-radius: var(--nav-border-radius) 0 0 var(--nav-border-radius);
   }
   &:last-child {
-    border-radius: 0 var(--nav-border-radius) var(--nav-border-radius) 0 ;
+    border-radius: 0 var(--nav-border-radius) var(--nav-border-radius) 0;
   }
 }
 .router-link-active {

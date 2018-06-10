@@ -10,33 +10,22 @@
 
 <style scoped>
 li {
-  padding: 0.25rem 0;
-  display: flex;
+  padding: 0.5rem;
 }
 p {
   margin: 0;
 }
 p:first-child {
-  width: 6rem;
   color: var(--c-primary);
 }
 small {
   display: block;
   color: var(--c-text-lighter);
+  font-size: 0.7em;
 }
 .active {
-  position: relative;
-}
-.active::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: -0.75em;
-  border-radius: 0.25em;
   background: var(--c-accent-lightest);
-  z-index: -1;
+  border-radius: var(--border-radius-small);
 }
 </style>
 

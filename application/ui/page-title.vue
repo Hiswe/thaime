@@ -18,8 +18,8 @@ header {
     display: block;
     position: absolute;
     top: 100%;
-    width: var(--border-radius-size);
-    height: var(--border-radius-size);
+    width: var(--border-radius);
+    height: var(--border-radius);
   }
   &::before {
     left: 0;
