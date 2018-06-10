@@ -4,54 +4,41 @@
       years
     </t-page-title>
     <div>
-      <label for="i10lYear">International</label>
-      <input
-        id="i10lYear"
-        type="number"
-        v-model.number="i10lYear"
-      >
-      <label for="thaiYear">Thai</label>
-      <input
-        id="thaiYear"
-        type="number"
-        v-model.number="thaiYear"
-      >
-      <label for="age">age</label>
-      <input
-        id="age"
-        type="number"
-        v-model.number="age"
-      >
+      <t-input
+        title="international"
+        v-model="i10lYear"
+      />
+      <t-input
+        title="thai"
+        v-model="thaiYear"
+      />
+      <t-input
+        title="age"
+        v-model="age"
+      />
     </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
 div {
-  display: grid;
-  grid-template-columns: 8em 1fr;
+  // display: grid;
+  // grid-template-columns: 8em 1fr;
   padding: var(--gutter) var(--half-gutter) 0;
-}
-label {
-  // gir
-}
-input {
-  font-size: 2rem;
-  font-family: monospace;
-  width: 100%;
 }
 </style>
 
-
 <script>
-import pageTitle from './ui/page-title'
+import pageTitle from '../ui/page-title'
+import inputNumber from './input-number'
 
-import * as years from './thai-years'
+import * as years from '../thai-years'
 
 export default {
   name: `page-year`,
   components: {
     't-page-title': pageTitle,
+    't-input': inputNumber,
   },
   data() {
     return {
@@ -64,6 +51,7 @@ export default {
         return years.toThaiYear(this.i10lYear)
       },
       set(thaiYear) {
+        console.log({ thaiYear })
         this.i10lYear = years.toI10lYear(thaiYear)
       },
     },
@@ -72,6 +60,7 @@ export default {
         return years.toAge(this.i10lYear)
       },
       set(age) {
+        console.log({ age })
         this.i10lYear = years.fromAge(age)
       },
     },

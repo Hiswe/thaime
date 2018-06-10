@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Symbols</title>
+  <title>6 Symbols</title>
   <meta name="viewport" content="width=device-width" />
   <style>
     html {
@@ -379,12 +379,22 @@
       height: 24px;
     }
     
+    .gss-showOriginal .gss-iconbox #gss-icon-add {
+      width: 24px;
+      height: 24px;
+    }
+    
     .gss-showOriginal .gss-iconbox #gss-icon-info {
       width: 24px;
       height: 24px;
     }
     
     .gss-showOriginal .gss-iconbox #gss-icon-insert-invitation {
+      width: 24px;
+      height: 24px;
+    }
+    
+    .gss-showOriginal .gss-iconbox #gss-icon-remove {
       width: 24px;
       height: 24px;
     }
@@ -407,11 +417,17 @@
   <symbol id="access-time" viewBox="0 0 24 24">
     <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
   </symbol>
+  <symbol id="add" viewBox="0 0 24 24">
+    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+  </symbol>
   <symbol id="info" viewBox="0 0 24 24">
     <path d="M11 7h2v2h-2zM11 11h2v6h-2z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
   </symbol>
   <symbol id="insert-invitation" viewBox="0 0 24 24">
     <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V9h14v10zm0-12H5V5h14v2z"/><path d="M17 12h-5v5h5v-5z"/>
+  </symbol>
+  <symbol id="remove" viewBox="0 0 24 24">
+    <path d="M19 13H5v-2h14v2z"/>
   </symbol>
   <symbol id="restore" viewBox="0 0 24 24">
     <path d="M13 3a9 9 0 0 0-9 9H1l4 3.99L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18z"/><path d="M12 8v5l4.25 2.52.77-1.28-3.52-2.09V8z"/>
@@ -424,13 +440,13 @@
   </symbol>
 </svg>
 <header class="gss-toolbar">
-  <h1>4 Symbols</h1>
+  <h1>6 Symbols</h1>
   <button class="gss-toolbar-list">
     <svg aria-label="Compact" width="15" height="15"><use xlink:href="#gss-icon-list"></use>
     </svg> List
   </button>
   <input class="gss-toolbar-filter" type="search"
-         placeholder="Filter 4 symbols…"
+         placeholder="Filter 6 symbols…"
          aria-label="Filter by id" title="Filter by id">
   <button class="gss-toolbar-orig" data-toggle-class="gss-showOriginal">Original Size</button>
   <button class="gss-toolbar-outl" data-toggle-class="gss-showColor">Test Color</button>
@@ -459,6 +475,35 @@
       <div class="gss-iconbox-code">
         <code>&lt;svg role=&quot;img&quot; class=&quot;access-time&quot;&gt;
   &lt;use xlink:href=&quot;#access-time&quot;&gt;&lt;/use&gt;
+&lt;/svg&gt;</code>
+      </div>
+    </div>
+    <div class="gss-iconbox-action">
+      <button data-action="copy">Copy</button>
+      <button data-action="info">Show</button>
+    </div>
+  </div>
+  <div class="gss-iconbox gss-searchable"
+       id="gss-iconbox-add"
+       data-search="add add 24x24 <1 <2 <3 <4 <5 <6 <7 <8 <9">
+    <div class="gss-iconbox-header">
+      <h2>add</h2>
+      <span>0.1&thinsp;kB</span>
+    </div>
+    <p class="gss-iconbox-head2">
+      <span>add.svg</span>
+      <span>24&thinsp;×&thinsp;24</span>
+      <span>100&thinsp;B</span>
+    </p>
+    <div class="gss-iconbox-wrapper">
+      <div class="gss-iconbox-icon" data-dimensions="24&thinsp;×&thinsp;24">
+        <svg role="img" id="gss-icon-add">
+          <use xlink:href="#add"></use>
+        </svg>
+      </div>
+      <div class="gss-iconbox-code">
+        <code>&lt;svg role=&quot;img&quot; class=&quot;add&quot;&gt;
+  &lt;use xlink:href=&quot;#add&quot;&gt;&lt;/use&gt;
 &lt;/svg&gt;</code>
       </div>
     </div>
@@ -517,6 +562,35 @@
       <div class="gss-iconbox-code">
         <code>&lt;svg role=&quot;img&quot; class=&quot;insert-invitation&quot;&gt;
   &lt;use xlink:href=&quot;#insert-invitation&quot;&gt;&lt;/use&gt;
+&lt;/svg&gt;</code>
+      </div>
+    </div>
+    <div class="gss-iconbox-action">
+      <button data-action="copy">Copy</button>
+      <button data-action="info">Show</button>
+    </div>
+  </div>
+  <div class="gss-iconbox gss-searchable"
+       id="gss-iconbox-remove"
+       data-search="remove remove 24x24 <1 <2 <3 <4 <5 <6 <7 <8 <9">
+    <div class="gss-iconbox-header">
+      <h2>remove</h2>
+      <span>0.1&thinsp;kB</span>
+    </div>
+    <p class="gss-iconbox-head2">
+      <span>remove.svg</span>
+      <span>24&thinsp;×&thinsp;24</span>
+      <span>85&thinsp;B</span>
+    </p>
+    <div class="gss-iconbox-wrapper">
+      <div class="gss-iconbox-icon" data-dimensions="24&thinsp;×&thinsp;24">
+        <svg role="img" id="gss-icon-remove">
+          <use xlink:href="#remove"></use>
+        </svg>
+      </div>
+      <div class="gss-iconbox-code">
+        <code>&lt;svg role=&quot;img&quot; class=&quot;remove&quot;&gt;
+  &lt;use xlink:href=&quot;#remove&quot;&gt;&lt;/use&gt;
 &lt;/svg&gt;</code>
       </div>
     </div>
