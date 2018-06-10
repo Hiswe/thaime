@@ -10,12 +10,8 @@
 </template>
 
 <script>
-import pageTitle from './ui/page-title'
 export default {
   name: `page-information`,
-  components: {
-    't-page-title': pageTitle,
-  },
 }
 </script>
 
