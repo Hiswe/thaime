@@ -68,7 +68,7 @@
   h2 {
     grid-area: titleDay;
     text-align: center;
-    border-top: 2px solid var(--c-primary-lightest);
+    box-shadow: 0 -3px 0px 2px var(--c-primary-lightest);
     padding-top: var(--half-gutter);
     border-radius: var(--border-radius);
     color: var(--c-primary);

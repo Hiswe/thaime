@@ -42,9 +42,6 @@ button {
   display: block;
   margin-top: var(--c-half-gutter);
 }
-// .svg-icon-wrapper .svg-icon {
-//   fill: red;
-// }
 </style>
 
 <style>
