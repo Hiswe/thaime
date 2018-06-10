@@ -98,7 +98,6 @@
 import { DateTime } from 'luxon'
 
 import THAI_NUMBERS from '../thai-numbers'
-import pageTitle from '../ui/page-title'
 import DayOrMonthItem from './day-month-item'
 import { days, months } from './day-month-names'
 
@@ -108,7 +107,6 @@ export default {
   name: `page-calendar`,
   components: {
     't-day-or-month-item': DayOrMonthItem,
-    't-page-title': pageTitle,
   },
   data() {
     return {

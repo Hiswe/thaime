@@ -44,12 +44,10 @@ export default {
   },
   computed: {
     rtgs() {
-      const thaiTime = getThaiTime(this.currentTime)
-      return thaiTime.rtgs()
+      return getThaiTime(this.currentTime).rtgs()
     },
     thai() {
-      const thaiTime = getThaiTime(this.currentTime)
-      return thaiTime.thai()
+      return getThaiTime(this.currentTime).thai()
     },
   },
 }

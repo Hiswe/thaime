@@ -16,17 +16,45 @@
         title="age"
         v-model="age"
       />
+      <transition name="fade">
+        <button
+          v-if="isNotCurrentYear"
+          @click="reset"
+        >
+          <t-icon
+            name="restore"
+            class="restore-year"
+            :scale="3"
+          />
+        </button>
+      </transition>
+
     </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
 div {
-  // display: grid;
-  // grid-template-columns: 8em 1fr;
-  padding: var(--gutter) var(--half-gutter) 0;
+  padding: var(--half-gutter) var(--half-gutter) 0;
+}
+button {
+  margin: 0 auto;
+  display: block;
+  margin-top: var(--c-half-gutter);
+}
+// .svg-icon-wrapper .svg-icon {
+//   fill: red;
+// }
+</style>
+
+<style>
+.restore-year svg {
+  fill: var(--c-accent);
+  stroke-width: 0.5;
+  stroke: white;
 }
 </style>
+
 
 <script>
 import pageTitle from '../ui/page-title'
@@ -37,7 +65,6 @@ import * as years from '../thai-years'
 export default {
   name: `page-year`,
   components: {
-    't-page-title': pageTitle,
     't-input': inputNumber,
   },
   data() {
@@ -45,7 +72,15 @@ export default {
       i10lYear: years.i10l,
     }
   },
+  methods: {
+    reset() {
+      this.i10lYear = years.i10l
+    },
+  },
   computed: {
+    isNotCurrentYear() {
+      return this.i10lYear !== years.i10l
+    },
     thaiYear: {
       get() {
         return years.toThaiYear(this.i10lYear)

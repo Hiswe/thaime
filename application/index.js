@@ -9,6 +9,9 @@ import InformationPage from './page-information'
 import YearPage from './page-year'
 import NotFound from './page-not-found'
 
+import svgIcon from './ui/svg-icons'
+import pageTitle from './ui/page-title'
+
 Vue.use(VueRouter)
 
 Vue.filter(`hoursMinutesSeconds`, value => {
@@ -16,6 +19,9 @@ Vue.filter(`hoursMinutesSeconds`, value => {
   if (!isLuxonDateTime) return `00:00:00`
   return value.toLocaleString(DateTime.TIME_24_WITH_SECONDS)
 })
+
+Vue.component(`t-icon`, svgIcon)
+Vue.component(`t-page-title`, pageTitle)
 
 const routes = [
   {

@@ -10,10 +10,10 @@
         v-model.number="localValue"
       />
       <button class="decrease" type="button"  @click="localValue -= 1">
-        <t-svg-icons name="remove" />
+        <t-icon name="remove" />
       </button>
       <button class="increase" type="button" @click="localValue += 1">
-        <t-svg-icons name="add" />
+        <t-icon name="add" />
       </button>
     </div>
   </div>
@@ -26,6 +26,7 @@ label {
   font-size: 1.25rem;
   text-transform: uppercase;
   font-weight: 300;
+  color: var(--c-text-lighter);
 }
 .input {
   display: grid;
@@ -50,20 +51,15 @@ input {
   border: 0;
 
   &:focus {
-    background: var(--c-accent-lightest);
     outline: none;
+    color: var(--c-primary-lighter);
   }
 }
 </style>
 
 <script>
-import svgIcons from '../ui/svg-icons'
-
 export default {
   name: `input-number`,
-  components: {
-    't-svg-icons': svgIcons,
-  },
   props: {
     title: String,
     value: Number,

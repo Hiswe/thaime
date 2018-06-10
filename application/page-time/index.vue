@@ -10,7 +10,7 @@
         @change="setHour"
       >
         <transition name="fade">
-          <t-svg-icons
+          <t-icon
             name="restore"
             class="restore-button"
             :scale="3"
@@ -77,8 +77,6 @@
 import { DateTime } from 'luxon'
 
 import { getThaiTime } from '../thai-hours'
-import svgIcons from '../ui/svg-icons'
-import pageTitle from '../ui/page-title'
 import Timer24 from './timer-24'
 import Clock from './clock'
 import TimerThai from './timer-thai'
@@ -89,8 +87,6 @@ export default {
     't-timer-24': Timer24,
     't-clock': Clock,
     't-timer-thai': TimerThai,
-    't-svg-icons': svgIcons,
-    't-page-title': pageTitle,
   },
   data() {
     return {
