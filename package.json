@@ -24,6 +24,7 @@
     "gulp": "^4.0.0",
     "gulp-cheerio": "^0.6.3",
     "gulp-if": "^2.0.2",
+    "gulp-image-resize": "^0.13.0",
     "gulp-load-plugins": "^1.5.0",
     "gulp-rename": "^1.2.3",
     "gulp-svg-symbols": "^3.1.1",
@@ -35,6 +36,7 @@
     "vue": "^2.5.16",
     "vue-hot-reload-api": "^2.3.0",
     "vue-router": "^3.0.1",
-    "vue-template-compiler": "^2.5.16"
+    "vue-template-compiler": "^2.5.16",
+    "yargs": "^11.0.0"
   }
 }
