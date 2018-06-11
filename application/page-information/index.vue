@@ -3,21 +3,25 @@
     <t-page-title>
       about thaime
     </t-page-title>
-    <t-info-category title="Author & suggestions">
-      <p>brought to you by <strong>Yannick “Hiswe” Aïvayan</strong></p>
-      <p>find me on:</p>
+    <t-category title="Author & suggestions">
+      <h3>
+          brought to you by
+          <strong>Yannick “Hiswe” Aïvayan</strong>
+          find me on:
+      </h3>
+      <p></p>
       <ul>
         <li><a href="https://hiswe.github.com">my blog</a></li>
         <li><a href="https://github.com/hiswe">github</a></li>
         <li><a href="https://twitter.com/hiswehalya">twitter</a></li>
       </ul>
-      <p>Any suggestions can be send:</p>
+      <p>Suggestions can be send by:</p>
       <ul>
         <li>using the form on <a href="http://www.hiswe.net/contact" target="_blank">hiswe.net</a></li>
         <li>creating a ticket on <a href="https://github.com/Hiswe/thaime/issues" target="_blank">the github repo</a></li>
       </ul>
-    </t-info-category>
-    <!-- <t-info-category title="share the app">
+    </t-category>
+    <!-- <t-category title="share the app">
       <p>The app can be shared with this link </p>
       <a href={ state.appLink }>{ state.appLink }</a>
       <p>
@@ -27,8 +31,8 @@
       </p>
       <p>or this QR code</p>
       <Icon svgId="thailpha-firebase" />
-    </t-info-category> -->
-    <t-info-category title="Source & ressources">
+    </t-category> -->
+    <t-category title="Source & ressources">
       <ul>
         <li>
           Information provided by
@@ -45,7 +49,7 @@
           <a href="https://en.parceljs.org/" target="_blank" >Parcel.js</a>
         </li>
       </ul>
-    </t-info-category>
+    </t-category>
   </section>
 </template>
 
@@ -53,16 +57,33 @@
 .page-content {
   padding-bottom: var(--navigation-total-height);
 }
+header + .category {
+  padding-top: 0;
+}
+h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  font-weight: 400;
+  text-align: center;
+}
+strong {
+  display: block;
+  padding-top: 0.25rem;
+}
+a {
+  text-decoration: none;
+  color: var(--c-text);
+  box-shadow: inset 0 -0.08em var(--c-accent-lighter),
+    0 0.08em var(--c-accent-lighter);
+}
+ul {
+  line-height: 1.35;
+}
 </style>
 
-
 <script>
-import infoCategory from './info-category'
 export default {
   name: `page-information`,
-  components: {
-    't-info-category': infoCategory,
-  },
 }
 </script>
 

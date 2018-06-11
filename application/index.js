@@ -11,6 +11,7 @@ import NotFound from './page-not-found'
 
 import svgIcon from './ui/svg-icons'
 import pageTitle from './ui/page-title'
+import category from './ui/category'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,7 @@ Vue.filter(`hoursMinutesSeconds`, value => {
 
 Vue.component(`t-icon`, svgIcon)
 Vue.component(`t-page-title`, pageTitle)
+Vue.component(`t-category`, category)
 
 const routes = [
   {

@@ -14,25 +14,28 @@
         {{rtgsDate}}
       </p>
     </section>
+
     <section class="day-month-listing">
-      <h2>days</h2>
-      <ul class="listing listing--days">
-        <t-day-or-month-item
-          v-for="(day, index) in days"
-          :key="day.rtgs"
-          :dayOrMonth="day"
-          :isCurrentDayOrMonth="currentDay === index + 1"
-        ></t-day-or-month-item>
-      </ul>
-      <h2>months</h2>
-      <ul class="listing listing--months">
-        <t-day-or-month-item
-          v-for="(month, index) in months"
-          :key="month.rtgs"
-          :dayOrMonth="month"
-          :isCurrentDayOrMonth="currentMonth === index + 1"
-        ></t-day-or-month-item>
-      </ul>
+      <t-category title="days">
+        <ul class="listing listing--days">
+          <t-day-or-month-item
+            v-for="(day, index) in days"
+            :key="day.rtgs"
+            :dayOrMonth="day"
+            :isCurrentDayOrMonth="currentDay === index + 1"
+          />
+        </ul>
+      </t-category>
+      <t-category title="days">
+        <ul class="listing listing--months">
+          <t-day-or-month-item
+            v-for="(month, index) in months"
+            :key="month.rtgs"
+            :dayOrMonth="month"
+            :isCurrentDayOrMonth="currentMonth === index + 1"
+          />
+        </ul>
+      </t-category>
     </section>
   </div>
 </template>
@@ -58,23 +61,6 @@
     &--rtgs {
       color: var(--c-text-lighter);
     }
-  }
-}
-.day-month-listing {
-  grid-template-areas:
-    'titleDay titleMonth'
-    'listDay listMonth';
-  grid-column-gap: var(--two-gutter);
-  h2 {
-    grid-area: titleDay;
-    text-align: center;
-    box-shadow: 0 -3px 0px 2px var(--c-primary-lightest);
-    padding-top: var(--half-gutter);
-    border-radius: var(--border-radius);
-    color: var(--c-primary);
-  }
-  h2 ~ h2 {
-    grid-area: titleMonth;
   }
 }
 .listing {
