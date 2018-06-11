@@ -5,19 +5,20 @@ const gulp = require('gulp')
 const $ = require('gulp-load-plugins')()
 const args = require('yargs').argv
 const del = require('del')
+const Parcel = require('parcel-bundler')
+const chalk = require('chalk')
 
-const isProd = args.compress === true
-const isDev = !isProd
-// const env         = isProd ? `production` : `development`
-const isRelease = args.release === true
+const isRelease = args.release !== false
 const destFolder = isRelease ? `public` : `dist`
+
+console.log('build for', chalk.magenta(isRelease ? `release` : `development`))
 
 ////////
 // ICONS
 ////////
 
 const materialName = /outline-([^\d]*)-24px/
-exports.icons = () => {
+const icons = () => {
   return gulp
     .src(`./source/icons/*.svg`)
     .pipe(
@@ -56,13 +57,15 @@ exports.icons = () => {
     .pipe($.if(/[.]vue$/, gulp.dest(`application/ui`)))
     .pipe($.if(/[.]html$/, gulp.dest(`source/icons`)))
 }
+icons.description = `build SVG icons`
+exports[`build:icons`] = icons
 
 ////////
 // APP LOGO
 ////////
 
 const logoBasename = `touch-icon`
-const logoDest = `source/application-logo`
+const logoDest = isRelease ? `public` : `source/application-logo`
 
 const cleanAppLogo = () => {
   return del([`${logoDest}/touch-*`, `${logoDest}/launcher-*`])
@@ -107,13 +110,13 @@ const workbox = require('workbox-build')
 const serviceWorker = () => {
   return workbox
     .generateSW({
-      globDirectory: destFolder,
+      globDirectory: `public`,
       globPatterns: [`**\/*.{html,js,css,png,svg,json}`],
-      swDest: `${destFolder}/thaime-sw.js`,
+      swDest: `public/thaime-service-worker.js`,
       cacheId: `thaime-cache-v1`,
       navigateFallback: `/index.html`,
-      // this is for allowing thaime-lib.js in dev
-      maximumFileSizeToCacheInBytes: isDev ? 5000000 : 2097152,
+      // // this is for allowing thaime-lib.js in dev
+      // maximumFileSizeToCacheInBytes: isDev ? 5000000 : 2097152,
     })
     .catch(error => console.warn(`Service worker generation failed: ${error}`))
 }
@@ -125,7 +128,74 @@ exports[`service-worker`] = serviceWorker
 ////////
 
 const webManifest = () => {
-  return gulp.src(`manifest.json`).pipe(gulp.dest(destFolder))
+  return gulp.src(`manifest.webmanifest`).pipe(gulp.dest(`public`))
 }
 webManifest.description = `copy the web manifest to the right place`
 exports[`web-manifest`] = webManifest
+
+////////
+// BUILD FOR PRODUCTION
+////////
+
+//----- APPLICATION
+
+const cleanPublic = () => {
+  return del([`public/*`, `!public/index.html`])
+}
+exports['clean-public'] = cleanPublic
+
+const applicationEntryFile = path.join(__dirname, `./application/index.js`)
+const parcelBundler = new Parcel(applicationEntryFile, {
+  outDir: `./public`,
+  outFile: `thaime`,
+  watch: false,
+  sourceMaps: false,
+  detailedReport: false,
+  cache: false,
+  logLevel: 2,
+  // minify break the build
+  minify: false,
+})
+
+const application = done => {
+  parcelBundler.bundle()
+  parcelBundler.on(`buildEnd`, () => {
+    done()
+  })
+}
+application.description = `bundle vue application with parcel.js`
+exports[`build:application`] = application
+
+exports[`build:app`] = gulp.series(cleanPublic, application)
+
+//----- MINIFY
+
+const minifyJs = () => {
+  return gulp
+    .src(`public/*.js`)
+    .pipe($.babelMinify())
+    .pipe(gulp.dest(`public`))
+}
+minifyJs.description = `minify js`
+exports[`minify:js`] = minifyJs
+
+const minifyCss = () => {
+  return gulp
+    .src(`public/*.css`)
+    .pipe($.cleanCss())
+    .pipe(gulp.dest(`public`))
+}
+minifyCss.description = `minify css`
+exports[`minify:css`] = minifyCss
+
+const minify = gulp.parallel(minifyJs, minifyCss)
+
+//----- BUILD ALL
+
+exports.build = gulp.series(
+  cleanPublic,
+  icons,
+  gulp.parallel(appLogo, webManifest, application),
+  minify,
+  serviceWorker
+)

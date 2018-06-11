@@ -4,6 +4,10 @@
 /.cache
 /source/application-logo/touch-*.png
 /source/application-logo/launcher-*.png
+/public/*.png
+/public/*.css
+/public/*.js
+/public/*.webmanifest
 
 # Logs
 logs
