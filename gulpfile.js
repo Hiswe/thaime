@@ -134,6 +134,23 @@ webManifest.description = `copy the web manifest to the right place`
 exports[`web-manifest`] = webManifest
 
 ////////
+// BUMP
+////////
+
+const bump = done => {
+  if (!args.to) {
+    console.log(chalk.red(`bump task needs the --to argument`))
+    return done()
+  }
+  return gulp
+    .src([`package.json`, `manifest.webmanifest`])
+    .pipe($.jsonEditor({ version: args.to }))
+    .pipe(gulp.dest(`.`))
+}
+bump.description = `bump to the --to=`
+exports[`bump`] = bump
+
+////////
 // BUILD FOR PRODUCTION
 ////////
 
