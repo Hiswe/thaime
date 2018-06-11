@@ -50,6 +50,7 @@
         </li>
       </ul>
     </t-category>
+    <footer>v{{version}}</footer>
   </section>
 </template>
 
@@ -79,11 +80,22 @@ a {
 ul {
   line-height: 1.35;
 }
+footer {
+  text-align: center;
+  padding-top: var(--half-gutter);
+  color: var(--c-primary-lightest);
+}
 </style>
 
 <script>
+import pkg from '../../package.json'
 export default {
   name: `page-information`,
+  data() {
+    return {
+      version: pkg.version,
+    }
+  },
 }
 </script>
 
