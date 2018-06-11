@@ -21,9 +21,11 @@
         <li>creating a ticket on <a href="https://github.com/Hiswe/thaime/issues" target="_blank">the github repo</a></li>
       </ul>
     </t-category>
+    <t-category title="share the app">
+      <p>The app can be shared with this link</p>
+      <a :href="homepage">{{ homepage }}</a>
+    </t-category>
     <!-- <t-category title="share the app">
-      <p>The app can be shared with this link </p>
-      <a href={ state.appLink }>{ state.appLink }</a>
       <p>
         <CopyToClipboard text={ state.appLink }>
           <button className="btn">Copy to clipboard</button>
@@ -94,6 +96,7 @@ export default {
   data() {
     return {
       version: pkg.version,
+      homepage: pkg.homepage,
     }
   },
 }

@@ -41,6 +41,9 @@ button {
   margin: 0 auto;
   display: block;
   margin-top: var(--c-half-gutter);
+  background: none;
+  border: 0;
+  text-align: center;
 }
 </style>
 

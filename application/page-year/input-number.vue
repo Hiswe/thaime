@@ -8,12 +8,13 @@
         :id="id"
         type="number"
         v-model.number="localValue"
+        min="0"
       />
       <button class="decrease" type="button"  @click="localValue -= 1">
-        <t-icon name="remove" />
+        <t-icon name="remove-circle" />
       </button>
       <button class="increase" type="button" @click="localValue += 1">
-        <t-icon name="add" />
+        <t-icon name="add-circle" />
       </button>
     </div>
   </div>
@@ -40,6 +41,9 @@ label {
 }
 button {
   color: var(--c-accent);
+  background: none;
+  border: none;
+  text-align: center;
 }
 input {
   text-align: center;

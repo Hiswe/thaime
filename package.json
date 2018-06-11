@@ -1,6 +1,7 @@
 {
   "name": "thaime",
   "description": "Thai clock & time",
+  "homepage": "https://thaime-2c0a5.firebaseapp.com",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/Hiswe/thaime.git",
@@ -14,8 +15,8 @@
     "bump": "gulp bump",
     "build": "gulp build",
     "build:app": "gulp build:app",
-    "build:icons": "gulp build:icons  --no-release",
-    "build:logo": "gulp application-logo",
+    "build:icons": "gulp build:icons",
+    "build:logo": "gulp application-logo --no-release",
     "serve": "http-server -d false -c -1 --ssl",
     "toc": "doctoc README.md --github",
     "release": "node ./bin/release.js"

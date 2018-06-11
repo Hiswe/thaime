@@ -17,7 +17,7 @@ console.log('build for', chalk.magenta(isRelease ? `release` : `development`))
 // ICONS
 ////////
 
-const materialName = /outline-([^\d]*)-24px/
+const materialName = /(?:outline|baseline)-([^\d]*)-24px/
 const icons = () => {
   return gulp
     .src(`./source/icons/*.svg`)
