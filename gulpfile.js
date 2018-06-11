@@ -5,6 +5,9 @@ const gulp = require('gulp')
 const $ = require('gulp-load-plugins')()
 const args = require(`yargs`).argv
 
+const isProd = args.compress === true
+const isDev = !isProd
+// const env         = isProd ? `production` : `development`
 const isRelease = args.release === true
 const destFolder = isRelease ? `public` : `dist`
 
@@ -88,3 +91,27 @@ const appLogo = () => {
 }
 appLogo.description = `resize favicon for different devices`
 exports[`app-logo`] = appLogo
+
+////////
+// SERVICE WORKER
+////////
+
+const workbox = require('workbox-build')
+
+// all options are listed here
+// https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.Configuration
+const serviceWorker = () => {
+  return workbox
+    .generateSW({
+      globDirectory: destFolder,
+      globPatterns: [`**\/*.{html,js,css,png,svg,json}`],
+      swDest: `${destFolder}/thaime-sw.js`,
+      cacheId: `thaime-cache-v1`,
+      navigateFallback: `/index.html`,
+      // this is for allowing thaime-lib.js in dev
+      maximumFileSizeToCacheInBytes: isDev ? 5000000 : 2097152,
+    })
+    .catch(error => console.warn(`Service worker generation failed: ${error}`))
+}
+serviceWorker.description = `generate the service worker using workbox`
+exports[`service-worker`] = serviceWorker
