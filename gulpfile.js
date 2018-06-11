@@ -3,7 +3,8 @@
 const path = require('path')
 const gulp = require('gulp')
 const $ = require('gulp-load-plugins')()
-const args = require(`yargs`).argv
+const args = require('yargs').argv
+const del = require('del')
 
 const isProd = args.compress === true
 const isDev = !isProd
@@ -61,36 +62,39 @@ exports.icons = () => {
 ////////
 
 const logoBasename = `touch-icon`
+const logoDest = `source/application-logo`
+
+const cleanAppLogo = () => {
+  return del([`${logoDest}/touch-*`, `${logoDest}/launcher-*`])
+}
 
 const appLogo = () => {
   return gulp
-    .src(`source/thaime-logo.png`)
+    .src(`source/application-logo/thaime-logo.png`)
     .pipe($.imageResize({ width: 192, height: 192, upscale: true }))
-    .pipe(
-      $.rename(path => (path.basename = `launcher-icon-${logoBasename}-4x`))
-    )
-    .pipe(gulp.dest(destFolder))
+    .pipe($.rename(path => (path.basename = `launcher-${logoBasename}-4x`)))
+    .pipe(gulp.dest(logoDest))
     .pipe($.imageResize({ width: 180, height: 180, upscale: true }))
     .pipe($.rename(path => (path.basename = `${logoBasename}-iphone-6-plus`)))
-    .pipe(gulp.dest(destFolder))
+    .pipe(gulp.dest(logoDest))
     .pipe($.imageResize({ width: 152, height: 152, upscale: true }))
     .pipe($.rename(path => (path.basename = `${logoBasename}-ipad-retina`)))
-    .pipe(gulp.dest(destFolder))
+    .pipe(gulp.dest(logoDest))
     .pipe($.imageResize({ width: 144, height: 144, upscale: true }))
     .pipe($.rename(path => (path.basename = `${logoBasename}-web-app`)))
-    .pipe(gulp.dest(destFolder))
+    .pipe(gulp.dest(logoDest))
     .pipe($.imageResize({ width: 120, height: 120, upscale: true }))
     .pipe($.rename(path => (path.basename = `${logoBasename}-iphone-retina`)))
-    .pipe(gulp.dest(destFolder))
+    .pipe(gulp.dest(logoDest))
     .pipe($.imageResize({ width: 76, height: 76, upscale: true }))
-    .pipe($.rename(path => (path.basename = `${logoBasename}-icon-ipad`)))
-    .pipe(gulp.dest(destFolder))
+    .pipe($.rename(path => (path.basename = `${logoBasename}-ipad`)))
+    .pipe(gulp.dest(logoDest))
     .pipe($.imageResize({ width: 57, height: 57, upscale: true }))
-    .pipe($.rename(path => (path.basename = `${logoBasename}-icon-iphone`)))
-    .pipe(gulp.dest(destFolder))
+    .pipe($.rename(path => (path.basename = `${logoBasename}-iphone`)))
+    .pipe(gulp.dest(logoDest))
 }
 appLogo.description = `resize favicon for different devices`
-exports[`app-logo`] = appLogo
+exports[`application-logo`] = gulp.series(cleanAppLogo, appLogo)
 
 ////////
 // SERVICE WORKER
@@ -115,3 +119,13 @@ const serviceWorker = () => {
 }
 serviceWorker.description = `generate the service worker using workbox`
 exports[`service-worker`] = serviceWorker
+
+////////
+// WEB MANIFEST
+////////
+
+const webManifest = () => {
+  return gulp.src(`manifest.json`).pipe(gulp.dest(destFolder))
+}
+webManifest.description = `copy the web manifest to the right place`
+exports[`web-manifest`] = webManifest
