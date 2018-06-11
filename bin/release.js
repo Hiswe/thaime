@@ -68,14 +68,21 @@ async function initRelease() {
   // FIREBASE RELEASE
   ////////
 
+  shell.echo(`deploying to firebase…`)
+  const firebaseDeploy = shell.exec(`yarn firebase deploy`, { silent: true })
+  if (firebaseDeploy.code !== 0) {
+    shell.echo(`Unable to deploy to firebase!!`)
+    shell.echo(firebaseDeploy.stderr)
+    shell.exit(1)
+  }
+  shell.echo(`…deployed!`)
+
   ////////
   // TAG
   ////////
 
   shell.exit(0)
 }
-
-function deployToFirebase() {}
 
 // const currentBranch = shell.exec(`git branch`, { silent: true }).grep(/^\*/)
 // const branchName = currentBranch.stdout.replace(/[\*\n\s]/g, ``)
