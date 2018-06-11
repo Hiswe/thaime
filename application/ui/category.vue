@@ -24,7 +24,7 @@ dt {
   box-shadow: 0 -3px 0px 2px var(--c-primary-lightest);
   padding: var(--half-gutter) 0 var(--gutter);
   border-radius: var(--border-radius);
-  color: var(--c-primary);
+  color: var(--c-accent-darker);
   text-transform: uppercase;
   font-weight: 300;
 }

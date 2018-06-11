@@ -49,6 +49,7 @@ input {
   width: 100%;
   grid-column: 2;
   border: 0;
+  border-radius: var(--border-radius-small);
 
   &:focus {
     outline: none;

@@ -24,7 +24,7 @@ small {
   font-size: 0.7em;
 }
 .active {
-  background: var(--c-accent-lightest);
+  background: white;
   border-radius: var(--border-radius-small);
 }
 </style>

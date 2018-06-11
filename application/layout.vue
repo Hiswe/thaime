@@ -17,6 +17,7 @@ body {
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 18px;
   color: var(--c-text);
+  background: var(--c-primary-white);
 }
 main {
   min-height: 100vh;
@@ -24,10 +25,10 @@ main {
 .page-content {
   flex: 1 0 auto;
 }
-h2 {
-  font-weight: 300;
-  text-transform: uppercase;
-}
+// h2 {
+//   font-weight: 300;
+//   text-transform: uppercase;
+// }
 .thai-text {
   font-size: 1.1em;
 }

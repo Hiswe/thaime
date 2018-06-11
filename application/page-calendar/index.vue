@@ -55,7 +55,7 @@
       font-size: 1.35em;
       padding: 0.5em 0;
       margin: 0.25em var(--half-gutter);
-      background: var(--c-accent-lightest);
+      // background: white;
       border-radius: var(--border-radius-small);
     }
     &--rtgs {
