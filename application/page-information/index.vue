@@ -35,12 +35,6 @@
       </p>
       <ul class="social">
         <li>
-          <a href="https://hiswe.github.com" target="_blank">
-            <t-icon name="ballot"></t-icon>
-            <small>my blog</small>
-          </a>
-        </li>
-        <li>
           <a href="https://github.com/hiswe" target="_blank">
             <t-icon name="c-github"></t-icon>
             <small>github</small>
@@ -50,6 +44,12 @@
           <a href="https://twitter.com/hiswehalya" target="_blank">
             <t-icon name="c-twitter"></t-icon>
             <small>twitter</small>
+          </a>
+        </li>
+        <li>
+          <a href="https://hiswe.github.com" target="_blank">
+            <t-icon name="ballot"></t-icon>
+            <small>my blog</small>
           </a>
         </li>
         <li>
@@ -74,12 +74,6 @@
         <li>
           Icons from
           <a class="link" href="https://material.io/icons" target="_blank" >Google Material Icon</a>
-        </li>
-        <li>
-          Build with
-          <a class="link" href="https://vuejs.org/" target="_blank" >Vue.js</a>
-          and
-          <a class="link" href="https://en.parceljs.org/" target="_blank" >Parcel.js</a>
         </li>
       </ul>
     </t-category>
