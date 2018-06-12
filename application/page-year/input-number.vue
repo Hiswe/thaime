@@ -45,6 +45,11 @@ button {
   background: none;
   border: none;
   text-align: center;
+  padding: 0;
+
+  &:active {
+    color: var(--c-accent-darker);
+  }
 }
 input {
   text-align: center;

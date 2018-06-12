@@ -62,7 +62,7 @@
 .clock {
   width: 100%;
   flex: 1 1 auto;
-  height: calc(100vh - 240px - var(--vh-offset));
+  height: calc(100vh - 250px - var(--vh-offset));
 }
 .timer-24 {
   margin-bottom: auto;
