@@ -118,7 +118,7 @@ async function initRelease() {
   shell.cp(`-r`, `./.git/.`, path.join(copyDirPath, `/.git`))
 
   shell.echo(`…dist files…`)
-  shell.cp(`-r`, `./dist/*`, copyDir)
+  shell.cp(`-r`, `./public/*`, copyDir)
   shell.echo(`…copy end`)
   shell.cd(copyDir)
 
