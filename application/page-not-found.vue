@@ -10,7 +10,7 @@
 
 <style lang="scss" scoped>
 .page-content {
-  height: calc(100vh - var(--navigation-total-height));
+  height: calc(100vh - var(--navigation-total-height) - var(--vh-offset));
   display: flex;
   flex-direction: column;
   align-items: center;

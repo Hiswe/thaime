@@ -20,7 +20,7 @@ body {
   background: var(--c-primary-white);
 }
 main {
-  min-height: 100vh;
+  min-height: calc(100vh - var(--vh-offset));
 }
 .page-content {
   flex: 1 0 auto;
@@ -34,13 +34,11 @@ main {
 </style>
 
 <script>
-import svgIcons from './ui/svg-icons'
 import mainNav from './navigation'
 
 export default {
   name: `layout`,
   components: {
-    't-svg-icons': svgIcons,
     't-nav': mainNav,
   },
 }

@@ -52,7 +52,7 @@
 .page-content {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - var(--navigation-total-height));
+  height: calc(100vh - var(--navigation-total-height) - var(--vh-offset));
 }
 .content-body {
   flex: 1 0 auto;
@@ -62,7 +62,7 @@
 .clock {
   width: 100%;
   flex: 1 1 auto;
-  height: calc(100vh - 240px);
+  height: calc(100vh - 240px - var(--vh-offset));
 }
 .timer-24 {
   margin-bottom: auto;

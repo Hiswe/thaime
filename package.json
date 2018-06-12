@@ -51,6 +51,7 @@
     "node-sass": "^4.9.0",
     "parcel-bundler": "^1.8.1",
     "shelljs": "^0.8.2",
+    "vh-check": "^1.1.2",
     "vue": "^2.5.16",
     "vue-clipboard2": "^0.1.1",
     "vue-hot-reload-api": "^2.3.0",

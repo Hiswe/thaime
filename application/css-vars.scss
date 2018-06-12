@@ -1,6 +1,9 @@
 @import './config';
 
 :root {
+  // vh-check
+  --vh-offset: 0px;
+
   // theme
   --c-text: hsl(0, 0%, 20%);
   --c-text-lighter: hsl(0, 0%, 60%);
