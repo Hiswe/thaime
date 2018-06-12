@@ -18,7 +18,7 @@
     "build:app": "NODE_ENV=production gulp build:app",
     "build:icons": "gulp build:icons",
     "build:logo": "gulp application-logo --no-release",
-    "serve": "http-server -d false -c -1 --ssl",
+    "serve": "http-server -d false -c-1 --ssl",
     "toc": "doctoc README.md --github",
     "release": "node ./bin/release.js"
   },
