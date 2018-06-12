@@ -84,7 +84,6 @@ export default {
         return years.toThaiYear(this.i10lYear)
       },
       set(thaiYear) {
-        console.log({ thaiYear })
         this.i10lYear = years.toI10lYear(thaiYear)
       },
     },
@@ -93,7 +92,6 @@ export default {
         return years.toAge(this.i10lYear)
       },
       set(age) {
-        console.log({ age })
         this.i10lYear = years.fromAge(age)
       },
     },
