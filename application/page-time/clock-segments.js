@@ -96,44 +96,68 @@ export const internationalHours = thaiPeriods.map(period => {
 
 const PERIOD_NAME_SHIFT = 1.25
 const PERIOD_NAME_HEIGHT = 10
+const PERIOD_LINE_HEIGHT = PERIOD_NAME_HEIGHT * 1.3
 const midnightPosition = SVG_SIZE * PERIOD_NAME_SHIFT + PERIOD_NAME_HEIGHT
-const midnightPath = `
+const midnightPath = [
+  `
   M ${midnightPosition * -1} ${midnightPosition * -1}
   L ${midnightPosition} ${midnightPosition * -1}
-`
+`,
+  `
+  M ${midnightPosition * -1} ${midnightPosition * -1 + PERIOD_LINE_HEIGHT}
+  L ${midnightPosition} ${midnightPosition * -1 + PERIOD_LINE_HEIGHT}
+`,
+]
 const noonPosition = SVG_SIZE * PERIOD_NAME_SHIFT + PERIOD_NAME_HEIGHT
 const noonPath = `
   M ${noonPosition * -1} ${noonPosition}
   L ${noonPosition} ${noonPosition}
 `
-export const periodNames = thaiPeriods.map((period, index) => {
-  const text =
-    period.rtgsPadStart && period.rtgsPadEnd
-      ? period.rtgs().replace(` `, ` * `)
-      : !period.rtgsPadStart && period.rtgsPadEnd
-        ? `* ${period.rtgs()}`
-        : period.rtgsPadStart && !period.rtgsPadEnd
-          ? `${period.rtgs()} *`
-          : period.rtgs()
-  const isMidnight = index === 0
-  const isNoon = index === 3
-  const isReversedText = index === 2 || index === 4
-  const shift = isReversedText
-    ? PERIOD_NAME_SHIFT + PERIOD_NAME_HEIGHT / 100
-    : PERIOD_NAME_SHIFT
-  const pathData = isMidnight
-    ? midnightPath
-    : isNoon
-      ? noonPath
-      : createPeriodArcPath(period, shift, isReversedText)
-  return {
-    text: isMidnight ? text.split(` `) : [text.replace(`  `, ` `)],
-    id: period.id,
-    pathId: `period-path-${period.id}`,
-    textId: `period-name-${period.id}`,
-    pathData,
-  }
-})
+export const periodNames = thaiPeriods
+  .map((period, index) => {
+    const text =
+      period.rtgsPadStart && period.rtgsPadEnd
+        ? period.rtgs().replace(` `, ` * `)
+        : !period.rtgsPadStart && period.rtgsPadEnd
+          ? `* ${period.rtgs()}`
+          : period.rtgsPadStart && !period.rtgsPadEnd
+            ? `${period.rtgs()} *`
+            : period.rtgs()
+    const isMidnight = index === 0
+    const isNoon = index === 3
+    const isReversedText = index === 2 || index === 4
+    const shift = isReversedText
+      ? PERIOD_NAME_SHIFT + PERIOD_NAME_HEIGHT / 100
+      : PERIOD_NAME_SHIFT
+
+    if (!isMidnight) {
+      return [
+        {
+          text: text.replace(`  `, ` `),
+          id: period.id,
+          pathId: `period-path-${period.id}`,
+          textId: `period-name-${period.id}`,
+          pathData: isNoon
+            ? noonPath
+            : createPeriodArcPath(period, shift, isReversedText),
+        },
+      ]
+    }
+    // we need to have “midnight” text on 2 lines
+    // • I had some trouble using <tspan>:
+    //   rendering wasn't coherent between Chrome & Firefox
+    // • → easier to make 2 different <textPath>
+    return text.split(` `).map((textPart, index) => {
+      return {
+        text: textPart,
+        id: period.id,
+        pathId: `period-path-${period.id}-${index}`,
+        textId: `period-name-${period.id}-${index}`,
+        pathData: midnightPath[index],
+      }
+    })
+  })
+  .reduce(flattenArray, [])
 
 export const nightSky = (() => {
   const SHIFT = 0.75

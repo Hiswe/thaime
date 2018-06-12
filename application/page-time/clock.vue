@@ -118,8 +118,6 @@
         >
           <tspan
             v-if="periodName.text.length > 1"
-            v-for="(line, index) of periodName.text"
-            x="9.5%"
             :dy="`${index * 1 }em`"
             :key="`${line}-${index}`"
           >
@@ -128,6 +126,7 @@
           <tspan v-if="periodName.text.length < 2">
             {{periodName.text[0]}}
           </tspan>
+          <tspan>{{periodName.text}}</tspan>
         </textPath>
       </text>
     </g>
