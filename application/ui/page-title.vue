@@ -57,7 +57,7 @@ header {
   &::after {
     right: 0;
     background: radial-gradient(
-      circle farthest-corner at bottom left,
+      circle at bottom left,
       transparent 68%,
       var(--c-background) 70%
     );

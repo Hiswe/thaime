@@ -23,8 +23,8 @@
   --quarter-gutter: calc(var(--gutter) / 4);
   --half-gutter: calc(var(--gutter) / 2);
   --two-gutter: calc(var(--gutter) * 2);
-  --border-radius: 0.75rem;
-  --border-radius-small: calc(var(--border-radius) * 0.75);
+  --border-radius: 14px;
+  --border-radius-small: 10px;
 
   --navigation-height: 50px;
   --navigation-margin: var(--half-gutter);
