@@ -1,3 +1,5 @@
+@import './config';
+
 :root {
   // theme
   --c-text: hsl(0, 0%, 20%);
@@ -26,6 +28,9 @@
   --navigation-total-height: calc(
     var(--navigation-height) + var(--navigation-margin) * 2
   );
+  @media #{$mq-big} {
+    --navigation-total-height: var(--navigation-margin);
+  }
 
   // period colors
   --c-midnight: hsl(243, 37%, 36%);

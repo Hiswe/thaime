@@ -7,6 +7,8 @@
 </template>
 
 <style scoped lang="scss">
+@import '../config';
+
 header {
   --c-background: var(--c-primary-lightest);
   background: var(--c-background);
@@ -46,6 +48,10 @@ h1 {
   padding: var(--half-gutter) var(--gutter);
   text-align: center;
   color: var(--c-primary);
+
+  @media #{$mq-big} {
+    text-align: left;
+  }
 }
 </style>
 

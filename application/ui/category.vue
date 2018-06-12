@@ -17,6 +17,7 @@ dd {
 }
 dl {
   padding-top: var(--gutter);
+  background: var(--c-primary-white);
 }
 dt {
   font-size: 1.5rem;

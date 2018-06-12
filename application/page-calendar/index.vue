@@ -26,7 +26,7 @@
           />
         </ul>
       </t-category>
-      <t-category title="days">
+      <t-category title="months">
         <ul class="listing listing--months">
           <t-day-or-month-item
             v-for="(month, index) in months"
@@ -45,7 +45,9 @@
   padding-bottom: var(--navigation-total-height);
 }
 .curent-date {
-  padding: var(--gutter) 0 0;
+  padding: var(--gutter) 0 calc(var(--gutter) * 1.5);
+  background: white;
+  margin-bottom: calc(var(--half-gutter) * -1);
 
   &__text {
     &--en {
@@ -61,6 +63,11 @@
     &--rtgs {
       color: var(--c-text-lighter);
     }
+  }
+}
+.day-month-listing {
+  .category:first-child {
+    padding-top: 0;
   }
 }
 .listing {

@@ -17,6 +17,8 @@
 </template>
 
 <style lang="scss" scoped>
+@import './config';
+
 nav {
   --nav-border-radius: var(--border-radius-small);
   display: flex;
@@ -30,6 +32,16 @@ nav {
   right: var(--navigation-margin);
   height: var(--navigation-height);
   border-radius: var(--nav-border-radius);
+  z-index: 2;
+
+  @media #{$mq-big} {
+    display: block;
+    top: 5px;
+    bottom: auto;
+    right: 5px;
+    left: auto;
+    background: none;
+  }
 }
 a {
   height: var(--navigation-height);
@@ -46,6 +58,18 @@ a {
   }
   &:last-child {
     border-radius: 0 var(--nav-border-radius) var(--nav-border-radius) 0;
+  }
+  @media #{$mq-big} {
+    &,
+    &:first-child,
+    &:last-child {
+      display: inline-flex;
+      vertical-align: middle;
+      margin-left: var(--half-gutter);
+      color: var(--c-primary);
+      width: var(--navigation-height);
+      border-radius: var(--navigation-height);
+    }
   }
 }
 .year {

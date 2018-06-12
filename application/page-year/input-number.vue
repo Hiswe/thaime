@@ -33,6 +33,7 @@ label {
   display: grid;
   grid-template-columns: 2rem 1fr 2rem;
   width: 65%;
+  max-width: 400px;
   margin: 0.5rem auto 0;
 }
 .decrease {
@@ -54,10 +55,17 @@ input {
   grid-column: 2;
   border: 0;
   border-radius: var(--border-radius-small);
+  -moz-appearance: textfield;
 
   &:focus {
     outline: none;
     color: var(--c-primary-lighter);
+  }
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 }
 </style>
