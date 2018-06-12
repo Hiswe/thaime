@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
-  "version": "1.1.0",
+  "version": "1.1.2",
   "name": "Thaime",
   "short_name": "Thaime",
-  "description": "Thai clock & time",
+  "description": "Thai time & date",
   "background_color": "#fff",
   "theme_color": "black",
   "lang": "en-US",

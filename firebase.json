@@ -10,7 +10,7 @@
     ],
     "headers": [
       {
-        "source": "thaime-sw.js",
+        "source": "thaime-service-worker.js",
         "headers": [
           {
             "key": "Cache-Control",
