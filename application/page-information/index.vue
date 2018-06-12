@@ -1,8 +1,6 @@
 <template>
   <section class="page-content">
-    <t-page-title>
-      about thaime
-    </t-page-title>
+    <t-page-title title="about thaime"></t-page-title>
     <div class="categories">
       <t-category title="share the app">
         <p>
@@ -18,15 +16,6 @@
         </p>
         <t-icon class="qrcode" name="thaime-qrcode"></t-icon>
       </t-category>
-      <!-- <t-category title="share the app">
-        <p>
-          <CopyToClipboard text={ state.appLink }>
-            <button className="btn">Copy to clipboard</button>
-          </CopyToClipboard>
-        </p>
-        <p>or this QR code</p>
-        <Icon svgId="thailpha-firebase" />
-      </t-category> -->
       <t-category title="Author & suggestions">
         <h3>
             brought to you by

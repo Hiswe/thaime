@@ -1,8 +1,6 @@
 <template>
   <section class="page-content">
-    <t-page-title>
-      Clock
-    </t-page-title>
+    <t-page-title title="clock"></t-page-title>
     <div class="content-body">
       <t-timer-24 :currentTime="currentTime"></t-timer-24>
       <t-clock

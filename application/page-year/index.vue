@@ -1,8 +1,6 @@
 <template>
   <section class="page-content">
-    <t-page-title>
-      years
-    </t-page-title>
+    <t-page-title title="years"></t-page-title>
     <div>
       <t-input
         title="international"

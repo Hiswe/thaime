@@ -59,14 +59,15 @@ a {
     border-radius: 0 var(--nav-border-radius) var(--nav-border-radius) 0;
   }
   @media #{$mq-big} {
+    display: inline-flex;
+    vertical-align: middle;
+    margin-left: var(--half-gutter);
+    color: var(--c-primary);
+    width: var(--navigation-height);
+
     &,
     &:first-child,
     &:last-child {
-      display: inline-flex;
-      vertical-align: middle;
-      margin-left: var(--half-gutter);
-      color: var(--c-primary);
-      width: var(--navigation-height);
       border-radius: var(--navigation-height);
     }
   }

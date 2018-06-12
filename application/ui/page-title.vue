@@ -1,13 +1,36 @@
 <template>
   <header>
-    <h1>
-      <slot></slot>
-    </h1>
+    <transition
+      name="title"
+      mode="out-in"
+      appear
+    >
+      <h1 :key="title">
+        {{title}}
+      </h1>
+    </transition>
+    <slot />
   </header>
 </template>
 
 <style scoped lang="scss">
 @import '../config';
+
+.title {
+  &-enter-active,
+  &-leave-active {
+    transition: transform 0.75s ease, opacity 0.75s ease;
+  }
+  &-enter,
+  &-leave-active {
+    opacity: 0.5;
+    transform: translateY(-10px);
+
+    @media #{$mq-big} {
+      transform: translateX(10px);
+    }
+  }
+}
 
 header {
   --c-background: var(--c-primary-lightest);
@@ -58,6 +81,9 @@ h1 {
 <script>
 export default {
   name: `page-title`,
+  props: {
+    title: String,
+  },
 }
 </script>
 

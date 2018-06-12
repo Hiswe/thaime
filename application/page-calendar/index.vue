@@ -1,8 +1,6 @@
 <template>
   <div class="page-content">
-    <t-page-title>
-      Days & months
-    </t-page-title>
+    <t-page-title title="days &amp; months"></t-page-title>
     <section class="curent-date">
       <p class="curent-date__text curent-date__text--en">
         {{englishDate}}
@@ -62,7 +60,6 @@ $listing-max-size: 700px;
       font-size: 1.35em;
       padding: 0.5em 0;
       margin: 0.25em var(--half-gutter);
-      // background: white;
       border-radius: var(--border-radius-small);
     }
     &--rtgs {
