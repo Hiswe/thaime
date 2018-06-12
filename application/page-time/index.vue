@@ -11,7 +11,6 @@
           <t-icon
             name="restore"
             class="restore-button"
-            :scale="3"
             v-if="isManualHour"
           />
         </transition>
@@ -62,12 +61,17 @@
 }
 .clock {
   width: 100%;
+  flex: 1 1 auto;
+  height: calc(100vh - 240px);
 }
 .timer-24 {
   margin-bottom: auto;
 }
 .timer-text {
   margin-top: auto;
+}
+.restore-button {
+  --svg-icon-scale: 3;
 }
 </style>
 
