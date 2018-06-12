@@ -3,87 +3,105 @@
     <t-page-title>
       about thaime
     </t-page-title>
-    <t-category title="share the app">
-      <p>
-        The app can be shared with this link
-      </p>
-      <p>
-        <a class="link" :href="homepage">{{ homepage }}</a>
-      </p>
-      <p>
-        <button type="button" v-clipboard:copy="homepage">
-          Copy to clipboard
-        </button>
-      </p>
-    </t-category>
-    <!-- <t-category title="share the app">
-      <p>
-        <CopyToClipboard text={ state.appLink }>
-          <button className="btn">Copy to clipboard</button>
-        </CopyToClipboard>
-      </p>
-      <p>or this QR code</p>
-      <Icon svgId="thailpha-firebase" />
-    </t-category> -->
-    <t-category title="Author & suggestions">
-      <h3>
-          brought to you by
-          <strong>Yannick “Hiswe” Aïvayan</strong>
-      </h3>
-      <p>
-        find me on
-      </p>
-      <ul class="social">
-        <li>
-          <a href="https://github.com/hiswe" target="_blank">
-            <t-icon name="c-github"></t-icon>
-            <small>github</small>
-          </a>
-        </li>
-        <li>
-          <a href="https://twitter.com/hiswehalya" target="_blank">
-            <t-icon name="c-twitter"></t-icon>
-            <small>twitter</small>
-          </a>
-        </li>
-        <li>
-          <a href="https://hiswe.github.com" target="_blank">
-            <t-icon name="ballot"></t-icon>
-            <small>my blog</small>
-          </a>
-        </li>
-        <li>
-          <a href="https://medium.com/@hiswehalya" target="_blank">
-            <t-icon name="c-medium"></t-icon>
-            <small>medium</small>
-          </a>
-        </li>
-      </ul>
-      <p>Suggestions can be send by:</p>
-      <ul class="list">
-        <li>using the form on <a class="link" href="http://www.hiswe.net/contact" target="_blank">hiswe.net</a></li>
-        <li>creating a ticket on <a class="link" href="https://github.com/Hiswe/thaime/issues" target="_blank">the github repo</a></li>
-      </ul>
-    </t-category>
-    <t-category title="Source & ressources">
-      <ul class="list">
-        <li>
-          Information provided by
-          <a class="link" href="http://thai-language.com" target="_blank" >thai-language.com</a>
-        </li>
-        <li>
-          Icons from
-          <a class="link" href="https://material.io/icons" target="_blank" >Google Material Icon</a>
-        </li>
-      </ul>
-    </t-category>
+    <div class="categories">
+      <t-category title="share the app">
+        <p>
+          The app can be shared with this link
+        </p>
+        <p>
+          <a class="link" :href="homepage">{{ homepage }}</a>
+        </p>
+        <p>
+          <button type="button" v-clipboard:copy="homepage">
+            Copy to clipboard
+          </button>
+        </p>
+        <t-icon class="qrcode" name="thaime-qrcode"></t-icon>
+      </t-category>
+      <!-- <t-category title="share the app">
+        <p>
+          <CopyToClipboard text={ state.appLink }>
+            <button className="btn">Copy to clipboard</button>
+          </CopyToClipboard>
+        </p>
+        <p>or this QR code</p>
+        <Icon svgId="thailpha-firebase" />
+      </t-category> -->
+      <t-category title="Author & suggestions">
+        <h3>
+            brought to you by
+            <strong>Yannick “Hiswe” Aïvayan</strong>
+        </h3>
+        <p>
+          find me on
+        </p>
+        <ul class="social">
+          <li>
+            <a href="https://github.com/hiswe" target="_blank">
+              <t-icon name="c-github"></t-icon>
+              <small>github</small>
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/hiswehalya" target="_blank">
+              <t-icon name="c-twitter"></t-icon>
+              <small>twitter</small>
+            </a>
+          </li>
+          <li>
+            <a href="https://hiswe.github.com" target="_blank">
+              <t-icon name="ballot"></t-icon>
+              <small>my blog</small>
+            </a>
+          </li>
+          <li>
+            <a href="https://medium.com/@hiswehalya" target="_blank">
+              <t-icon name="c-medium"></t-icon>
+              <small>medium</small>
+            </a>
+          </li>
+        </ul>
+        <p>Suggestions can be send by:</p>
+        <ul class="list">
+          <li>using the form on <a class="link" href="http://www.hiswe.net/contact" target="_blank">hiswe.net</a></li>
+          <li>creating a ticket on <a class="link" href="https://github.com/Hiswe/thaime/issues" target="_blank">the github repo</a></li>
+        </ul>
+      </t-category>
+      <t-category title="Source & ressources">
+        <ul class="list">
+          <li>
+            Information provided by
+            <a class="link" href="http://thai-language.com" target="_blank" >thai-language.com</a>
+          </li>
+          <li>
+            Icons from
+            <a class="link" href="https://material.io/icons" target="_blank" >Google Material Icon</a>
+          </li>
+          <li>
+            QR Code by
+            <a class="link" href="http://goqr.me/#t=url" target="_blank" >QR Code Generator</a>
+          </li>
+        </ul>
+      </t-category>
+    </div>
     <footer>v{{version}}</footer>
   </section>
 </template>
 
 <style lang="scss" scoped>
+@import '../config';
+
 .page-content {
   padding-bottom: var(--navigation-total-height);
+}
+.categories {
+  @media #{$mq-big} {
+    display: grid;
+    grid-gap: 0 var(--gutter);
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 800px;
+    margin: 0 auto;
+  }
 }
 header + .category {
   padding-top: 0;
@@ -113,6 +131,11 @@ h3 {
     color: var(--c-primary-lighter);
   }
 }
+.qrcode {
+  color: var(--c-primary-darker);
+  text-align: center;
+  --svg-icon-scale: 0.65;
+}
 p {
   text-align: center;
 }
@@ -140,7 +163,8 @@ button {
   border: 0;
   background: var(--c-accent);
   font: inherit;
-  padding: 0.5em 1em;
+  padding: 0.75em 1.5em;
+  border-radius: var(--border-radius-small);
 }
 </style>
 

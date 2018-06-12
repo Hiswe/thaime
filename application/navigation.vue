@@ -33,6 +33,7 @@ nav {
   z-index: 2;
 
   @media #{$mq-big} {
+    position: absolute;
     display: block;
     top: 5px;
     bottom: auto;
@@ -77,6 +78,10 @@ a {
 }
 .router-link-active {
   background: var(--c-primary-lighter);
+
+  @media #{$mq-big} {
+    color: white;
+  }
 }
 </style>
 
@@ -87,7 +92,6 @@ import * as years from './thai-years'
 
 const now = DateTime.local()
 const currentYear = now.year
-// const
 
 export default {
   name: `main-navigation`,

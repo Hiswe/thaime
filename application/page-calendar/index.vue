@@ -41,6 +41,10 @@
 </template>
 
 <style scoped lang="scss">
+@import '../config';
+
+$listing-max-size: 700px;
+
 .page-content {
   padding-bottom: var(--navigation-total-height);
   text-align: center;
@@ -67,8 +71,14 @@
   }
 }
 .day-month-listing {
-  .category:first-child {
-    padding-top: 0;
+  @media (max-width: #{($listing-max-size * 2) - 1}) {
+    .category:first-child {
+      padding-top: 0;
+    }
+  }
+  @media (min-width: #{($listing-max-size * 2)}) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 .listing {
@@ -81,9 +91,11 @@
 
   &--days {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    max-width: $listing-max-size;
   }
   &--months {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    max-width: $listing-max-size;
   }
 }
 </style>
