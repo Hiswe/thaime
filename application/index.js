@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { DateTime } from 'luxon'
+import VueClipboard from 'vue-clipboard2'
 
 import Layout from './layout'
 import TimePage from './page-time'
@@ -14,6 +15,7 @@ import pageTitle from './ui/page-title'
 import category from './ui/category'
 
 Vue.use(VueRouter)
+Vue.use(VueClipboard)
 
 Vue.filter(`hoursMinutesSeconds`, value => {
   const isLuxonDateTime = value instanceof DateTime

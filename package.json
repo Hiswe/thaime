@@ -52,6 +52,7 @@
     "parcel-bundler": "^1.8.1",
     "shelljs": "^0.8.2",
     "vue": "^2.5.16",
+    "vue-clipboard2": "^0.1.1",
     "vue-hot-reload-api": "^2.3.0",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.5.16",

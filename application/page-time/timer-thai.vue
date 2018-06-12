@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<style scope lang="scss">
+<style scoped lang="scss">
 @import '../config.scss';
 p {
   margin: 0;

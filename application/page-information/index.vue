@@ -3,27 +3,18 @@
     <t-page-title>
       about thaime
     </t-page-title>
-    <t-category title="Author & suggestions">
-      <h3>
-          brought to you by
-          <strong>Yannick “Hiswe” Aïvayan</strong>
-          find me on:
-      </h3>
-      <p></p>
-      <ul>
-        <li><a href="https://hiswe.github.com">my blog</a></li>
-        <li><a href="https://github.com/hiswe">github</a></li>
-        <li><a href="https://twitter.com/hiswehalya">twitter</a></li>
-      </ul>
-      <p>Suggestions can be send by:</p>
-      <ul>
-        <li>using the form on <a href="http://www.hiswe.net/contact" target="_blank">hiswe.net</a></li>
-        <li>creating a ticket on <a href="https://github.com/Hiswe/thaime/issues" target="_blank">the github repo</a></li>
-      </ul>
-    </t-category>
     <t-category title="share the app">
-      <p>The app can be shared with this link</p>
-      <a :href="homepage">{{ homepage }}</a>
+      <p>
+        The app can be shared with this link
+      </p>
+      <p>
+        <a class="link" :href="homepage">{{ homepage }}</a>
+      </p>
+      <p>
+        <button type="button" v-clipboard:copy="homepage">
+          Copy to clipboard
+        </button>
+      </p>
     </t-category>
     <!-- <t-category title="share the app">
       <p>
@@ -34,21 +25,61 @@
       <p>or this QR code</p>
       <Icon svgId="thailpha-firebase" />
     </t-category> -->
+    <t-category title="Author & suggestions">
+      <h3>
+          brought to you by
+          <strong>Yannick “Hiswe” Aïvayan</strong>
+      </h3>
+      <p>
+        find me on
+      </p>
+      <ul class="social">
+        <li>
+          <a href="https://hiswe.github.com" target="_blank">
+            <t-icon name="ballot"></t-icon>
+            <small>my blog</small>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/hiswe" target="_blank">
+            <t-icon name="c-github"></t-icon>
+            <small>github</small>
+          </a>
+        </li>
+        <li>
+          <a href="https://twitter.com/hiswehalya" target="_blank">
+            <t-icon name="c-twitter"></t-icon>
+            <small>twitter</small>
+          </a>
+        </li>
+        <li>
+          <a href="https://medium.com/@hiswehalya" target="_blank">
+            <t-icon name="c-medium"></t-icon>
+            <small>medium</small>
+          </a>
+        </li>
+      </ul>
+      <p>Suggestions can be send by:</p>
+      <ul class="list">
+        <li>using the form on <a class="link" href="http://www.hiswe.net/contact" target="_blank">hiswe.net</a></li>
+        <li>creating a ticket on <a class="link" href="https://github.com/Hiswe/thaime/issues" target="_blank">the github repo</a></li>
+      </ul>
+    </t-category>
     <t-category title="Source & ressources">
-      <ul>
+      <ul class="list">
         <li>
           Information provided by
-          <a href="http://thai-language.com" target="_blank" >thai-language.com</a>
+          <a class="link" href="http://thai-language.com" target="_blank" >thai-language.com</a>
         </li>
         <li>
           Icons from
-          <a href="https://material.io/icons" target="_blank" >Google Material Icon</a>
+          <a class="link" href="https://material.io/icons" target="_blank" >Google Material Icon</a>
         </li>
         <li>
           Build with
-          <a href="https://vuejs.org/" target="_blank" >Vue.js</a>
+          <a class="link" href="https://vuejs.org/" target="_blank" >Vue.js</a>
           and
-          <a href="https://en.parceljs.org/" target="_blank" >Parcel.js</a>
+          <a class="link" href="https://en.parceljs.org/" target="_blank" >Parcel.js</a>
         </li>
       </ul>
     </t-category>
@@ -69,23 +100,53 @@ h3 {
   font-weight: 400;
   text-align: center;
 }
+.social {
+  text-align: center;
+  list-style: none;
+  --svg-icon-scale: 1.75;
+
+  li {
+    display: inline-block;
+    padding: 0 0.75em;
+  }
+  a {
+    text-decoration: none;
+    color: var(--c-accent-darker);
+  }
+  small {
+    display: block;
+    padding-top: 0.25rem;
+    color: var(--c-primary-lighter);
+  }
+}
+p {
+  text-align: center;
+}
 strong {
   display: block;
   padding-top: 0.25rem;
 }
-a {
+.link {
   text-decoration: none;
   color: var(--c-text);
   box-shadow: inset 0 -0.08em var(--c-accent-lighter),
     0 0.08em var(--c-accent-lighter);
 }
-ul {
+.list {
   line-height: 1.35;
+  max-width: 400px;
+  margin: 0 auto;
 }
 footer {
   text-align: center;
   padding-top: var(--half-gutter);
   color: var(--c-primary-lightest);
+}
+button {
+  border: 0;
+  background: var(--c-accent);
+  font: inherit;
+  padding: 0.5em 1em;
 }
 </style>
 
@@ -101,4 +162,3 @@ export default {
   },
 }
 </script>
-

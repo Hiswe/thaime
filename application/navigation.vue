@@ -1,17 +1,15 @@
 <template>
 <nav>
   <router-link to="/" exact>
-    <t-svg-icons name="access-time"/>
+    <t-icon name="access-time"/>
   </router-link>
-
   <router-link to="/calendar">
-    <t-svg-icons name="insert-invitation"/>
+    <t-icon name="insert-invitation"/>
   </router-link>
-
+  <!-- have to keep it on a single line for better styling -->
   <router-link class="year" to="/year">{{i10lYear}}<br />{{thaiYear}}</router-link>
-
   <router-link to="/information">
-    <t-svg-icons name="info"/>
+    <t-icon name="info"/>
   </router-link>
 </nav>
 </template>
@@ -86,7 +84,6 @@ a {
 import { DateTime } from 'luxon'
 
 import * as years from './thai-years'
-import svgIcons from './ui/svg-icons'
 
 const now = DateTime.local()
 const currentYear = now.year
@@ -94,9 +91,6 @@ const currentYear = now.year
 
 export default {
   name: `main-navigation`,
-  components: {
-    't-svg-icons': svgIcons,
-  },
   data() {
     return {
       i10lYear: years.i10l,

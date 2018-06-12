@@ -43,6 +43,7 @@
 <style scoped lang="scss">
 .page-content {
   padding-bottom: var(--navigation-total-height);
+  text-align: center;
 }
 .curent-date {
   padding: var(--gutter) 0 calc(var(--gutter) * 1.5);

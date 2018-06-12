@@ -10,6 +10,8 @@
 </template>
 
 <style lang="scss" scoped>
+@import '../config';
+
 dl,
 dd {
   margin: 0;
@@ -28,6 +30,9 @@ dt {
   color: var(--c-accent-darker);
   text-transform: uppercase;
   font-weight: 300;
+  @media #{$mq-big} {
+    box-shadow: none;
+  }
 }
 </style>
 

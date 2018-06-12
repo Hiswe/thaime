@@ -6,7 +6,7 @@
       viewBox: icon.svg.viewBox,
       preserveAspectRatio: icon.svg.originalAttributes.preserveAspectRatio,
     })
-    return `<svg${ symbolAttrs } :style="{'--svg-icon-scale': safeScale}" v-if="name === '${icon.id}'">${ icon.svg.content }</svg>`
+    return `<svg${ symbolAttrs } v-if="name === '${icon.id}'">${ icon.svg.content }</svg>`
   }).join('\n') %>
 </div>
 </template>
@@ -33,17 +33,10 @@ export default {
       default: ``,
       type: String
     },
-    scale: {
-      default: 1,
-      type: Number
-    },
   },
   computed: {
     iconName() {
       return <%= 'name' %> ? <%= '`svg-icon--${name}`' %> : '';
-    },
-    safeScale() {
-      return Number.isFinite( this.scale ) ? this.scale : 1;
     }
   }
 }
