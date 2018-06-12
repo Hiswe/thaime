@@ -116,16 +116,6 @@
           :href="`#${periodName.pathId}`"
           startOffset="50%"
         >
-          <tspan
-            v-if="periodName.text.length > 1"
-            :dy="`${index * 1 }em`"
-            :key="`${line}-${index}`"
-          >
-            {{line}}
-          </tspan>
-          <tspan v-if="periodName.text.length < 2">
-            {{periodName.text[0]}}
-          </tspan>
           <tspan>{{periodName.text}}</tspan>
         </textPath>
       </text>
