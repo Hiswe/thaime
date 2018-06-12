@@ -84,6 +84,11 @@
   padding-bottom: var(--navigation-total-height);
 }
 .categories {
+  @media #{$mq-small} {
+    .category:first-child {
+      padding-top: 0;
+    }
+  }
   @media #{$mq-big} {
     display: grid;
     grid-gap: 0 var(--gutter);
@@ -91,9 +96,6 @@
     max-width: 800px;
     margin: 0 auto;
   }
-}
-header + .category {
-  padding-top: 0;
 }
 h3 {
   margin-top: 0;

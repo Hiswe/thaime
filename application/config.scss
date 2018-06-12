@@ -1,4 +1,6 @@
 $periods: 'midnight', 'late-night', 'morning', 'noon', 'afternoon', 'sunset',
   'night';
 
-$mq-big: '(min-width: 1024px)';
+$big-stop: 1024px;
+$mq-small: '(max-width: #{$big-stop - 1px})';
+$mq-big: '(min-width: #{$big-stop})';
