@@ -22,7 +22,6 @@
           <t-icon
             name="restore"
             class="restore-year"
-            :scale="3"
           />
         </button>
       </transition>
@@ -36,6 +35,7 @@ div {
   padding: var(--half-gutter) var(--half-gutter) 0;
 }
 button {
+  --svg-icon-scale: 3;
   margin: 0 auto;
   display: block;
   margin-top: var(--c-half-gutter);

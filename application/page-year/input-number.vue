@@ -31,8 +31,8 @@ label {
 }
 .input {
   display: grid;
-  grid-template-columns: 2rem 1fr 2rem;
-  width: 65%;
+  grid-template-columns: 3rem 1fr 3rem;
+  width: 95%;
   max-width: 400px;
   margin: 0.5rem auto 0;
 }
@@ -41,6 +41,7 @@ label {
   grid-row: 1;
 }
 button {
+  --svg-icon-scale: 1.5;
   color: var(--c-accent);
   background: none;
   border: none;
