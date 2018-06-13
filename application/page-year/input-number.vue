@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <form @submit.prevent="removeInputFocus">
     <label :for="id">
       {{title}}
     </label>
@@ -8,12 +8,14 @@
         :id="id"
         type="number"
         v-model.number="localValue"
+        ref="input"
+        @focus="$event.target.select()"
         min="0"
       />
       <t-button-icon class="decrease" icon="remove-circle" @click="localValue -= 1"></t-button-icon>
       <t-button-icon class="increase" icon="add-circle" @click="localValue += 1"></t-button-icon>
     </div>
-  </div>
+  </form>
 </template>
 
 <style lang="scss" scoped>
@@ -81,6 +83,11 @@ export default {
       set(value) {
         this.$emit(`input`, value)
       },
+    },
+  },
+  methods: {
+    removeInputFocus() {
+      this.$refs.input.blur()
     },
   },
 }
