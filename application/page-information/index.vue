@@ -60,6 +60,16 @@
           <li>creating a ticket on <a class="link" href="https://github.com/Hiswe/thaime/issues" target="_blank">the github repo</a></li>
         </ul>
       </t-category>
+      <t-category title="other app">
+        <p style="margin-top: 0">
+          Thailpha is your pocket Thai Alphabet dictionnary!
+        </p>
+        <p>
+          <a href="https://thailpha-3e7f6.firebaseapp.com/" target="_blank">
+            <t-icon name="c-thailpha"></t-icon>
+          </a>
+        </p>
+      </t-category>
       <t-category title="Source & ressources">
         <ul class="list">
           <li>
@@ -110,6 +120,7 @@ h3 {
 .social {
   text-align: center;
   list-style: none;
+  padding: 0;
   --svg-icon-scale: 1.75;
 
   li {

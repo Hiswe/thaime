@@ -1,6 +1,9 @@
 <template>
 <div <%= attributesToString(svgAttrs) %>>
-  <%= icons.map(function(icon){
+<% if (defs) { %><defs>
+<%= defs.trim() %>
+</defs>
+<% } %><%= icons.map(function(icon){
     const symbolAttrs = attributesToString({
       class: `svg-icon svg-icon--${icon.id}`,
       viewBox: icon.svg.viewBox,
