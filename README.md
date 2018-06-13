@@ -19,6 +19,10 @@ Thai time & date web-application
 - years converter
 - offline support
 
+__demo:__
+
+https://thaime-2c0a5.firebaseapp.com
+
 ![Thaime screenshots](/source/thaime-screenshot.png)
 
 ## Sources & references
