@@ -7,6 +7,7 @@ Thai time & date web-application
 
 
 - [about](#about)
+- [demo](#demo)
 - [Sources & references](#sources--references)
 - [Developers](#developers)
 
@@ -19,7 +20,7 @@ Thai time & date web-application
 - years converter
 - offline support
 
-__demo:__
+## demo
 
 https://thaime-2c0a5.firebaseapp.com
 
