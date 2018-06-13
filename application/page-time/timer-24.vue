@@ -1,26 +1,33 @@
 <template>
-  <div
-    :class="[`timer-24`, `timer-24--${timeFormat}`]"
-    @click="toggleFormat"
-  >{{ displayedTime }}</div>
+  <div class="timer-24">
+    <t-button-icon icon="remove-circle" @click="decrease"></t-button-icon>
+    <p :class="`text text--${timeFormat}`" @click="toggleFormat">{{ displayedTime }}</p>
+    <t-button-icon icon="add-circle" @click="increase"></t-button-icon>
+  </div>
 </template>
 
 <style scoped lang="scss">
 .timer-24 {
-  font-size: 2rem;
-  margin-top: var(--half-gutter);
-  text-align: center;
-  font-weight: 300;
-  color: var(--c-primary-lighter);
-  // https://www.client9.com/css-system-font-stack-monospace-v2/
-  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
-    monospace;
-  text-transform: lowercase;
+  display: flex;
+  margin: var(--half-gutter) auto 0;
 
-  // try to keep the hour centered
-  &--time::before {
-    content: '   ';
-    white-space: pre;
+  .text {
+    font-size: 2rem;
+    margin: 0;
+    text-align: center;
+    font-weight: 300;
+    color: var(--c-primary-lighter);
+    // https://www.client9.com/css-system-font-stack-monospace-v2/
+    font-family: var(--monospace);
+    text-transform: lowercase;
+  }
+}
+button {
+  &:first-child {
+    margin-right: var(--gutter);
+  }
+  &:last-child {
+    margin-left: var(--gutter);
   }
 }
 </style>
@@ -55,6 +62,12 @@ export default {
   methods: {
     toggleFormat() {
       this.timeFormat = this.timeFormat === `time-24` ? `time` : `time-24`
+    },
+    increase() {
+      this.$emit(`change`, this.currentTime.hour + 1)
+    },
+    decrease() {
+      this.$emit(`change`, this.currentTime.hour - 1)
     },
   },
 }

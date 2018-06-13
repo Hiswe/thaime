@@ -73,8 +73,8 @@ a {
   }
 }
 .year {
-  font-family: monospace;
-  font-size: 0.8em;
+  font-family: var(--monospace);
+  font-size: 0.7em;
   text-align: center;
 }
 .router-link-active {

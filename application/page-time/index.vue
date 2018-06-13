@@ -2,7 +2,7 @@
   <section class="page-content">
     <t-page-title title="clock"></t-page-title>
     <div class="content-body">
-      <t-timer-24 :currentTime="currentTime"></t-timer-24>
+      <t-timer-24 :currentTime="currentTime" @change="setHour"></t-timer-24>
       <t-clock
         :currentTime="currentTime"
         @change="setHour"

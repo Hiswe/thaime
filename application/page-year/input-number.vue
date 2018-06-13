@@ -10,12 +10,8 @@
         v-model.number="localValue"
         min="0"
       />
-      <button class="decrease" type="button"  @click="localValue -= 1">
-        <t-icon name="remove-circle"></t-icon>
-      </button>
-      <button class="increase" type="button" @click="localValue += 1">
-        <t-icon name="add-circle"></t-icon>
-      </button>
+      <t-button-icon class="decrease" icon="remove-circle" @click="localValue -= 1"></t-button-icon>
+      <t-button-icon class="increase" icon="add-circle" @click="localValue += 1"></t-button-icon>
     </div>
   </div>
 </template>
@@ -39,18 +35,6 @@ label {
 .decrease {
   grid-column: 1;
   grid-row: 1;
-}
-button {
-  --svg-icon-scale: 1.5;
-  color: var(--c-accent);
-  background: none;
-  border: none;
-  text-align: center;
-  padding: 0;
-
-  &:active {
-    color: var(--c-accent-darker);
-  }
 }
 input {
   text-align: center;

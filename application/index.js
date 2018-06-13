@@ -14,21 +14,17 @@ import NotFound from './page-not-found'
 import svgIcon from './ui/svg-icons'
 import pageTitle from './ui/page-title'
 import category from './ui/category'
+import buttonIcon from './ui/button-icon'
 
 vhCheck()
 
 Vue.use(VueRouter)
 Vue.use(VueClipboard)
 
-Vue.filter(`hoursMinutesSeconds`, value => {
-  const isLuxonDateTime = value instanceof DateTime
-  if (!isLuxonDateTime) return `00:00:00`
-  return value.toLocaleString(DateTime.TIME_24_WITH_SECONDS)
-})
-
 Vue.component(`t-icon`, svgIcon)
 Vue.component(`t-page-title`, pageTitle)
 Vue.component(`t-category`, category)
+Vue.component(`t-button-icon`, buttonIcon)
 
 const routes = [
   {
