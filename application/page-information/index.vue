@@ -62,7 +62,7 @@
       </t-category>
       <t-category title="other app">
         <p style="margin-top: 0">
-          Thailpha is your pocket Thai Alphabet dictionnary!
+          <strong>Thailpha</strong>a pocket Thai alphabet dictionnary
         </p>
         <p>
           <a href="https://thailpha-3e7f6.firebaseapp.com/" target="_blank">

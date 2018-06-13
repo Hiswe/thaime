@@ -16,10 +16,16 @@
 @import '../config.scss';
 
 .timer-text {
+  --timer-color: var(--c-primary-lihtest);
   padding-top: var(--quarter-gutter);
   padding-bottom: calc(var(--navigation-height) + var(--navigation-margin));
   position: relative;
-  background: currentColor;
+  background: var(--timer-color);
+
+  @media #{$mq-big} {
+    padding-top: var(--half-gutter);
+    padding-bottom: var(--half-gutter);
+  }
 
   &::before,
   &::after {
@@ -35,7 +41,7 @@
     background: radial-gradient(
       circle at top right,
       transparent 68%,
-      currentColor 70%
+      var(--timer-color) 70%
     );
   }
   &::after {
@@ -43,13 +49,13 @@
     background: radial-gradient(
       circle at top left,
       transparent 68%,
-      currentColor 70%
+      var(--timer-color) 70%
     );
   }
 
   @each $period in $periods {
     &--#{$period} {
-      color: var(--c-#{$period}-lighter);
+      --timer-color: var(--c-#{$period}-lighter);
     }
   }
 

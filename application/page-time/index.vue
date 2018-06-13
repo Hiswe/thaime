@@ -114,7 +114,7 @@ export default {
       const isValidHour = Number.isInteger(hour) && hour >= 0 && hour < 24
       if (!isValidHour) return
       this.stopTimers()
-      this.setCurrentTime(DateTime.fromObject({ hour, minutes: 30 }))
+      this.setCurrentTime(DateTime.fromObject({ hour, minutes: 0 }))
     },
     beginAutomaticTimeUpdate() {
       this.setCurrentTime(DateTime.local())

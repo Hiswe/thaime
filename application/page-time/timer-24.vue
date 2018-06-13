@@ -7,12 +7,18 @@
 </template>
 
 <style scoped lang="scss">
+@import '../config.scss';
+
 .timer-24 {
   display: flex;
   align-items: center;
   margin: 0 auto;
   width: 300px;
   height: 50px;
+
+  @media #{$mq-big} {
+    height: 70px;
+  }
 
   .text {
     flex-grow: 1;
