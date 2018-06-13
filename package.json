@@ -19,7 +19,7 @@
     "build:icons": "gulp build:icons",
     "build:logo": "gulp application-logo --no-release",
     "serve": "http-server -d false -c-1 --ssl",
-    "toc": "doctoc README.md --github",
+    "toc": "doctoc README.md README_DEV.md --github",
     "release": "node ./bin/release.js"
   },
   "dependencies": {},
