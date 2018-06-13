@@ -2,7 +2,10 @@
   <main>
     <t-nav></t-nav>
     <router-view></router-view>
-    <notifications classes="thaime-notifications" duration.number="-1" position="bottom center" />
+    <notifications
+      classes="thaime-notifications"
+      position="bottom center"
+    ></notifications>
   </main>
 </template>
 

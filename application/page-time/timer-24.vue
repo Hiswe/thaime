@@ -9,10 +9,14 @@
 <style scoped lang="scss">
 .timer-24 {
   display: flex;
-  margin: var(--half-gutter) auto 0;
+  align-items: center;
+  margin: 0 auto;
+  width: 300px;
+  height: 50px;
 
   .text {
-    font-size: 2rem;
+    flex-grow: 1;
+    font-size: 1.75rem;
     margin: 0;
     text-align: center;
     font-weight: 300;

@@ -36,18 +36,25 @@
   }
 
   // period colors
+  --c-midnight-lighter: hsl(243, 37%, 90%);
   --c-midnight: hsl(243, 37%, 36%);
   --c-midnight-darker: hsl(243, 37%, 36%);
+  --c-late-night-lighter: hsl(266, 37%, 90%);
   --c-late-night: hsl(266, 37%, 56%);
   --c-late-night-darker: hsl(266, 37%, 45%);
+  --c-morning-lighter: hsl(55, 53%, 90%);
   --c-morning: hsl(55, 53%, 58%);
   --c-morning-darker: hsl(55, 53%, 45%);
+  --c-noon-lighter: hsl(12, 68%, 90%);
   --c-noon: hsl(12, 68%, 56%);
   --c-noon-darker: hsl(12, 68%, 40%);
+  --c-afternoon-lighter: hsl(32, 77%, 90%);
   --c-afternoon: hsl(32, 77%, 61%);
   --c-afternoon-darker: hsl(32, 76%, 55%);
+  --c-sunset-lighter: hsl(339, 91%, 93%);
   --c-sunset: hsl(339, 91%, 83%);
   --c-sunset-darker: hsl(339, 94%, 75%);
+  --c-night-lighter: hsl(209, 47%, 90%);
   --c-night: hsl(209, 47%, 50%);
   --c-night-darker: hsl(209, 48%, 40%);
 
