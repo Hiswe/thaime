@@ -3,14 +3,18 @@
     <t-page-title title="about thaime"></t-page-title>
     <div class="categories">
       <t-category title="share the app">
-        <p>
+        <p style="margin-top: 0">
           The app can be shared with this link
         </p>
         <p>
           <a class="link" :href="homepage">{{ homepage }}</a>
         </p>
         <p>
-          <button type="button" v-clipboard:copy="homepage">
+          <button
+            type="button"
+            v-clipboard:copy="homepage"
+            v-clipboard:success="onCopy"
+          >
             Copy to clipboard
           </button>
         </p>
@@ -156,11 +160,18 @@ button {
   font: inherit;
   padding: 0.75em 1.5em;
   border-radius: var(--border-radius-small);
+  transition: transform 0.25s, background-color 0.25s;
+
+  &:active {
+    background: var(--c-accent-lightest);
+    transform: translateY(5px);
+  }
 }
 </style>
 
 <script>
 import pkg from '../../package.json'
+
 export default {
   name: `page-information`,
   data() {
@@ -168,6 +179,11 @@ export default {
       version: pkg.version,
       homepage: pkg.homepage,
     }
+  },
+  methods: {
+    onCopy() {
+      this.$notify(`copied!`)
+    },
   },
 }
 </script>

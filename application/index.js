@@ -1,8 +1,8 @@
+import vhCheck from 'vh-check'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { DateTime } from 'luxon'
 import VueClipboard from 'vue-clipboard2'
-import vhCheck from 'vh-check'
+import VueNotifications from 'vue-notification'
 
 import Layout from './layout'
 import TimePage from './page-time'
@@ -20,6 +20,7 @@ vhCheck()
 
 Vue.use(VueRouter)
 Vue.use(VueClipboard)
+Vue.use(VueNotifications)
 
 Vue.component(`t-icon`, svgIcon)
 Vue.component(`t-page-title`, pageTitle)

@@ -2,6 +2,7 @@
   <main>
     <t-nav></t-nav>
     <router-view></router-view>
+    <notifications classes="thaime-notifications" duration.number="-1" position="bottom center" />
   </main>
 </template>
 
@@ -40,12 +41,26 @@ main {
 .svg-icon {
   fill: currentColor;
 }
+
+// override default notification styling
+// https://github.com/euvl/vue-notification/blob/master/demo/src/App.vue#L267-L287
+.notification.thaime-notifications {
+  margin: 1rem;
+  margin-bottom: 0;
+  border-radius: 0.25em;
+  font-size: 1.5em;
+  text-align: center;
+  padding: 10px 20px;
+  color: var(--c-text);
+  background: var(--c-accent-lighter);
+  border: 0;
+  box-shadow: 0 0 15px 0 var(--c-primary);
+}
 // prevent zoomin on double-tap
 // https://stackoverflow.com/questions/46167604/iphone-html-disable-double-tap-to-zoom
 button {
   touch-action: manipulation;
 }
-
 // remove focus ring until a user press tab
 // https://hackernoon.com/removing-that-ugly-focus-ring-and-keeping-it-too-6c8727fefcd2
 body:not(.user-is-tabbing) {
