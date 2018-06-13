@@ -45,6 +45,17 @@ main {
 button {
   touch-action: manipulation;
 }
+
+// remove focus ring until a user press tab
+// https://hackernoon.com/removing-that-ugly-focus-ring-and-keeping-it-too-6c8727fefcd2
+body:not(.user-is-tabbing) {
+  button:focus,
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+  }
+}
 </style>
 
 <script>

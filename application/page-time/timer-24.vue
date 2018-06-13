@@ -20,6 +20,10 @@
     // https://www.client9.com/css-system-font-stack-monospace-v2/
     font-family: var(--monospace);
     text-transform: lowercase;
+
+    &--time {
+      font-size: 1.5rem;
+    }
   }
 }
 button {
