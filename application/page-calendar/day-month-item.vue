@@ -2,7 +2,7 @@
   <li :class="{ active: isCurrentDayOrMonth }">
     <p class="english-name">{{ dayOrMonth.en }}</p>
     <p class="thai-name">
-      <span class="thai-text">{{ dayOrMonth.th }} </span>
+      <span class="thai-text">{{ dayOrMonth.th }}</span>
       <small class="rtgs">{{ dayOrMonth.rtgs }}</small>
     </p>
   </li>

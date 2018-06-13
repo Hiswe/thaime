@@ -4,7 +4,7 @@
       {{title}}
     </dt>
     <dd class="category__content">
-      <slot />
+      <slot></slot>
     </dd>
   </dl>
 </template>

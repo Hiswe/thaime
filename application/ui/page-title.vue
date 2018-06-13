@@ -9,7 +9,7 @@
         {{title}}
       </h1>
     </transition>
-    <slot />
+    <slot></slot>
   </header>
 </template>
 

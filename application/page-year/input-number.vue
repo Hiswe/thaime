@@ -11,10 +11,10 @@
         min="0"
       />
       <button class="decrease" type="button"  @click="localValue -= 1">
-        <t-icon name="remove-circle" />
+        <t-icon name="remove-circle"></t-icon>
       </button>
       <button class="increase" type="button" @click="localValue += 1">
-        <t-icon name="add-circle" />
+        <t-icon name="add-circle"></t-icon>
       </button>
     </div>
   </div>

@@ -5,15 +5,15 @@
       <t-input
         title="international"
         v-model="i10lYear"
-      />
+      ></t-input>
       <t-input
         title="thai"
         v-model="thaiYear"
-      />
+      ></t-input>
       <t-input
         title="age"
         v-model="age"
-      />
+      ></t-input>
       <transition name="fade">
         <button
           v-if="isNotCurrentYear"
@@ -22,10 +22,9 @@
           <t-icon
             name="restore"
             class="restore-year"
-          />
+          ></t-icon>
         </button>
       </transition>
-
     </div>
   </section>
 </template>

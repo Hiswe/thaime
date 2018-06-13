@@ -12,13 +12,13 @@
             name="restore"
             class="restore-button"
             v-if="isManualHour"
-          />
+          ></t-icon>
         </transition>
       </t-clock>
       <t-timer-thai
         :currentTime="currentTime"
         :currentPeriod="currentPeriod"
-      />
+      ></t-timer-thai>
     </div>
   </section>
 </template>
