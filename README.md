@@ -1,3 +1,5 @@
+<img src="source/application-logo/thaime-logo.svg" width="100" heigh="100" style="display: block; margin: 0 auto"/>
+
 # thaime
 
 Thai time & date web-application
