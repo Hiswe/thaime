@@ -1,8 +1,12 @@
 <template>
   <section class="page-content">
     <t-page-title title="about thaime"></t-page-title>
-    <div class="categories content-body">
-      <t-category title="share the app">
+    <thaime-list-transition tag="div" class="categories content-body">
+      <t-category
+        key="share-the-app"
+        title="share the app"
+        :data-index="1 / 4"
+      >
         <p style="margin-top: 0">
           The app can be shared with this link
         </p>
@@ -20,7 +24,11 @@
         </p>
         <t-icon class="qrcode" name="thaime-qrcode"></t-icon>
       </t-category>
-      <t-category title="Author & suggestions">
+      <t-category
+        key="author-suggestions"
+        title="Author & suggestions"
+        :data-index="2 / 4"
+      >
         <h3>
             brought to you by
             <strong>Yannick “Hiswe” Aïvayan</strong>
@@ -60,7 +68,11 @@
           <li>creating a ticket on <a class="link" href="https://github.com/Hiswe/thaime/issues" target="_blank">the github repo</a></li>
         </ul>
       </t-category>
-      <t-category title="other app">
+      <t-category
+        key="other-app"
+        title="other app"
+        :data-index="3 / 4"
+      >
         <p style="margin-top: 0">
           <strong>Thailpha</strong>a pocket Thai alphabet dictionnary
         </p>
@@ -70,7 +82,11 @@
           </a>
         </p>
       </t-category>
-      <t-category title="Source & ressources">
+      <t-category
+        key="source-ressources"
+        title="Source & ressources"
+        :data-index="4 / 4"
+      >
         <ul class="list">
           <li>
             Information provided by
@@ -86,7 +102,7 @@
           </li>
         </ul>
       </t-category>
-    </div>
+    </thaime-list-transition>
     <footer>v{{version}}</footer>
   </section>
 </template>

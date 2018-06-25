@@ -16,13 +16,7 @@
 
       <section class="day-month-listing">
         <t-category title="days">
-          <transition-group
-            appear
-            name="staggered-fade"
-
-            :css="false"
-            @enter="enter"
-          >
+          <thaime-list-transition tag="ul" class="listing listing--days">
             <t-day-or-month-item
               v-for="(day, index) in days"
               :key="day.rtgs"
@@ -30,17 +24,10 @@
               :data-index="index / 7"
               :isCurrentDayOrMonth="currentDay === index + 1"
             ></t-day-or-month-item>
-          </transition-group>
+          </thaime-list-transition>
         </t-category>
         <t-category title="months">
-          <transition-group
-              appear
-              name="staggered-fade"
-              tag="ul"
-              class="listing listing--months"
-              :css="false"
-              @enter="enter"
-            >
+          <thaime-list-transition tag="ul" class="listing listing--months">
             <t-day-or-month-item
               v-for="(month, index) in months"
               :key="month.rtgs"
@@ -48,7 +35,7 @@
               :data-index="index / 12"
               :isCurrentDayOrMonth="currentMonth === index + 1"
             ></t-day-or-month-item>
-          </transition-group>
+          </thaime-list-transition>
         </t-category>
       </section>
     </div>
@@ -116,15 +103,12 @@ $listing-max-size: 700px;
 
 <script>
 import { DateTime } from 'luxon'
-import anime from 'animejs'
 
 import THAI_NUMBERS from '../thai-numbers'
 import DayOrMonthItem from './day-month-item'
 import { days, months } from './day-month-names'
 
 const YEAR_DIFFERENCE = 2561 - 2018
-const ANIM_DURATION = 1100
-const ANIM_DELAY = 500
 
 export default {
   name: `page-calendar`,
@@ -165,18 +149,6 @@ export default {
   },
   created() {
     this.currentDate = DateTime.local()
-  },
-  methods: {
-    enter(el, done) {
-      anime({
-        targets: el,
-        opacity: [0, 1],
-        translateY: [-10, 0],
-        complete: done,
-        duration: ANIM_DURATION,
-        delay: el.dataset.index * ANIM_DELAY,
-      })
-    },
   },
 }
 </script>

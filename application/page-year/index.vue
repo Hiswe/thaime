@@ -2,18 +2,26 @@
   <section class="page-content">
     <t-page-title title="years"></t-page-title>
     <div class="content-body">
-      <t-input
-        title="international"
-        v-model="i10lYear"
-      ></t-input>
-      <t-input
-        title="thai"
-        v-model="thaiYear"
-      ></t-input>
-      <t-input
-        title="age"
-        v-model="age"
-      ></t-input>
+      <thaime-list-transition tag="div">
+        <t-input
+          key="international"
+          title="international"
+          v-model="i10lYear"
+          :data-index="1 / 3"
+        ></t-input>
+        <t-input
+          key="thai"
+          title="thai"
+          v-model="thaiYear"
+          :data-index="2 / 3"
+        ></t-input>
+        <t-input
+          key="age"
+          title="age"
+          v-model="age"
+          :data-index="3 / 3"
+        ></t-input>
+      </thaime-list-transition>
       <transition name="fade">
         <button
           v-if="isNotCurrentYear"

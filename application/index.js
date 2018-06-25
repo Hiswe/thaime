@@ -15,6 +15,7 @@ import svgIcon from './ui/svg-icons'
 import pageTitle from './ui/page-title'
 import category from './ui/category'
 import buttonIcon from './ui/button-icon'
+import ListTransition from './ui/list-transition'
 
 vhCheck()
 
@@ -26,23 +27,36 @@ Vue.component(`t-icon`, svgIcon)
 Vue.component(`t-page-title`, pageTitle)
 Vue.component(`t-category`, category)
 Vue.component(`t-button-icon`, buttonIcon)
+Vue.component(`thaime-list-transition`, ListTransition)
 
 const routes = [
   {
     path: `/`,
     component: TimePage,
+    meta: {
+      title: `clock`,
+    },
   },
   {
     path: `/calendar`,
     component: CalendarPage,
-  },
-  {
-    path: `/information`,
-    component: InformationPage,
+    meta: {
+      title: `days & months`,
+    },
   },
   {
     path: `/year`,
     component: YearPage,
+    meta: {
+      title: `years`,
+    },
+  },
+  {
+    path: `/information`,
+    component: InformationPage,
+    meta: {
+      title: `about thaime`,
+    },
   },
   {
     path: `/*`,

@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   margin: 0 auto;
-  width: 300px;
+  width: 360px;
   height: 50px;
 
   @media #{$mq-big} {
