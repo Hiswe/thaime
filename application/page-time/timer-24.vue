@@ -13,7 +13,8 @@
   display: flex;
   align-items: center;
   margin: 0 auto;
-  width: 360px;
+  width: 100%;
+  max-width: 300px;
   height: 50px;
 
   @media #{$mq-big} {
@@ -38,10 +39,10 @@
 }
 button {
   &:first-child {
-    margin-right: var(--gutter);
+    margin-right: var(--half-gutter);
   }
   &:last-child {
-    margin-left: var(--gutter);
+    margin-left: var(--half-gutter);
   }
 }
 </style>
