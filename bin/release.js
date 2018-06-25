@@ -3,7 +3,6 @@
 const shell = require('shelljs')
 const inquirer = require('inquirer')
 const path = require('path')
-const fs = require('fs')
 
 const pkg = require(`../package.json`)
 const BRANCH = `firebase`
@@ -17,7 +16,11 @@ if (!shell.which(`yarn`)) {
   shell.exit(1)
 }
 
-initRelease()
+initRelease().catch(error => {
+  shell.echo(`errored during release`)
+  shell.echo(error)
+  shell.exit(1)
+})
 
 async function initRelease() {
   ////////
@@ -76,6 +79,7 @@ async function initRelease() {
     shell.exit(1)
   }
   shell.echo(`…deployed!`)
+  shell.echo(pkg.homepage)
 
   if (!bumping.bump) {
     shell.echo(`Skipping pushing tag`)
