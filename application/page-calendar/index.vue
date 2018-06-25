@@ -1,40 +1,57 @@
 <template>
   <div class="page-content">
     <t-page-title title="days &amp; months"></t-page-title>
-    <section class="curent-date">
-      <p class="curent-date__text curent-date__text--en">
-        {{englishDate}}
-      </p>
-      <p class="curent-date__text curent-date__text--th thai-text">
-        {{thaiDate}}
-      </p>
-      <p class="curent-date__text curent-date__text--rtgs thai-text">
-        {{rtgsDate}}
-      </p>
-    </section>
+    <div class="content-body">
+      <section class="curent-date">
+        <p class="curent-date__text curent-date__text--en">
+          {{englishDate}}
+        </p>
+        <p class="curent-date__text curent-date__text--th thai-text">
+          {{thaiDate}}
+        </p>
+        <p class="curent-date__text curent-date__text--rtgs thai-text">
+          {{rtgsDate}}
+        </p>
+      </section>
 
-    <section class="day-month-listing">
-      <t-category title="days">
-        <ul class="listing listing--days">
-          <t-day-or-month-item
-            v-for="(day, index) in days"
-            :key="day.rtgs"
-            :dayOrMonth="day"
-            :isCurrentDayOrMonth="currentDay === index + 1"
-          />
-        </ul>
-      </t-category>
-      <t-category title="months">
-        <ul class="listing listing--months">
-          <t-day-or-month-item
-            v-for="(month, index) in months"
-            :key="month.rtgs"
-            :dayOrMonth="month"
-            :isCurrentDayOrMonth="currentMonth === index + 1"
-          />
-        </ul>
-      </t-category>
-    </section>
+      <section class="day-month-listing">
+        <t-category title="days">
+          <transition-group
+            appear
+            name="staggered-fade"
+
+            :css="false"
+            @enter="enter"
+          >
+            <t-day-or-month-item
+              v-for="(day, index) in days"
+              :key="day.rtgs"
+              :dayOrMonth="day"
+              :data-index="index / 7"
+              :isCurrentDayOrMonth="currentDay === index + 1"
+            ></t-day-or-month-item>
+          </transition-group>
+        </t-category>
+        <t-category title="months">
+          <transition-group
+              appear
+              name="staggered-fade"
+              tag="ul"
+              class="listing listing--months"
+              :css="false"
+              @enter="enter"
+            >
+            <t-day-or-month-item
+              v-for="(month, index) in months"
+              :key="month.rtgs"
+              :dayOrMonth="month"
+              :data-index="index / 12"
+              :isCurrentDayOrMonth="currentMonth === index + 1"
+            ></t-day-or-month-item>
+          </transition-group>
+        </t-category>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -99,12 +116,15 @@ $listing-max-size: 700px;
 
 <script>
 import { DateTime } from 'luxon'
+import anime from 'animejs'
 
 import THAI_NUMBERS from '../thai-numbers'
 import DayOrMonthItem from './day-month-item'
 import { days, months } from './day-month-names'
 
 const YEAR_DIFFERENCE = 2561 - 2018
+const ANIM_DURATION = 1100
+const ANIM_DELAY = 500
 
 export default {
   name: `page-calendar`,
@@ -145,6 +165,18 @@ export default {
   },
   created() {
     this.currentDate = DateTime.local()
+  },
+  methods: {
+    enter(el, done) {
+      anime({
+        targets: el,
+        opacity: [0, 1],
+        translateY: [-10, 0],
+        complete: done,
+        duration: ANIM_DURATION,
+        delay: el.dataset.index * ANIM_DELAY,
+      })
+    },
   },
 }
 </script>

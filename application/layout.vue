@@ -1,7 +1,9 @@
 <template>
   <main>
-    <t-nav></t-nav>
-    <router-view></router-view>
+    <thaime-navigation></thaime-navigation>
+    <transition name="page" mode="out-in">
+      <router-view></router-view>
+    </transition>
     <notifications
       classes="thaime-notifications"
       position="bottom center"
@@ -74,6 +76,29 @@ body:not(.user-is-tabbing) {
     outline: none;
   }
 }
+
+.page-enter-active,
+.page-leave-active {
+  transition-duration: var(--page-transition);
+}
+
+.page-enter-active {
+  transition-delay: var(--page-transition);
+}
+.page-enter-active .content-body,
+.page-leave-active .content-body {
+  transition-property: opacity;
+  transition-duration: var(--page-transition);
+}
+
+.page-enter-active .content-body {
+  transition-delay: var(--page-transition);
+}
+
+.page-enter .content-body,
+.page-leave-active .content-body {
+  opacity: 0;
+}
 </style>
 
 <script>
@@ -82,7 +107,7 @@ import mainNav from './navigation'
 export default {
   name: `layout`,
   components: {
-    't-nav': mainNav,
+    'thaime-navigation': mainNav,
   },
 }
 </script>

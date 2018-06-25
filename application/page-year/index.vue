@@ -1,7 +1,7 @@
 <template>
   <section class="page-content">
     <t-page-title title="years"></t-page-title>
-    <div>
+    <div class="content-body">
       <t-input
         title="international"
         v-model="i10lYear"

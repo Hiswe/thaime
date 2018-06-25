@@ -1,7 +1,7 @@
 <template>
   <section class="page-content">
     <t-page-title title="about thaime"></t-page-title>
-    <div class="categories">
+    <div class="categories content-body">
       <t-category title="share the app">
         <p style="margin-top: 0">
           The app can be shared with this link

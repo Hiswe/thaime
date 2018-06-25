@@ -1,36 +1,14 @@
 <template>
   <header>
-    <transition
-      name="title"
-      mode="out-in"
-      appear
-    >
       <h1 :key="title">
         {{title}}
       </h1>
-    </transition>
     <slot></slot>
   </header>
 </template>
 
 <style scoped lang="scss">
 @import '../config';
-
-.title {
-  &-enter-active,
-  &-leave-active {
-    transition: transform 0.75s ease, opacity 0.75s ease;
-  }
-  &-enter,
-  &-leave-active {
-    opacity: 0.5;
-    transform: translateY(-10px);
-
-    @media #{$mq-big} {
-      transform: translateX(10px);
-    }
-  }
-}
 
 header {
   --c-background: var(--c-primary-lightest);
@@ -71,6 +49,28 @@ h1 {
   padding: var(--half-gutter) var(--gutter);
   text-align: center;
   color: var(--c-primary);
+
+  .page-enter-active &,
+  .page-leave-active & {
+    transition-duration: var(--page-transition);
+  }
+
+  .page-enter & {
+    transform: translateY(10px);
+  }
+
+  .page-enter-active & {
+    transition-delay: var(--page-transition);
+  }
+
+  .page-enter &,
+  .page-leave-active & {
+    opacity: 0;
+  }
+
+  .page-leave-active & {
+    transform: translateY(-10px);
+  }
 
   @media #{$mq-big} {
     text-align: left;
