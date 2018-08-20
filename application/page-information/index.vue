@@ -1,110 +1,74 @@
-<template>
-  <section class="page-content">
-    <t-page-title title="about thaime"></t-page-title>
-    <thaime-list-transition tag="div" class="categories content-body">
-      <t-category
-        key="share-the-app"
-        title="share the app"
-        :data-index="1 / 4"
-      >
-        <p style="margin-top: 0">
-          The app can be shared with this link
-        </p>
-        <p>
-          <a class="link" :href="homepage">{{ homepage }}</a>
-        </p>
-        <p>
-          <button
-            type="button"
-            v-clipboard:copy="homepage"
-            v-clipboard:success="onCopy"
-          >
-            Copy to clipboard
-          </button>
-        </p>
-        <t-icon class="qrcode" name="thaime-qrcode"></t-icon>
-      </t-category>
-      <t-category
-        key="author-suggestions"
-        title="Author & suggestions"
-        :data-index="2 / 4"
-      >
-        <h3>
-            brought to you by
-            <strong>Yannick “Hiswe” Aïvayan</strong>
-        </h3>
-        <p>
-          find me on
-        </p>
-        <ul class="social">
-          <li>
-            <a href="https://github.com/hiswe" target="_blank">
-              <t-icon name="c-github"></t-icon>
-              <small>github</small>
-            </a>
-          </li>
-          <li>
-            <a href="https://twitter.com/hiswehalya" target="_blank">
-              <t-icon name="c-twitter"></t-icon>
-              <small>twitter</small>
-            </a>
-          </li>
-          <li>
-            <a href="https://hiswe.github.com" target="_blank">
-              <t-icon name="ballot"></t-icon>
-              <small>my blog</small>
-            </a>
-          </li>
-          <li>
-            <a href="https://medium.com/@hiswehalya" target="_blank">
-              <t-icon name="c-medium"></t-icon>
-              <small>medium</small>
-            </a>
-          </li>
-        </ul>
-        <p>Suggestions can be send by:</p>
-        <ul class="list">
-          <li>using the form on <a class="link" href="http://www.hiswe.net/contact" target="_blank">hiswe.net</a></li>
-          <li>creating a ticket on <a class="link" href="https://github.com/Hiswe/thaime/issues" target="_blank">the github repo</a></li>
-        </ul>
-      </t-category>
-      <t-category
-        key="other-app"
-        title="other app"
-        :data-index="3 / 4"
-      >
-        <p style="margin-top: 0">
-          <strong>Thailpha</strong>a pocket Thai alphabet dictionnary
-        </p>
-        <p>
-          <a href="https://thailpha-3e7f6.firebaseapp.com/" target="_blank">
-            <t-icon name="c-thailpha"></t-icon>
-          </a>
-        </p>
-      </t-category>
-      <t-category
-        key="source-ressources"
-        title="Source & ressources"
-        :data-index="4 / 4"
-      >
-        <ul class="list">
-          <li>
-            Information provided by
-            <a class="link" href="http://thai-language.com" target="_blank" >thai-language.com</a>
-          </li>
-          <li>
-            Icons from
-            <a class="link" href="https://material.io/icons" target="_blank" >Google Material Icon</a>
-          </li>
-          <li>
-            QR Code by
-            <a class="link" href="http://goqr.me/#t=url" target="_blank" >QR Code Generator</a>
-          </li>
-        </ul>
-      </t-category>
-    </thaime-list-transition>
-    <footer>v{{version}}</footer>
-  </section>
+<template lang="pug">
+section.page-content
+  t-page-title(title="about thaime")
+  thaime-list-transition.categories.content-body(tag="div")
+    t-category(
+      key="share-the-app"
+      title="share the app"
+      :data-index="1 / 4"
+    )
+      p(style="margin-top: 0") The app can be shared with this link
+      p: a.link(:href="homepage") {{ homepage }}
+      p: button(
+          type="button"
+          v-clipboard:copy="homepage"
+          v-clipboard:success="onCopy"
+        ) Copy to clipboard
+
+      t-icon.qrcode(name="thaime-qrcode" :scale="0.65")
+    t-category(
+      key="author-suggestions"
+      title="Author & suggestions"
+      :data-index="2 / 4"
+    )
+      h3
+        | brought to you by
+        strong Yannick “Hiswe” Aïvayan
+      p find me on
+      ul.social
+        li: a(href="https://github.com/hiswe" target="_blank")
+          t-icon(name="c-github" :scale="1.75")
+          small github
+        li: a(href="https://twitter.com/hiswehalya" target="_blank")
+          t-icon(name="c-twitter" :scale="1.75")
+          small twitter
+        li: a(href="https://hiswe.github.com" target="_blank")
+          t-icon(name="ballot" :scale="1.75")
+          small my blog
+        li: a(href="https://medium.com/@hiswehalya" target="_blank")
+          t-icon(name="c-medium" :scale="1.75")
+          small medium
+      p Suggestions can be send by:
+      ul.list
+        li using the form on <a class="link" href="http://www.hiswe.net/contact" target="_blank">hiswe.net</a>
+        li creating a ticket on <a class="link" href="https://github.com/Hiswe/thaime/issues" target="_blank">the github repo</a>
+
+    t-category(
+      key="other-app"
+      title="other app"
+      :data-index="3 / 4"
+    )
+      p(style="margin-top: 0")
+        | <strong>Thailpha</strong>a pocket Thai alphabet dictionnary
+      p: a(href="https://thailpha-3e7f6.firebaseapp.com/" target="_blank")
+        t-icon(name="c-thailpha")
+
+    t-category(
+      key="source-ressources"
+      title="Source & ressources"
+      :data-index="4 / 4"
+    )
+      ul.list
+        li
+          | Information provided by
+          a.link(href="http://thai-language.com" target="_blank") thai-language.com
+        li
+          | Icons from
+          a.link(href="https://material.io/icons" target="_blank") Google Material Icon
+        li
+          | QR Code by
+          a.link(href="http://goqr.me/#t=url" target="_blank") QR Code Generator
+  footer v{{version}}
 </template>
 
 <style lang="scss" scoped>
@@ -137,7 +101,6 @@ h3 {
   text-align: center;
   list-style: none;
   padding: 0;
-  --svg-icon-scale: 1.75;
 
   li {
     display: inline-block;
@@ -156,7 +119,8 @@ h3 {
 .qrcode {
   color: var(--c-primary-darker);
   text-align: center;
-  --svg-icon-scale: 0.65;
+  display: block;
+  margin: 0 auto;
 }
 p {
   text-align: center;

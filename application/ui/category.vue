@@ -1,12 +1,8 @@
-<template>
-  <dl class="category">
-    <dt class="category__title">
-      {{title}}
-    </dt>
-    <dd class="category__content">
-      <slot></slot>
-    </dd>
-  </dl>
+<template lang="pug">
+dl.category
+  dt.category__title {{title}}
+  dd.category__content
+    slot
 </template>
 
 <style lang="scss" scoped>

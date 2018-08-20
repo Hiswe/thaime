@@ -1,26 +1,22 @@
-<template>
-  <section class="page-content">
-    <t-page-title title="clock"></t-page-title>
-    <div class="content-body">
-      <t-timer-24 :currentTime="currentTime" @change="setHour"></t-timer-24>
-      <t-clock
-        :currentTime="currentTime"
-        @change="setHour"
-      >
-        <transition name="fade">
-          <t-icon
-            name="restore"
-            class="restore-button"
-            v-if="isManualHour"
-          ></t-icon>
-        </transition>
-      </t-clock>
-      <t-timer-thai
-        :currentTime="currentTime"
-        :currentPeriod="currentPeriod"
-      ></t-timer-thai>
-    </div>
-  </section>
+<template lang="pug">
+section.page-content
+  t-page-title(title="clock")
+  .content-body
+    t-timer-24(:currentTime="currentTime" @change="setHour")
+    t-clock(
+      :currentTime="currentTime"
+      @change="setHour"
+    )
+      transition(name="fade")
+        t-icon.restore-button(
+          name="restore"
+          v-if="isManualHour"
+          :scale="3"
+        )
+    t-timer-thai(
+      :currentTime="currentTime"
+      :currentPeriod="currentPeriod"
+    )
 </template>
 
 <style lang="scss">
@@ -32,11 +28,8 @@
   pointer-events: none;
   z-index: 2;
   color: var(--c-accent);
-
-  path {
-    stroke-width: 0.5;
-    stroke: white;
-  }
+  stroke-width: 0.5;
+  stroke: white;
 }
 .fade-enter-active,
 .fade-leave-active {
@@ -63,7 +56,6 @@
   width: 100%;
   flex: 1 1 auto;
   height: calc(100vh - 250px - var(--vh-offset));
-  // background: pink;
 }
 .restore-button {
   --svg-icon-scale: 3;

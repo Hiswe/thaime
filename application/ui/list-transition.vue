@@ -1,13 +1,12 @@
-<template>
-  <transition-group
-    appear
-    name="list-transition"
-    :tag="tag"
-    :css="false"
-    @enter="enter"
-  >
-    <slot></slot>
-  </transition-group>
+<template lang="pug">
+transition-group(
+  appear
+  name="list-transition"
+  :tag="tag"
+  :css="false"
+  @enter="enter"
+)
+  slot
 </template>
 
 <script>

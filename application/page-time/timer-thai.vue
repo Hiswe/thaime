@@ -1,15 +1,9 @@
-<template>
-  <div :class="[`timer-text`, `timer-text--${currentPeriod.id}`]">
-    <p class="timer-text__rtgs">{{ rtgs }}</p>
-    <p :class="[
-      `thai-text`,
-      `timer-text__thai`,
-      `timer-text__thai--${currentPeriod.id}`,
-      ]"
-    >
-      {{ thai }}
-    </p>
-  </div>
+<template lang="pug">
+.timer-text(:class="`timer-text--${currentPeriod.id}`")
+  p.timer-text__rtgs {{ rtgs }}
+  p.thai-text.timer-text__thai(
+    :class="`timer-text__thai--${currentPeriod.id}`"
+  ) {{ thai }}
 </template>
 
 <style scoped lang="scss">

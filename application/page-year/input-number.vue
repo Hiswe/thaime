@@ -1,21 +1,17 @@
-<template>
-  <form @submit.prevent="removeInputFocus">
-    <label :for="id">
-      {{title}}
-    </label>
-    <div class="input">
-      <input
-        :id="id"
-        type="number"
-        v-model.number="localValue"
-        ref="input"
-        @focus="$event.target.select()"
-        min="0"
-      />
-      <t-button-icon class="decrease" icon="remove-circle" @click="localValue -= 1"></t-button-icon>
-      <t-button-icon class="increase" icon="add-circle" @click="localValue += 1"></t-button-icon>
-    </div>
-  </form>
+<template lang="pug">
+form(@submit.prevent="removeInputFocus")
+  label(:for="id") {{title}}
+  .input
+    input(
+      :id="id"
+      type="number"
+      v-model.number="localValue"
+      ref="input"
+      @focus="$event.target.select()"
+      min="0"
+    )
+    t-button-icon.decrease(icon="remove-circle" @click="localValue -= 1")
+    t-button-icon.increase(icon="add-circle" @click="localValue += 1")
 </template>
 
 <style lang="scss" scoped>
