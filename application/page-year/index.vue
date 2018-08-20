@@ -1,40 +1,35 @@
-<template>
-  <section class="page-content">
-    <t-page-title title="years"></t-page-title>
-    <div class="content-body">
-      <thaime-list-transition tag="div">
-        <t-input
-          key="international"
-          title="international"
-          v-model="i10lYear"
-          :data-index="1 / 3"
-        ></t-input>
-        <t-input
-          key="thai"
-          title="thai"
-          v-model="thaiYear"
-          :data-index="2 / 3"
-        ></t-input>
-        <t-input
-          key="age"
-          title="age"
-          v-model="age"
-          :data-index="3 / 3"
-        ></t-input>
-      </thaime-list-transition>
-      <transition name="fade">
-        <button
-          v-if="isNotCurrentYear"
-          @click="reset"
-        >
-          <t-icon
-            name="restore"
-            class="restore-year"
-          ></t-icon>
-        </button>
-      </transition>
-    </div>
-  </section>
+<template lang="pug">
+section.page-content
+  t-page-title(title="years")
+  .content-body
+    thaime-list-transition(tag="div")
+      t-input(
+        key="international"
+        title="international"
+        v-model="i10lYear"
+        :data-index="1 / 3"
+      )
+      t-input(
+        key="thai"
+        title="thai"
+        v-model="thaiYear"
+        :data-index="2 / 3"
+      )
+      t-input(
+        key="age"
+        title="age"
+        v-model="age"
+        :data-index="3 / 3"
+      )
+    transition(name="fade")
+      button(
+        v-if="isNotCurrentYear"
+        @click="reset"
+      )
+        t-icon.restore-year(
+          name="restore"
+          :scale="3"
+        )
 </template>
 
 <style lang="scss" scoped>
@@ -50,16 +45,12 @@ button {
   border: 0;
   text-align: center;
 }
-</style>
-
-<style>
-.restore-year svg {
+.restore-year {
   fill: var(--c-accent);
   stroke-width: 0.5;
   stroke: white;
 }
 </style>
-
 
 <script>
 import pageTitle from '../ui/page-title'

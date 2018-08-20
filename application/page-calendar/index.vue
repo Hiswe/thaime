@@ -1,45 +1,33 @@
-<template>
-  <div class="page-content">
-    <t-page-title title="days &amp; months"></t-page-title>
-    <div class="content-body">
-      <section class="curent-date">
-        <p class="curent-date__text curent-date__text--en">
-          {{englishDate}}
-        </p>
-        <p class="curent-date__text curent-date__text--th thai-text">
-          {{thaiDate}}
-        </p>
-        <p class="curent-date__text curent-date__text--rtgs thai-text">
-          {{rtgsDate}}
-        </p>
-      </section>
-
-      <section class="day-month-listing">
-        <t-category title="days">
-          <thaime-list-transition tag="ul" class="listing listing--days">
-            <t-day-or-month-item
-              v-for="(day, index) in days"
-              :key="day.rtgs"
-              :dayOrMonth="day"
-              :data-index="index / 7"
-              :isCurrentDayOrMonth="currentDay === index + 1"
-            ></t-day-or-month-item>
-          </thaime-list-transition>
-        </t-category>
-        <t-category title="months">
-          <thaime-list-transition tag="ul" class="listing listing--months">
-            <t-day-or-month-item
-              v-for="(month, index) in months"
-              :key="month.rtgs"
-              :dayOrMonth="month"
-              :data-index="index / 12"
-              :isCurrentDayOrMonth="currentMonth === index + 1"
-            ></t-day-or-month-item>
-          </thaime-list-transition>
-        </t-category>
-      </section>
-    </div>
-  </div>
+<template lang="pug">
+.page-content
+  t-page-title(title="days & months")
+  .content-body
+    section.curent-date
+      p.curent-date__text.curent-date__text--en
+        | {{englishDate}}
+      p.curent-date__text.curent-date__text--rtgs.thai-text
+        | {{rtgsDate}}
+      p.curent-date__text.curent-date__text--th.thai-text
+        | {{thaiDate}}
+    section.day-month-listing
+      t-category(title="days")
+        thaime-list-transition.listing.listing--days(tag="ul")
+          t-day-or-month-item(
+            v-for="(day, index) in days"
+            :key="day.rtgs"
+            :dayOrMonth="day"
+            :data-index="index / 7"
+            :isCurrentDayOrMonth="currentDay === index + 1"
+          )
+      t-category(title="months")
+        thaime-list-transition.listing.listing--months(tag="ul")
+          t-day-or-month-item(
+            v-for="(month, index) in months"
+            :key="month.rtgs"
+            :dayOrMonth="month"
+            :data-index="index / 12"
+            :isCurrentDayOrMonth="currentMonth === index + 1"
+          )
 </template>
 
 <style scoped lang="scss">
@@ -60,13 +48,13 @@ $listing-max-size: 700px;
     &--en {
       font-weight: 300;
     }
-    &--th {
+    &--rtgs {
       font-size: 1.35em;
       padding: 0.5em 0;
       margin: 0.25em var(--half-gutter);
       border-radius: var(--border-radius-small);
     }
-    &--rtgs {
+    &--th {
       color: var(--c-text-lighter);
     }
   }

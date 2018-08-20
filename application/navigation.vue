@@ -1,23 +1,20 @@
-<template>
-<nav>
-  <router-link to="/" exact>
-    <t-icon name="access-time"/>
-  </router-link>
-  <router-link to="/calendar">
-    <t-icon name="insert-invitation"/>
-  </router-link>
-  <!-- have to keep it on a single line for better styling -->
-  <router-link class="year" to="/year">{{i10lYear}}<br />{{thaiYear}}</router-link>
-  <router-link to="/information">
-    <t-icon name="info"/>
-  </router-link>
-</nav>
+<template lang="pug">
+nav.main-navigation
+  router-link.main-navigation__link(to="/" exact)
+    t-icon(name="access-time")
+  router-link.main-navigation__link(to="/calendar")
+    t-icon(name="insert-invitation")
+  router-link.main-navigation__link.main-navigation__link--year(to="/year")
+    //- have to keep it on a single line for better styling
+    | {{i10lYear}}<br />{{thaiYear}}
+  router-link.main-navigation__link(to="/information")
+    t-icon(name="info")
 </template>
 
 <style lang="scss" scoped>
 @import './config';
 
-nav {
+.main-navigation {
   --nav-border-radius: var(--border-radius-small);
   display: flex;
   list-style: none;
@@ -41,42 +38,45 @@ nav {
     left: auto;
     background: none;
   }
-}
-a {
-  height: var(--navigation-height);
-  display: flex;
-  flex: 1 0 25%;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  text-decoration: none;
-  color: var(--c-primary-contrast);
 
-  &:first-child {
-    border-radius: var(--nav-border-radius) 0 0 var(--nav-border-radius);
-  }
-  &:last-child {
-    border-radius: 0 var(--nav-border-radius) var(--nav-border-radius) 0;
-  }
-  @media #{$mq-big} {
-    display: inline-flex;
-    vertical-align: middle;
-    margin-left: var(--half-gutter);
-    color: var(--c-primary);
-    width: var(--navigation-height);
+  &__link {
+    height: var(--navigation-height);
+    display: flex;
+    flex: 1 0 25%;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    text-decoration: none;
+    color: var(--c-primary-contrast);
 
-    &,
-    &:first-child,
+    &:first-child {
+      border-radius: var(--nav-border-radius) 0 0 var(--nav-border-radius);
+    }
     &:last-child {
-      border-radius: var(--navigation-height);
+      border-radius: 0 var(--nav-border-radius) var(--nav-border-radius) 0;
+    }
+    @media #{$mq-big} {
+      display: inline-flex;
+      vertical-align: middle;
+      margin-left: var(--half-gutter);
+      color: var(--c-primary);
+      width: var(--navigation-height);
+
+      &,
+      &:first-child,
+      &:last-child {
+        border-radius: var(--navigation-height);
+      }
+    }
+
+    &--year {
+      font-family: var(--monospace);
+      font-size: 0.7em;
+      text-align: center;
     }
   }
 }
-.year {
-  font-family: var(--monospace);
-  font-size: 0.7em;
-  text-align: center;
-}
+
 .router-link-active {
   background: var(--c-primary-lighter);
 

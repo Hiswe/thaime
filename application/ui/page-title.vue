@@ -1,16 +1,13 @@
-<template>
-  <header>
-      <h1 :key="title">
-        {{title}}
-      </h1>
-    <slot></slot>
-  </header>
+<template lang="pug">
+header.header
+  h1.header__title(:key="title") {{title}}
+  slot
 </template>
 
 <style scoped lang="scss">
 @import '../config';
 
-header {
+.header {
   --c-background: var(--c-primary-lightest);
   background: var(--c-background);
   position: relative;
@@ -23,6 +20,7 @@ header {
     top: 100%;
     width: var(--border-radius);
     height: var(--border-radius);
+    z-index: 2;
   }
   &::before {
     left: 0;
@@ -40,40 +38,40 @@ header {
       var(--c-background) 70%
     );
   }
-}
-h1 {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 300;
-  text-transform: uppercase;
-  padding: var(--half-gutter) var(--gutter);
-  text-align: center;
-  color: var(--c-primary);
+  &__title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    padding: var(--half-gutter) var(--gutter);
+    text-align: center;
+    color: var(--c-primary);
 
-  .page-enter-active &,
-  .page-leave-active & {
-    transition-duration: var(--page-transition);
-  }
+    .page-enter-active &,
+    .page-leave-active & {
+      transition-duration: var(--page-transition);
+    }
 
-  .page-enter & {
-    transform: translateY(10px);
-  }
+    .page-enter & {
+      transform: translateY(10px);
+    }
 
-  .page-enter-active & {
-    transition-delay: var(--page-transition);
-  }
+    .page-enter-active & {
+      transition-delay: var(--page-transition);
+    }
 
-  .page-enter &,
-  .page-leave-active & {
-    opacity: 0;
-  }
+    .page-enter &,
+    .page-leave-active & {
+      opacity: 0;
+    }
 
-  .page-leave-active & {
-    transform: translateY(-10px);
-  }
+    .page-leave-active & {
+      transform: translateY(-10px);
+    }
 
-  @media #{$mq-big} {
-    text-align: left;
+    @media #{$mq-big} {
+      text-align: left;
+    }
   }
 }
 </style>

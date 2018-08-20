@@ -1,27 +1,30 @@
-<template>
-  <li :class="{ active: isCurrentDayOrMonth }">
-    <p class="english-name">{{ dayOrMonth.en }}</p>
-    <p class="thai-name">
-      <span class="thai-text">{{ dayOrMonth.th }}</span>
-      <small class="rtgs">{{ dayOrMonth.rtgs }}</small>
-    </p>
-  </li>
+<template lang="pug">
+li.calendar-item(:class="{ active: isCurrentDayOrMonth }")
+  p.calendar-item__name.calendar-item__name--english.english-name {{ dayOrMonth.en }}
+  p.calendar-item__name.calendar-item__name--thai.thai-name
+    span.rtgs {{ dayOrMonth.rtgs }}
+    small.thai-text {{ dayOrMonth.th }}
 </template>
 
-<style scoped>
-li {
+<style scoped lang="scss">
+.calendar-item {
   padding: 0.5rem;
-}
-p {
-  margin: 0;
-}
-p:first-child {
-  color: var(--c-primary);
-}
-small {
-  display: block;
-  color: var(--c-text-lighter);
-  font-size: 0.7em;
+
+  &__name {
+    margin: 0;
+
+    &--english {
+      color: var(--c-primary);
+    }
+    small,
+    &--thai {
+      margin-top: 0.25rem;
+    }
+  }
+  small {
+    display: block;
+    color: var(--c-text-lighter);
+  }
 }
 .active {
   background: white;

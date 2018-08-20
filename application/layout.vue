@@ -1,14 +1,9 @@
-<template>
-  <main>
-    <thaime-navigation></thaime-navigation>
-    <transition name="page" mode="out-in">
-      <router-view></router-view>
-    </transition>
-    <notifications
-      classes="thaime-notifications"
-      position="bottom center"
-    ></notifications>
-  </main>
+<template lang="pug">
+main
+  thaime-navigation
+  transition(name="page" mode="out-in")
+    router-view
+  notifications(classes="thaime-notifications" position="bottom center")
 </template>
 
 <style lang="scss">
@@ -43,7 +38,7 @@ main {
 .thai-text {
   font-size: 1.1em;
 }
-.svg-icon {
+.svg-symbol {
   fill: currentColor;
 }
 

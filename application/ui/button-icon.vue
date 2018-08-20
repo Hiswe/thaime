@@ -1,12 +1,10 @@
-<template>
-  <button type="button" @click="$emit(`click`)">
-    <t-icon :name="icon"></t-icon>
-  </button>
+<template lang="pug">
+button.button-icon(type="button" @click="$emit(`click`)")
+  t-icon(:name="icon" :scale="1.5")
 </template>
 
 <style lang="scss" scoped>
-button {
-  --svg-icon-scale: 1.5;
+.button-icon {
   color: var(--c-accent);
   background: none;
   border: none;
@@ -15,6 +13,13 @@ button {
 
   &:active {
     color: var(--c-accent-darker);
+
+    .svg-symbol {
+      transform: scale(1.2);
+    }
+  }
+  .svg-symbol {
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 }
 </style>

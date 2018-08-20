@@ -45,13 +45,11 @@ const icons = () => {
     .pipe(
       $.svgSymbols({
         svgAttrs: {
-          class: `svg-icon-wrapper`,
+          class: `svg-symbol`,
           xmlns: false,
         },
-        templates: [
-          `default-demo`,
-          path.join(__dirname, `./source/icons/svg-icons.vue`),
-        ],
+        class: `.svg-symbol--%f`,
+        templates: [`default-demo`, `default-vue`],
       })
     )
     .pipe($.if(/[.]vue$/, gulp.dest(`application/ui`)))

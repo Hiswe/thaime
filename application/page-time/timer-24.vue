@@ -1,9 +1,8 @@
-<template>
-  <div class="timer-24">
-    <t-button-icon icon="remove-circle" @click="decrease"></t-button-icon>
-    <p :class="`text text--${timeFormat}`" @click="toggleFormat">{{ displayedTime }}</p>
-    <t-button-icon icon="add-circle" @click="increase"></t-button-icon>
-  </div>
+<template lang="pug">
+.timer-24
+  t-button-icon.timer-24__button(icon="remove-circle" @click="decrease")
+  p(:class="`text text--${timeFormat}`" @click="toggleFormat") {{ displayedTime }}
+  t-button-icon.timer-24__button(icon="add-circle" @click="increase")
 </template>
 
 <style scoped lang="scss">
@@ -36,13 +35,13 @@
       font-size: 1.5rem;
     }
   }
-}
-button {
-  &:first-child {
-    margin-right: var(--half-gutter);
-  }
-  &:last-child {
-    margin-left: var(--half-gutter);
+  &__button {
+    &:first-child {
+      margin-right: var(--half-gutter);
+    }
+    &:last-child {
+      margin-left: var(--half-gutter);
+    }
   }
 }
 </style>

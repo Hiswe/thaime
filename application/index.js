@@ -11,7 +11,7 @@ import InformationPage from './page-information'
 import YearPage from './page-year'
 import NotFound from './page-not-found'
 
-import svgIcon from './ui/svg-icons'
+import svgIcon from './ui/svg-symbols'
 import pageTitle from './ui/page-title'
 import category from './ui/category'
 import buttonIcon from './ui/button-icon'
