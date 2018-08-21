@@ -31,6 +31,8 @@ body {
 }
 main {
   min-height: calc(100vh - var(--vh-offset));
+  width: 100%;
+  overflow: hidden;
 }
 .page-content {
   flex: 1 0 auto;

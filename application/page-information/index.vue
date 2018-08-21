@@ -8,7 +8,7 @@ section.page-content
       :data-index="1 / 4"
     )
       p(style="margin-top: 0") The app can be shared with this link
-      p: a.link(:href="homepage") {{ homepage }}
+      p: a.link(:href="homepage") {{ homepageNoProtocol }}
       p: button(
           type="button"
           v-clipboard:copy="homepage"
@@ -114,7 +114,7 @@ h3 {
 
   li {
     flex: 1 0 20%;
-    padding: 0 0.5em;
+    padding: 0;
     display: flex;
   }
   a {
@@ -188,6 +188,11 @@ export default {
       version: pkg.version,
       homepage: pkg.homepage,
     }
+  },
+  computed: {
+    homepageNoProtocol() {
+      return this.homepage.replace(`https://`, ``)
+    },
   },
   methods: {
     onCopy() {
