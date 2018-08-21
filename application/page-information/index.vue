@@ -24,7 +24,7 @@ section.page-content
       h3
         | brought to you by
         strong Yannick “Hiswe” Aïvayan
-      p find me on
+      p find me
       ul.social
         li: a(href="http://hiswe.net" target="_blank")
           t-icon(name="web" :scale="2")
@@ -64,12 +64,15 @@ section.page-content
       ul.list
         li
           | Information provided by
+          |
           a.link(href="http://thai-language.com" target="_blank") thai-language.com
         li
           | Icons from
+          |
           a.link(href="https://material.io/icons" target="_blank") Google Material Icon
         li
           | QR Code by
+          |
           a.link(href="http://goqr.me/#t=url" target="_blank") QR Code Generator
   footer v{{version}}
 </template>
