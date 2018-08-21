@@ -62,7 +62,7 @@ $listing-max-size: 700px;
 .day-month-listing {
   @media (max-width: #{($listing-max-size * 2) - 1}) {
     .category:first-child {
-      padding-top: 0;
+      margin-top: 0;
     }
   }
   @media (min-width: #{($listing-max-size * 2)}) {

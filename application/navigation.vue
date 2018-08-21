@@ -27,7 +27,7 @@ nav.main-navigation
   right: var(--navigation-margin);
   height: var(--navigation-height);
   border-radius: var(--nav-border-radius);
-  z-index: 2;
+  z-index: 10;
 
   @media #{$mq-big} {
     position: absolute;

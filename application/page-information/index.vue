@@ -94,6 +94,9 @@ section.page-content
     margin: 0 auto;
   }
 }
+.category--share::before {
+  display: none;
+}
 h3 {
   margin-top: 0;
   font-size: 1.2rem;
