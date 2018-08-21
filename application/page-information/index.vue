@@ -2,7 +2,7 @@
 section.page-content
   t-page-title(title="about thaime")
   thaime-list-transition.categories.content-body(tag="div")
-    t-category(
+    t-category.category--share(
       key="share-the-app"
       title="share the app"
       :data-index="1 / 4"
@@ -26,18 +26,21 @@ section.page-content
         strong Yannick “Hiswe” Aïvayan
       p find me on
       ul.social
+        li: a(href="http://hiswe.net" target="_blank")
+          t-icon(name="web" :scale="2")
+          small website
         li: a(href="https://github.com/hiswe" target="_blank")
           t-icon(name="c-github" :scale="1.75")
           small github
+        li: a(href="https://hiswe.github.com" target="_blank")
+          t-icon(name="ballot" :scale="2")
+          small blog
+        li: a(href="https://medium.com/@hiswehalya" target="_blank")
+          t-icon(name="c-medium" :scale="1.5")
+          small medium
         li: a(href="https://twitter.com/hiswehalya" target="_blank")
           t-icon(name="c-twitter" :scale="1.75")
           small twitter
-        li: a(href="https://hiswe.github.com" target="_blank")
-          t-icon(name="ballot" :scale="1.75")
-          small my blog
-        li: a(href="https://medium.com/@hiswehalya" target="_blank")
-          t-icon(name="c-medium" :scale="1.75")
-          small medium
       p Suggestions can be send by:
       ul.list
         li using the form on <a class="link" href="http://www.hiswe.net/contact" target="_blank">hiswe.net</a>
@@ -101,14 +104,23 @@ h3 {
   text-align: center;
   list-style: none;
   padding: 0;
+  display: flex;
 
   li {
-    display: inline-block;
-    padding: 0 0.75em;
+    flex: 1 0 20%;
+    padding: 0 0.5em;
+    display: flex;
   }
   a {
+    flex: 1 1 auto;
     text-decoration: none;
     color: var(--c-accent-darker);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .svg-symbol {
+    margin: auto 0;
   }
   small {
     display: block;
