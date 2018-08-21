@@ -1,0 +1,47 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Thaime</title>
+
+  <link rel="icon" sizes="228x228" href="/touch-icon-iphone-6-plus.png">
+  <link rel="apple-touch-icon" href="/touch-icon-iphone.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/touch-icon-ipad.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/touch-icon-iphone-retina.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/touch-icon-ipad-retina.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/touch-icon-iphone-6-plus.png">
+
+  <meta name="author" content="Yannick “Hiswe” Aïvayan">
+  <meta name="description" value="Thai time &amp; date">
+  <meta name="keywords" content="thai,time,clock,date">
+
+  <meta property="og:title" content="Thaime">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thaime-2c0a5.firebaseapp.com">
+  <meta property="og:description" content="Thai time &amp; date">
+  <meta property="og:image" content="https://thaime-2c0a5.firebaseapp.com/launcher-touch-icon-4x.png">
+
+  <meta property="twitter:card" content="summary">
+  <meta property="twitter:site" content="@hiswehalya">
+  <meta property="twitter:creator" content="@hiswehalya">
+
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/thaime.css">
+</head>
+
+<body>
+  <div id="vue-root"></div>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/thaime-service-worker.js');
+      });
+    }
+  </script>
+  <script src="/thaime.js"></script>
+</body>
+
+</html>
