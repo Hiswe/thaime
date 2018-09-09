@@ -105,7 +105,7 @@ const workbox = require('workbox-build')
 
 // all options are listed here
 // https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.Configuration
-const serviceWorker = () => {
+const generateServiceWorker = () => {
   return workbox
     .generateSW({
       globDirectory: `public`,
@@ -113,11 +113,22 @@ const serviceWorker = () => {
       swDest: `public/thaime-service-worker.js`,
       cacheId: `thaime-cache-v1`,
       navigateFallback: `/index.html`,
-      // // this is for allowing thaime-lib.js in dev
-      // maximumFileSizeToCacheInBytes: isDev ? 5000000 : 2097152,
     })
     .catch(error => console.warn(`Service worker generation failed: ${error}`))
 }
+const addServiceWorkerSkipWaitingCode = () => {
+  return gulp
+    .src([
+      `public/thaime-service-worker.js`,
+      `source/service-worker-skipwaiting.js`,
+    ])
+    .pipe($.concat(`thaime-service-worker.js`))
+    .pipe(gulp.dest(`public`))
+}
+const serviceWorker = gulp.series(
+  generateServiceWorker,
+  addServiceWorkerSkipWaitingCode
+)
 serviceWorker.description = `generate the service worker using workbox`
 exports[`service-worker`] = serviceWorker
 

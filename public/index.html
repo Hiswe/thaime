@@ -35,11 +35,112 @@
 <body>
   <div id="vue-root"></div>
   <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/thaime-service-worker.js');
-      });
-    }
+    (function () {
+      if ('serviceWorker' in navigator) {
+        var BASE_CLASS = 'pwa-refresh-ui';
+
+        function showRefreshUI(registration) {
+          const refreshContainer = document.createElement('div');
+          refreshContainer.classList.add(BASE_CLASS);
+
+          const refreshText = document.createElement('p');
+          refreshText.classList.add(BASE_CLASS + '__text');
+          refreshText.textContent = 'New version available';
+
+          const dismissButton = document.createElement('button');
+          dismissButton.classList.add(BASE_CLASS + '__dismiss');
+          dismissButton.textContent = 'dismiss';
+
+          const refreshButton = document.createElement('button');
+          refreshButton.classList.add(BASE_CLASS + '__refresh');
+          refreshButton.textContent = 'refresh'
+
+          function removeRefreshUI() {
+            refreshContainer.parentNode.removeChild(refreshContainer);
+          }
+
+          dismissButton.addEventListener('click', removeRefreshUI);
+
+          refreshButton.addEventListener('click', function () {
+            if (!registration.waiting) {
+              return
+            }
+            registration.waiting.postMessage('skipWaiting');
+            removeRefreshUI();
+          })
+
+          refreshContainer.appendChild(refreshText);
+          refreshContainer.appendChild(dismissButton);
+          refreshContainer.appendChild(refreshButton);
+          document.body.appendChild(refreshContainer);
+        }
+
+        function onNewServiceWorker(registration, callback) {
+          if (registration.waiting) {
+            return callback();
+          }
+
+          function listenInstalledStateChange() {
+            registration.installing.addEventListener('statechange', function (event) {
+              if (event.target.state === 'installed') {
+                callback();
+              }
+            })
+          }
+
+          if (registration.installing) {
+            return listenInstalledStateChange();
+          }
+
+          registration.addEventListener('updatefound', listenInstalledStateChange);
+        }
+
+        function listenForWaitingServiceWorker(registration, callback) {
+          function awaitStateChange() {
+            registration.installing.addEventListener('statechange', function () {
+              if (this.state === 'installed') callback(registration);
+            })
+          }
+          if (!registration) {
+            return;
+          }
+          if (registration.waiting) {
+            return callback(registration);
+          }
+          if (registration.installing) {
+            awaitStateChange();
+          }
+          registration.addEventListener('updatefound', function () {
+            awaitStateChange()
+          })
+        }
+
+        function onRegistration(registration) {
+          if (!navigator.serviceWorker.controller) {
+            return;
+          }
+
+          var preventDevToolsReloadLoop = false;
+          navigator.serviceWorker.addEventListener('controllerchange', function (event) {
+            if (preventDevToolsReloadLoop) {
+              return;
+            }
+            preventDevToolsReloadLoop = true;
+            window.location.reload();
+          })
+
+          listenForWaitingServiceWorker(registration, showRefreshUI)
+        }
+
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker
+              .register('/thaime-service-worker.js')
+              .then(onRegistration);
+          })
+        }
+      }
+    })()
   </script>
   <script src="/thaime.js"></script>
 </body>
