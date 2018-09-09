@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "version": "1.3.2",
+  "version": "1.4.0",
   "name": "Thaime",
   "short_name": "Thaime",
   "description": "Thai time & date",
