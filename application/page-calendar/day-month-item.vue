@@ -27,8 +27,16 @@ li.calendar-item(:class="{ active: isCurrentDayOrMonth }")
   }
 }
 .active {
-  background: white;
+  background: var(--c-accent);
+  color: white;
   border-radius: var(--border-radius-small);
+
+  small {
+    color: white;
+    opacity: 0.75;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 </style>
 
