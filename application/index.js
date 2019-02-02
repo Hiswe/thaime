@@ -1,7 +1,6 @@
 import vhCheck from 'vh-check'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import VueClipboard from 'vue-clipboard2'
 import VueNotifications from 'vue-notification'
 
 import Layout from './layout'
@@ -20,7 +19,6 @@ import ListTransition from './ui/list-transition'
 vhCheck()
 
 Vue.use(VueRouter)
-Vue.use(VueClipboard)
 Vue.use(VueNotifications)
 
 Vue.component(`t-icon`, svgIcon)

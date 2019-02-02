@@ -10,7 +10,6 @@ const chalk = require('chalk')
 const resizer = require('node-image-resizer')
 
 const isRelease = args.release !== false
-const destFolder = isRelease ? `public` : `dist`
 
 console.log('build for', chalk.magenta(isRelease ? `release` : `development`))
 

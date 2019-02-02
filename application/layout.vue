@@ -50,7 +50,6 @@ main {
   margin: 1rem;
   margin-bottom: 0;
   border-radius: 0.25em;
-  font-size: 1.5em;
   text-align: center;
   padding: 10px 20px;
   color: var(--c-text);

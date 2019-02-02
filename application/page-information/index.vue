@@ -1,3 +1,50 @@
+<script>
+import copy from 'copy-to-clipboard'
+
+import pkg from '../../package.json'
+
+const SHARE_API = typeof navigator.share === `function`
+const __APP_TITLE__ = pkg.name
+const __APP_DESC__ = pkg.description
+const __APP_URL__ = pkg.homepage
+
+export default {
+  name: `page-information`,
+  data() {
+    return {
+      version: pkg.version,
+      homepage: pkg.homepage,
+    }
+  },
+  computed: {
+    homepageNoProtocol() {
+      return this.homepage.replace(`https://`, ``)
+    },
+  },
+  methods: {
+    onCopy() {
+      this.notifyCopy()
+    },
+    share() {
+      if (SHARE_API) return this.shareWithApi()
+      this.copyToClipboard()
+    },
+    shareWithApi() {
+      const shareOptions = {
+        title: __APP_TITLE__,
+        text: __APP_DESC__,
+        url: __APP_URL__,
+      }
+      navigator.share(shareOptions).catch(() => this.copyToClipboard())
+    },
+    copyToClipboard() {
+      copy(__APP_URL__)
+      this.$notify(`Application link copied!`)
+    },
+  },
+}
+</script>
+
 <template lang="pug">
 section.page-content
   t-page-title(title="about thaime")
@@ -7,14 +54,13 @@ section.page-content
       title="share the app"
       :data-index="1 / 4"
     )
-      p(style="margin-top: 0") The app can be shared with this link
-      p: a.link(:href="homepage") {{ homepageNoProtocol }}
-      p: button(
-          type="button"
-          v-clipboard:copy="homepage"
-          v-clipboard:success="onCopy"
-        ) Copy to clipboard
-
+      p(style="margin-top: 0"): button(
+        type="button"
+        @click="share"
+      ) Share <i>Thaime</i>!
+      p or copy this url
+      p: span.link(@click="copyToClipboard") {{ homepageNoProtocol }}
+      p or use this qrcode
       t-icon.qrcode(name="thaime-qrcode" :scale="0.65")
     t-category(
       key="author-suggestions"
@@ -26,25 +72,25 @@ section.page-content
         strong Yannick “Hiswe” Aïvayan
       p find me
       ul.social
-        li: a(href="http://hiswe.net" target="_blank")
+        li: a(href="http://hiswe.net" target="_blank" rel="noreferrer noopener")
           t-icon(name="web" :scale="2")
           small website
-        li: a(href="https://github.com/hiswe" target="_blank")
+        li: a(href="https://github.com/hiswe" target="_blank" rel="noreferrer noopener")
           t-icon(name="c-github" :scale="1.75")
           small github
-        li: a(href="https://hiswe.github.com" target="_blank")
+        li: a(href="https://hiswe.github.com" target="_blank" rel="noreferrer noopener")
           t-icon(name="ballot" :scale="2")
           small blog
-        li: a(href="https://medium.com/@hiswehalya" target="_blank")
+        li: a(href="https://medium.com/@hiswehalya" target="_blank" rel="noreferrer noopener")
           t-icon(name="c-medium" :scale="1.5")
           small medium
-        li: a(href="https://twitter.com/hiswehalya" target="_blank")
+        li: a(href="https://twitter.com/hiswehalya" target="_blank" rel="noreferrer noopener")
           t-icon(name="c-twitter" :scale="1.75")
-          small twitter
+          small twitter 
       p Suggestions can be send by:
       ul.list
-        li using the form on <a class="link" href="http://www.hiswe.net/contact" target="_blank">hiswe.net</a>
-        li creating a ticket on <a class="link" href="https://github.com/Hiswe/thaime/issues" target="_blank">the github repo</a>
+        li using the form on <a class="link" href="http://www.hiswe.net/contact" target="_blank" rel="noreferrer noopener">hiswe.net</a>
+        li creating a ticket on <a class="link" href="https://github.com/Hiswe/thaime/issues" target="_blank" rel="noreferrer noopener">the github repo</a>
 
     t-category(
       key="other-app"
@@ -53,7 +99,7 @@ section.page-content
     )
       p(style="margin-top: 0")
         | <strong>Thailpha</strong>a pocket Thai alphabet dictionnary
-      p: a(href="https://thailpha-3e7f6.firebaseapp.com/" target="_blank")
+      p: a(href="https://thailpha-3e7f6.firebaseapp.com/" target="_blank" rel="noreferrer noopener")
         t-icon(name="c-thailpha")
 
     t-category(
@@ -65,15 +111,15 @@ section.page-content
         li
           | Information provided by
           |
-          a.link(href="http://thai-language.com" target="_blank") thai-language.com
+          a.link(href="http://thai-language.com" target="_blank" rel="noreferrer noopener") thai-language.com
         li
           | Icons from
           |
-          a.link(href="https://material.io/icons" target="_blank") Google Material Icon
+          a.link(href="https://material.io/icons" target="_blank" rel="noreferrer noopener") Google Material Icon
         li
           | QR Code by
           |
-          a.link(href="http://goqr.me/#t=url" target="_blank") QR Code Generator
+          a.link(href="http://goqr.me/#t=url" target="_blank" rel="noreferrer noopener") QR Code Generator
   footer v{{version}}
 </template>
 
@@ -178,26 +224,3 @@ button {
 }
 </style>
 
-<script>
-import pkg from '../../package.json'
-
-export default {
-  name: `page-information`,
-  data() {
-    return {
-      version: pkg.version,
-      homepage: pkg.homepage,
-    }
-  },
-  computed: {
-    homepageNoProtocol() {
-      return this.homepage.replace(`https://`, ``)
-    },
-  },
-  methods: {
-    onCopy() {
-      this.$notify(`copied!`)
-    },
-  },
-}
-</script>
