@@ -7,6 +7,7 @@ const args = require('yargs').argv
 const del = require('del')
 const Parcel = require('parcel-bundler')
 const chalk = require('chalk')
+const resizer = require('node-image-resizer')
 
 const isRelease = args.release !== false
 const destFolder = isRelease ? `public` : `dist`
@@ -62,37 +63,32 @@ exports[`build:icons`] = icons
 // APP LOGO
 ////////
 
-const logoBasename = `touch-icon`
-const logoDest = isRelease ? `public` : `source/application-logo`
-
 const cleanAppLogo = () => {
-  return del([`${logoDest}/touch-*`, `${logoDest}/launcher-*`])
+  return del([`public/touch-*`, `public/launcher-*`])
 }
 
-const appLogo = () => {
-  return gulp
-    .src(`source/application-logo/thaime-logo.png`)
-    .pipe($.imageResize({ width: 192, height: 192, upscale: true }))
-    .pipe($.rename(path => (path.basename = `launcher-${logoBasename}-4x`)))
-    .pipe(gulp.dest(logoDest))
-    .pipe($.imageResize({ width: 180, height: 180, upscale: true }))
-    .pipe($.rename(path => (path.basename = `${logoBasename}-iphone-6-plus`)))
-    .pipe(gulp.dest(logoDest))
-    .pipe($.imageResize({ width: 152, height: 152, upscale: true }))
-    .pipe($.rename(path => (path.basename = `${logoBasename}-ipad-retina`)))
-    .pipe(gulp.dest(logoDest))
-    .pipe($.imageResize({ width: 144, height: 144, upscale: true }))
-    .pipe($.rename(path => (path.basename = `${logoBasename}-web-app`)))
-    .pipe(gulp.dest(logoDest))
-    .pipe($.imageResize({ width: 120, height: 120, upscale: true }))
-    .pipe($.rename(path => (path.basename = `${logoBasename}-iphone-retina`)))
-    .pipe(gulp.dest(logoDest))
-    .pipe($.imageResize({ width: 76, height: 76, upscale: true }))
-    .pipe($.rename(path => (path.basename = `${logoBasename}-ipad`)))
-    .pipe(gulp.dest(logoDest))
-    .pipe($.imageResize({ width: 57, height: 57, upscale: true }))
-    .pipe($.rename(path => (path.basename = `${logoBasename}-iphone`)))
-    .pipe(gulp.dest(logoDest))
+const LOGO_PATH = path.join(__dirname, `source/application-logo/touch-icon.png`)
+const RESIZER_SETUP = {
+  all: {
+    path: path.join(__dirname, `/public/`),
+  },
+  versions: [
+    {
+      prefix: `launcher-`,
+      suffix: `-4x`,
+      width: 192,
+      height: 192,
+    },
+    { suffix: `-iphone-6-plus`, width: 180, height: 180 },
+    { suffix: `-ipad-retina`, width: 152, height: 152 },
+    { suffix: `-web-app`, width: 144, height: 144 },
+    { suffix: `-iphone-retina`, width: 120, height: 120 },
+    { suffix: `-ipad`, width: 76, height: 76 },
+    { suffix: `-iphone`, width: 57, height: 57 },
+  ],
+}
+const appLogo = async () => {
+  await resizer(LOGO_PATH, RESIZER_SETUP)
 }
 appLogo.description = `resize favicon for different devices`
 exports[`application-logo`] = gulp.series(cleanAppLogo, appLogo)

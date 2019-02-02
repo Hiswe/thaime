@@ -10,5 +10,6 @@
     "rtgs",
     "thaime"
   ],
-  "prettier.disableLanguages": ["vue", "markdown"]
+  "prettier.disableLanguages": ["vue", "markdown"],
+  "editor.tabSize": 2
 }

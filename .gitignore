@@ -2,13 +2,12 @@
 
 /dist
 /.cache
-/source/application-logo/touch-*.png
-/source/application-logo/launcher-*.png
 /public/*.png
 /public/*.css
 /public/*.js
 /public/*.webmanifest
 /.firebase
+.DS_Store
 
 # Logs
 logs
