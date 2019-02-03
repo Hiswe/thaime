@@ -6,6 +6,7 @@
 /public/*.css
 /public/*.js
 /public/*.webmanifest
+/application/assets/*.png
 /.firebase
 .DS_Store
 

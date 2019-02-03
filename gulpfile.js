@@ -12,6 +12,7 @@ const resizer = require('node-image-resizer')
 const isRelease = args.release !== false
 
 console.log('build for', chalk.magenta(isRelease ? `release` : `development`))
+console.log(process.env)
 
 ////////
 // ICONS
@@ -69,7 +70,7 @@ const cleanAppLogo = () => {
 const LOGO_PATH = path.join(__dirname, `source/application-logo/touch-icon.png`)
 const RESIZER_SETUP = {
   all: {
-    path: path.join(__dirname, `/public/`),
+    path: path.join(__dirname, `/application/assets/`),
   },
   versions: [
     {
@@ -186,6 +187,28 @@ const application = done => {
 }
 application.description = `bundle vue application with parcel.js`
 exports[`build:application`] = application
+
+const pwaEntryFile = path.join(__dirname, `./application/index.pug`)
+const pwaBundler = new Parcel(pwaEntryFile, {
+  outDir: `./public`,
+  // outFile: `thaime`,
+  watch: false,
+  sourceMaps: false,
+  detailedReport: false,
+  cache: false,
+  logLevel: 2,
+  // minify break the build
+  minify: false,
+})
+
+const pwaApplication = done => {
+  pwaBundler.bundle()
+  pwaBundler.on(`buildEnd`, () => {
+    done()
+  })
+}
+pwaApplication.description = `bundle vue pwa application with parcel.js`
+exports[`build:pwa`] = pwaApplication
 
 exports[`build:app`] = gulp.series(cleanPublic, application)
 

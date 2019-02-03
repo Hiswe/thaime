@@ -1,0 +1,36 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title= process.env.APP_NAME
+
+    meta(name="author" content=process.env.AUTHOR)
+    meta(name="description" value=process.env.APP_DESCRIPTION)
+    meta(name="keywords" content=process.env.APP_KEYWORDS)
+
+    meta(property="og:title" content=process.env.APP_NAME)
+    meta(property="og:type" content="website")
+    meta(property="og:url" content=process.env.APP_URL)
+    meta(property="og:description" content=process.env.APP_DESCRIPTION)
+    meta(property="og:image" content="./assets/launcher-touch-icon-4x.png")
+
+    meta(property="twitter:card" content="summary")
+    meta(property="twitter:site" content=process.env.AUTHOR_TWITTER)
+    meta(property="twitter:creator" content=process.env.AUTHOR_TWITTER)
+
+    link( rel="manifest" href="/manifest.webmanifest")
+    //- if (isRelease)
+    //-   //- Global site tag (gtag.js) - Google Analytics
+    //-   script(async src="https://www.googletagmanager.com/gtag/js?id=UA-42058488-3")
+    //-   script.
+    //-     window.dataLayer = window.dataLayer || [];
+    //-     function gtag(){dataLayer.push(arguments);}
+    //-     gtag('js', new Date());
+    //-     gtag('config', 'UA-42058488-3');
+
+  body
+    p=process.env.RELEASE
+    #vue-root
+    script(src="./index.js")

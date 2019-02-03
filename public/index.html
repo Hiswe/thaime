@@ -1,148 +1,26 @@
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-  <title>Thaime</title>
-
-  <link rel="icon" sizes="228x228" href="/touch-icon-iphone-6-plus.png">
-  <link rel="apple-touch-icon" href="/touch-icon-iphone.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="/touch-icon-ipad.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="/touch-icon-iphone-retina.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="/touch-icon-ipad-retina.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/touch-icon-iphone-6-plus.png">
-
-  <meta name="author" content="Yannick “Hiswe” Aïvayan">
-  <meta name="description" value="Thai time &amp; date">
-  <meta name="keywords" content="thai,time,clock,date">
-
-  <meta property="og:title" content="Thaime">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://thaime-2c0a5.firebaseapp.com">
-  <meta property="og:description" content="Thai time &amp; date">
-  <meta property="og:image" content="https://thaime-2c0a5.firebaseapp.com/launcher-touch-icon-4x.png">
-
-  <meta property="twitter:card" content="summary">
-  <meta property="twitter:site" content="@hiswehalya">
-  <meta property="twitter:creator" content="@hiswehalya">
-
-  <link rel="manifest" href="/manifest.webmanifest">
-  <link rel="stylesheet" href="/thaime.css">
-</head>
-
-<body>
-  <div id="vue-root"></div>
-  <script>
-    (function () {
-      if ('serviceWorker' in navigator) {
-        var BASE_CLASS = 'pwa-refresh-ui';
-
-        function showRefreshUI(registration) {
-          const refreshContainer = document.createElement('div');
-          refreshContainer.classList.add(BASE_CLASS);
-
-          const refreshText = document.createElement('p');
-          refreshText.classList.add(BASE_CLASS + '__text');
-          refreshText.textContent = 'New version available';
-
-          const dismissButton = document.createElement('button');
-          dismissButton.classList.add(BASE_CLASS + '__dismiss');
-          dismissButton.textContent = 'dismiss';
-
-          const refreshButton = document.createElement('button');
-          refreshButton.classList.add(BASE_CLASS + '__refresh');
-          refreshButton.textContent = 'refresh'
-
-          function removeRefreshUI() {
-            refreshContainer.parentNode.removeChild(refreshContainer);
-          }
-
-          dismissButton.addEventListener('click', removeRefreshUI);
-
-          refreshButton.addEventListener('click', function () {
-            if (!registration.waiting) {
-              return
-            }
-            registration.waiting.postMessage('skipWaiting');
-            removeRefreshUI();
-          })
-
-          refreshContainer.appendChild(refreshText);
-          refreshContainer.appendChild(dismissButton);
-          refreshContainer.appendChild(refreshButton);
-          document.body.appendChild(refreshContainer);
-        }
-
-        function onNewServiceWorker(registration, callback) {
-          if (registration.waiting) {
-            return callback();
-          }
-
-          function listenInstalledStateChange() {
-            registration.installing.addEventListener('statechange', function (event) {
-              if (event.target.state === 'installed') {
-                callback();
-              }
-            })
-          }
-
-          if (registration.installing) {
-            return listenInstalledStateChange();
-          }
-
-          registration.addEventListener('updatefound', listenInstalledStateChange);
-        }
-
-        function listenForWaitingServiceWorker(registration, callback) {
-          function awaitStateChange() {
-            registration.installing.addEventListener('statechange', function () {
-              if (this.state === 'installed') callback(registration);
-            })
-          }
-          if (!registration) {
-            return;
-          }
-          if (registration.waiting) {
-            return callback(registration);
-          }
-          if (registration.installing) {
-            awaitStateChange();
-          }
-          registration.addEventListener('updatefound', function () {
-            awaitStateChange()
-          })
-        }
-
-        function onRegistration(registration) {
-          if (!navigator.serviceWorker.controller) {
-            return;
-          }
-
-          var preventDevToolsReloadLoop = false;
-          navigator.serviceWorker.addEventListener('controllerchange', function (event) {
-            if (preventDevToolsReloadLoop) {
-              return;
-            }
-            preventDevToolsReloadLoop = true;
-            window.location.reload();
-          })
-
-          listenForWaitingServiceWorker(registration, showRefreshUI)
-        }
-
-        if ('serviceWorker' in navigator) {
-          window.addEventListener('load', () => {
-            navigator.serviceWorker
-              .register('/thaime-service-worker.js')
-              .then(onRegistration);
-          })
-        }
-      }
-    })()
-  </script>
-  <script src="/thaime.js"></script>
-</body>
-
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Thailpha</title>
+    <meta name="author" content="Yannick “Hiswe” Aïvayan">
+    <meta name="description" value="Thai time &amp; date">
+    <meta name="keywords" content="thai,time,clock,date">
+    <meta property="og:title" content="Thailpha">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thaime-2c0a5.firebaseapp.com">
+    <meta property="og:description" content="Thai time &amp; date">
+    <meta property="og:image" content="/launcher-touch-icon-4x.e85629b7.png">
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:site" content="@hiswehalya">
+    <meta property="twitter:creator" content="@hiswehalya">
+    <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/application.d86e94c6.css"></head>
+  <body>
+    <p>true</p>
+    <div id="vue-root"></div>
+    <script src="/application.514b63bf.js"></script>
+  </body>
 </html>

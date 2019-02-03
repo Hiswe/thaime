@@ -1,0 +1,50 @@
+{
+  "manifest_version": 2,
+  "version": "1.4.0",
+  "name": "Thaime",
+  "short_name": "Thaime",
+  "description": "Thai time & date",
+  "background_color": "#fff",
+  "theme_color": "black",
+  "lang": "en-US",
+  "display": "standalone",
+  "start_url": "/index.html?utm_source=homescreen",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./assets/touch-icon-iphone.png",
+      "sizes": "57x57",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/touch-icon-ipad.png",
+      "sizes": "76x76",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/touch-icon-ipad-retina.png",
+      "sizes": "120x120",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/touch-icon-web-app.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/touch-icon-ipad-retina.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/touch-icon-iphone-6-plus.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/launcher-touch-icon-4x.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
