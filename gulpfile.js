@@ -12,7 +12,6 @@ const resizer = require('node-image-resizer')
 const isRelease = args.release !== false
 
 console.log('build for', chalk.magenta(isRelease ? `release` : `development`))
-console.log(process.env)
 
 ////////
 // ICONS
@@ -165,6 +164,8 @@ const cleanPublic = () => {
   return del([`public/*`, `!public/index.html`])
 }
 exports['clean-public'] = cleanPublic
+const cleanDist = () => del([`dist/**/*`])
+exports['clean-dist'] = cleanDist
 
 const applicationEntryFile = path.join(__dirname, `./application/index.js`)
 const parcelBundler = new Parcel(applicationEntryFile, {
@@ -190,15 +191,15 @@ exports[`build:application`] = application
 
 const pwaEntryFile = path.join(__dirname, `./application/index.pug`)
 const pwaBundler = new Parcel(pwaEntryFile, {
-  outDir: `./public`,
+  outDir: process.env.RELEASE ? `./dist` : `./public`,
   // outFile: `thaime`,
   watch: false,
-  sourceMaps: false,
+  sourceMaps: !process.env.RELEASE,
   detailedReport: false,
   cache: false,
   logLevel: 2,
-  // minify break the build
-  minify: false,
+  // // minify break the build
+  // minify: false,
 })
 
 const pwaApplication = done => {
@@ -208,7 +209,7 @@ const pwaApplication = done => {
   })
 }
 pwaApplication.description = `bundle vue pwa application with parcel.js`
-exports[`build:pwa`] = pwaApplication
+exports[`build:pwa`] = gulp.series(cleanDist, pwaApplication)
 
 exports[`build:app`] = gulp.series(cleanPublic, application)
 
