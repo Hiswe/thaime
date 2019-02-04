@@ -93,41 +93,6 @@ appLogo.description = `resize favicon for different devices`
 exports[`application-logo`] = gulp.series(cleanAppLogo, appLogo)
 
 ////////
-// SERVICE WORKER
-////////
-
-const workbox = require('workbox-build')
-
-// all options are listed here
-// https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.Configuration
-const generateServiceWorker = () => {
-  return workbox
-    .generateSW({
-      globDirectory: `public`,
-      globPatterns: [`**\/*.{html,js,css,png,svg,json}`],
-      swDest: `public/thaime-service-worker.js`,
-      cacheId: `thaime-cache-v1`,
-      navigateFallback: `/index.html`,
-    })
-    .catch(error => console.warn(`Service worker generation failed: ${error}`))
-}
-const addServiceWorkerSkipWaitingCode = () => {
-  return gulp
-    .src([
-      `public/thaime-service-worker.js`,
-      `source/service-worker-skipwaiting.js`,
-    ])
-    .pipe($.concat(`thaime-service-worker.js`))
-    .pipe(gulp.dest(`public`))
-}
-const serviceWorker = gulp.series(
-  generateServiceWorker,
-  addServiceWorkerSkipWaitingCode
-)
-serviceWorker.description = `generate the service worker using workbox`
-exports[`service-worker`] = serviceWorker
-
-////////
 // BUMP
 ////////
 
@@ -151,34 +116,8 @@ exports[`bump`] = bump
 
 //----- APPLICATION
 
-const cleanPublic = () => {
-  return del([`public/*`, `!public/index.html`])
-}
-exports['clean-public'] = cleanPublic
 const cleanDist = () => del([`dist/**/*`])
-exports['clean-dist'] = cleanDist
-
-const applicationEntryFile = path.join(__dirname, `./application/index.js`)
-const parcelBundler = new Parcel(applicationEntryFile, {
-  outDir: `./public`,
-  outFile: `thaime`,
-  watch: false,
-  sourceMaps: false,
-  detailedReport: false,
-  cache: false,
-  logLevel: 2,
-  // minify break the build
-  minify: false,
-})
-
-const application = done => {
-  parcelBundler.bundle()
-  parcelBundler.on(`buildEnd`, () => {
-    done()
-  })
-}
-application.description = `bundle vue application with parcel.js`
-exports[`build:application`] = application
+exports[`clean-dist`] = cleanDist
 
 const pwaEntryFile = path.join(__dirname, `./application/index.pug`)
 const pwaBundler = new Parcel(pwaEntryFile, {
@@ -189,8 +128,6 @@ const pwaBundler = new Parcel(pwaEntryFile, {
   detailedReport: false,
   cache: false,
   logLevel: 2,
-  // // minify break the build
-  // minify: false,
 })
 
 const pwaApplication = done => {
@@ -202,36 +139,10 @@ const pwaApplication = done => {
 pwaApplication.description = `bundle vue pwa application with parcel.js`
 exports[`build:pwa`] = gulp.series(cleanDist, pwaApplication)
 
-exports[`build:app`] = gulp.series(cleanPublic, application)
-
-//----- MINIFY
-
-const minifyJs = () => {
-  return gulp
-    .src(`public/*.js`)
-    .pipe($.babelMinify())
-    .pipe(gulp.dest(`public`))
-}
-minifyJs.description = `minify js`
-exports[`minify:js`] = minifyJs
-
-const minifyCss = () => {
-  return gulp
-    .src(`public/*.css`)
-    .pipe($.cleanCss())
-    .pipe(gulp.dest(`public`))
-}
-minifyCss.description = `minify css`
-exports[`minify:css`] = minifyCss
-
-const minify = gulp.parallel(minifyJs, minifyCss)
-
 //----- BUILD ALL
 
 exports.build = gulp.series(
-  cleanPublic,
-  icons,
-  gulp.parallel(appLogo, application),
-  minify,
-  serviceWorker
+  cleanDist,
+  gulp.parallel(icons, appLogo),
+  pwaApplication
 )

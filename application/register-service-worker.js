@@ -1,6 +1,5 @@
 const BASE_CLASS = `pwa-refresh-ui`
-// const SW_PATH = `/thaime-service-worker.js`
-const SW_PATH = process.env.SW_PATH
+const SW_PATH = `/thaime-service-worker.js`
 
 export default function registerServiceWorker() {
   if (!(`serviceWorker` in navigator)) return

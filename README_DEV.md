@@ -31,6 +31,30 @@ here are some of the commands to run the project locally
 
 ## commands
 
+### building error
+
+[one ticket](https://github.com/mischnic/parcel-plugin-sw-cache/issues/15) is open to fix an error in the service worker generation
+
+Until then go to: 
+
+```
+node_modules/parcel-plugin-sw-cache/index.js
+```
+update lines 93 & after to:
+
+```js
+workbox
+  .injectManifest(injectOptions)
+  // update here
+  .then(() =>
+    replace({
+      files: config.swDest || swDest,
+      from: /__PUBLIC/g,
+      to: publicURL,
+    })
+  )
+```
+
 ### building dependencies
 
 ```sh

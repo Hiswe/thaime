@@ -1,8 +1,11 @@
+importScripts(
+  'https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js'
+)
+
 workbox.core.setCacheNameDetails({ prefix: 'thaime-cache-v1' })
 
-self.__precacheManifest = [].concat(self.__precacheManifest || [])
 workbox.precaching.suppressWarnings()
-workbox.precaching.precacheAndRoute(self.__precacheManifest, {})
+workbox.precaching.precacheAndRoute([])
 
 // workbox.routing.registerNavigationRoute('/index.html', {
 //   whitelist: [/\/(vowels|numbers|about|search|char\/)/],
