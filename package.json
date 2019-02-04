@@ -26,6 +26,13 @@
     "toc": "doctoc README.md README_DEV.md --github",
     "release": "node ./bin/release.js"
   },
+  "cache": {
+    "cacheId": "thaime-cache-v1",
+    "swDest": "thaime-service-worker.js",
+    "navigateFallback": "/index.html",
+    "skipWaiting": false,
+    "clientsClaim": false
+  },
   "dependencies": {
     "animejs": "^3.0.1",
     "copy-to-clipboard": "^3.0.8",

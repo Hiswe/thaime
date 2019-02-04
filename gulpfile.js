@@ -128,16 +128,6 @@ serviceWorker.description = `generate the service worker using workbox`
 exports[`service-worker`] = serviceWorker
 
 ////////
-// WEB MANIFEST
-////////
-
-const webManifest = () => {
-  return gulp.src(`manifest.webmanifest`).pipe(gulp.dest(`public`))
-}
-webManifest.description = `copy the web manifest to the right place`
-exports[`web-manifest`] = webManifest
-
-////////
 // BUMP
 ////////
 
@@ -146,6 +136,7 @@ const bump = done => {
     console.log(chalk.red(`bump task needs the --to argument`))
     return done()
   }
+  // TODO: bump production webmanifest
   return gulp
     .src([`package.json`, `manifest.webmanifest`])
     .pipe($.jsonEditor({ version: args.to }))
@@ -240,7 +231,7 @@ const minify = gulp.parallel(minifyJs, minifyCss)
 exports.build = gulp.series(
   cleanPublic,
   icons,
-  gulp.parallel(appLogo, webManifest, application),
+  gulp.parallel(appLogo, application),
   minify,
   serviceWorker
 )

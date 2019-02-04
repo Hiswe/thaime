@@ -9,6 +9,7 @@ import CalendarPage from './page-calendar'
 import InformationPage from './page-information'
 import YearPage from './page-year'
 import NotFound from './page-not-found'
+import registerServiceWorker from './register-service-worker'
 
 import svgIcon from './ui/svg-symbols'
 import pageTitle from './ui/page-title'
@@ -17,6 +18,7 @@ import buttonIcon from './ui/button-icon'
 import ListTransition from './ui/list-transition'
 
 vhCheck()
+registerServiceWorker()
 
 Vue.use(VueRouter)
 Vue.use(VueNotifications)
