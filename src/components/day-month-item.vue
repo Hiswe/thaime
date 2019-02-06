@@ -19,6 +19,21 @@ li.calendar-item(:class="{ active: isCurrentDayOrMonth }")
 <style scoped lang="scss">
 .calendar-item {
   padding: 0.5rem;
+  counter-increment: dayOrMonthlisting;
+
+  &::before {
+    content: counter(dayOrMonthlisting);
+    position: absolute;
+    top: 50%;
+    left: 0.5rem;
+    transform: translate(0, -50%);
+    font-weight: 900;
+    font-size: 5rem;
+    z-index: -1;
+    color: white;
+    pointer-events: none;
+    opacity: 0.85;
+  }
 
   &__name {
     margin: 0;
@@ -41,11 +56,13 @@ li.calendar-item(:class="{ active: isCurrentDayOrMonth }")
   color: white;
   border-radius: var(--border-radius-small);
 
+  &::before {
+    color: var(--c-accent-darker);
+    opacity: 0.35;
+  }
+
   small {
-    color: white;
-    opacity: 0.75;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    color: var(--c-primary);
   }
 }
 </style>

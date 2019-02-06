@@ -129,6 +129,7 @@ $listing-max-size: 700px;
   margin: 0 auto;
   display: grid;
   grid-gap: 0.25em;
+  counter-reset: dayOrMonthlisting;
 
   &--days {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
