@@ -69,7 +69,7 @@ const cleanAppLogo = () => {
 const LOGO_PATH = path.join(__dirname, `source/application-logo/touch-icon.png`)
 const RESIZER_SETUP = {
   all: {
-    path: path.join(__dirname, `/application/assets/`),
+    path: path.join(__dirname, `/src/assets/`),
   },
   versions: [
     {
