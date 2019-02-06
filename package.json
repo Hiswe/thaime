@@ -32,6 +32,7 @@
     "swDest": "thaime-service-worker.js"
   },
   "dependencies": {
+    "@hiswe/focus-ring": "^1.0.4",
     "animejs": "^3.0.1",
     "copy-to-clipboard": "^3.0.8",
     "lodash.round": "^4.0.4",

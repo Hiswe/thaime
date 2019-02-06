@@ -712,6 +712,11 @@
     through2 "^2.0.0"
     xdg-basedir "^3.0.0"
 
+"@hiswe/focus-ring@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@hiswe/focus-ring/-/focus-ring-1.0.4.tgz#99847353c7df53ac0c656cadf1166aa768688dac"
+  integrity sha512-lui7/vh1zyM/G4icff4Vx/cx2Sh1pKt9VoFk1Rhxuf0K0Q/Mu60mo63+jXS0B9IPQvBukp97lWjzusJGelrjgQ==
+
 "@iarna/toml@^2.2.0":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-2.2.1.tgz#82d0993d8882bb05e0645fbb4731d9e939e895b3"

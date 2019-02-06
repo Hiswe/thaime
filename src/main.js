@@ -2,6 +2,7 @@ import vhCheck from 'vh-check'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueNotifications from 'vue-notification'
+import focusRing from '@hiswe/focus-ring'
 
 import Layout from '~/layout'
 // pages
@@ -20,6 +21,7 @@ import buttonIcon from '~/components/button-icon'
 import ListTransition from '~/components/list-transition'
 
 vhCheck()
+focusRing()
 registerServiceWorker()
 
 Vue.use(VueRouter)
@@ -76,14 +78,3 @@ new Vue({
   render: h => h(Layout),
   router,
 })
-
-// enable focus ring when user press tab
-// https://hackernoon.com/removing-that-ugly-focus-ring-and-keeping-it-too-6c8727fefcd2
-function handleFirstTab(e) {
-  if (e.keyCode === 9) {
-    // the "I am a keyboard user" key
-    document.body.classList.add(`user-is-tabbing`)
-    window.removeEventListener(`keydown`, handleFirstTab, { passive: true })
-  }
-}
-window.addEventListener(`keydown`, handleFirstTab)

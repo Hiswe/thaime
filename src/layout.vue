@@ -18,7 +18,8 @@ main
 </template>
 
 <style lang="scss">
-@import './css-vars';
+@import '~/css-vars';
+@import '~@hiswe/focus-ring/dist/focus-ring.scss';
 
 *,
 *::before,
@@ -68,20 +69,10 @@ main {
   border: 0;
   box-shadow: 0 0 15px 0 var(--c-primary);
 }
-// prevent zoomin on double-tap
+// prevent zooming on double-tap
 // https://stackoverflow.com/questions/46167604/iphone-html-disable-double-tap-to-zoom
 button {
   touch-action: manipulation;
-}
-// remove focus ring until a user press tab
-// https://hackernoon.com/removing-that-ugly-focus-ring-and-keeping-it-too-6c8727fefcd2
-body:not(.user-is-tabbing) {
-  button:focus,
-  input:focus,
-  select:focus,
-  textarea:focus {
-    outline: none;
-  }
 }
 
 .page-enter-active,
