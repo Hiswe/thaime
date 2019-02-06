@@ -107,6 +107,7 @@ button {
   display: flex;
   padding: 0 calc(50% - 500px / 2);
   font-size: 18px;
+  z-index: 2;
 
   &__text,
   &__dismiss,

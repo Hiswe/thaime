@@ -18,8 +18,8 @@ here are some of the commands to run the project locally
 
 ## requirements
 
-- [node](http://nodejs.org/download/) >= 8.11.2
-- [yarn](https://yarnpkg.com/lang/en/) >= 1.7.0
+- [node](http://nodejs.org/download/) >= 10.15.0
+- [yarn](https://yarnpkg.com/lang/en/) >= 1.13.0
 
 ## dev stack
 
