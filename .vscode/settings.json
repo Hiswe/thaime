@@ -11,5 +11,6 @@
     "thaime"
   ],
   "prettier.disableLanguages": ["vue", "markdown"],
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "files.insertFinalNewline": true
 }

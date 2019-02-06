@@ -2,9 +2,7 @@
   <section class="page-content">
     <h1>404</h1>
     <h2>nothing there</h2>
-    <router-link to="/" exact>
-      back to homepage
-    </router-link>
+    <router-link to="/" exact>back to homepage</router-link>
   </section>
 </template>
 

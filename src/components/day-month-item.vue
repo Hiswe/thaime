@@ -1,3 +1,13 @@
+<script>
+export default {
+  name: `day-month-item`,
+  props: {
+    dayOrMonth: Object,
+    isCurrentDayOrMonth: Boolean,
+  },
+}
+</script>
+
 <template lang="pug">
 li.calendar-item(:class="{ active: isCurrentDayOrMonth }")
   p.calendar-item__name.calendar-item__name--english.english-name {{ dayOrMonth.en }}
@@ -39,16 +49,3 @@ li.calendar-item(:class="{ active: isCurrentDayOrMonth }")
   }
 }
 </style>
-
-<script>
-export default {
-  name: `day-month-item`,
-  props: {
-    dayOrMonth: Object,
-    isCurrentDayOrMonth: Boolean,
-  },
-}
-</script>
-
-
-

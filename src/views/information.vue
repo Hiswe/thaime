@@ -124,7 +124,7 @@ section.page-content
 </template>
 
 <style lang="scss" scoped>
-@import '../config';
+@import '~/config';
 
 .page-content {
   padding-bottom: var(--navigation-total-height);
@@ -223,4 +223,3 @@ button {
   }
 }
 </style>
-

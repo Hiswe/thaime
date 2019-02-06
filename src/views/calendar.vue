@@ -1,3 +1,55 @@
+<script>
+import { DateTime } from 'luxon'
+
+import THAI_NUMBERS from '~/utils/thai-numbers'
+import { days, months } from '~/utils/day-month-names'
+import DayOrMonthItem from '~/components/day-month-item'
+
+const YEAR_DIFFERENCE = 2561 - 2018
+
+export default {
+  name: `page-calendar`,
+  components: {
+    't-day-or-month-item': DayOrMonthItem,
+  },
+  data() {
+    return {
+      days,
+      months,
+      currentDate: false,
+    }
+  },
+  computed: {
+    englishDate() {
+      if (!this.currentDate) return ``
+      return this.currentDate.toLocaleString(DateTime.DATE_HUGE)
+    },
+    thaiDate() {
+      if (!this.currentDate) return ``
+      return this.currentDate.setLocale(`th`).toLocaleString(DateTime.DATE_HUGE)
+    },
+    rtgsDate() {
+      if (!this.currentDate) return ``
+      const { weekday, day, month } = this.currentDate
+      return `${days[weekday - 1].rtgs} ${THAI_NUMBERS[day].rtgs} ${
+        months[month - 1].rtgs
+      }`
+    },
+    currentDay() {
+      if (!this.currentDate) return 0
+      return this.currentDate.weekday
+    },
+    currentMonth() {
+      if (!this.currentDate) return 0
+      return this.currentDate.month
+    },
+  },
+  created() {
+    this.currentDate = DateTime.local()
+  },
+}
+</script>
+
 <template lang="pug">
 .page-content
   t-page-title(title="days & months")
@@ -88,55 +140,3 @@ $listing-max-size: 700px;
   }
 }
 </style>
-
-<script>
-import { DateTime } from 'luxon'
-
-import THAI_NUMBERS from '../thai-numbers'
-import DayOrMonthItem from './day-month-item'
-import { days, months } from './day-month-names'
-
-const YEAR_DIFFERENCE = 2561 - 2018
-
-export default {
-  name: `page-calendar`,
-  components: {
-    't-day-or-month-item': DayOrMonthItem,
-  },
-  data() {
-    return {
-      days,
-      months,
-      currentDate: false,
-    }
-  },
-  computed: {
-    englishDate() {
-      if (!this.currentDate) return ``
-      return this.currentDate.toLocaleString(DateTime.DATE_HUGE)
-    },
-    thaiDate() {
-      if (!this.currentDate) return ``
-      return this.currentDate.setLocale(`th`).toLocaleString(DateTime.DATE_HUGE)
-    },
-    rtgsDate() {
-      if (!this.currentDate) return ``
-      const { weekday, day, month } = this.currentDate
-      return `${days[weekday - 1].rtgs} ${THAI_NUMBERS[day].rtgs} ${
-        months[month - 1].rtgs
-      }`
-    },
-    currentDay() {
-      if (!this.currentDate) return 0
-      return this.currentDate.weekday
-    },
-    currentMonth() {
-      if (!this.currentDate) return 0
-      return this.currentDate.month
-    },
-  },
-  created() {
-    this.currentDate = DateTime.local()
-  },
-}
-</script>

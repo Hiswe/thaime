@@ -1,3 +1,22 @@
+<script>
+import { DateTime } from 'luxon'
+
+import * as years from '~/utils/thai-years'
+
+const now = DateTime.local()
+const currentYear = now.year
+
+export default {
+  name: `main-navigation`,
+  data() {
+    return {
+      i10lYear: years.i10l,
+      thaiYear: years.thai,
+    }
+  },
+}
+</script>
+
 <template lang="pug">
 nav.main-navigation
   router-link.main-navigation__link(to="/" exact)
@@ -12,7 +31,7 @@ nav.main-navigation
 </template>
 
 <style lang="scss" scoped>
-@import './config';
+@import '~/config';
 
 .main-navigation {
   --nav-border-radius: var(--border-radius-small);
@@ -85,22 +104,3 @@ nav.main-navigation
   }
 }
 </style>
-
-<script>
-import { DateTime } from 'luxon'
-
-import * as years from './thai-years'
-
-const now = DateTime.local()
-const currentYear = now.year
-
-export default {
-  name: `main-navigation`,
-  data() {
-    return {
-      i10lYear: years.i10l,
-      thaiYear: years.thai,
-    }
-  },
-}
-</script>

@@ -52,7 +52,7 @@ const icons = () => {
         templates: [`default-demo`, `default-vue`],
       })
     )
-    .pipe($.if(/[.]vue$/, gulp.dest(`application/ui`)))
+    .pipe($.if(/[.]vue$/, gulp.dest(`src/components`)))
     .pipe($.if(/[.]html$/, gulp.dest(`source/icons`)))
 }
 icons.description = `build SVG icons`
@@ -119,7 +119,7 @@ exports[`bump`] = bump
 const cleanDist = () => del([`dist/**/*`])
 exports[`clean-dist`] = cleanDist
 
-const pwaEntryFile = path.join(__dirname, `./application/index.pug`)
+const pwaEntryFile = path.join(__dirname, `./src/index.pug`)
 const pwaBundler = new Parcel(pwaEntryFile, {
   outDir: process.env.RELEASE ? `./dist` : `./public`,
   // outFile: `thaime`,

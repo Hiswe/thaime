@@ -1,6 +1,6 @@
 import round from 'lodash.round'
 
-import { thaiPeriods } from '../thai-hours'
+import { thaiPeriods } from '~/utils/thai-hours'
 
 export const SVG_SIZE = 100
 
@@ -119,10 +119,10 @@ export const periodNames = thaiPeriods
       period.rtgsPadStart && period.rtgsPadEnd
         ? period.rtgs().replace(` `, ` * `)
         : !period.rtgsPadStart && period.rtgsPadEnd
-          ? `* ${period.rtgs()}`
-          : period.rtgsPadStart && !period.rtgsPadEnd
-            ? `${period.rtgs()} *`
-            : period.rtgs()
+        ? `* ${period.rtgs()}`
+        : period.rtgsPadStart && !period.rtgsPadEnd
+        ? `${period.rtgs()} *`
+        : period.rtgs()
     const isMidnight = index === 0
     const isNoon = index === 3
     const isReversedText = index === 2 || index === 4

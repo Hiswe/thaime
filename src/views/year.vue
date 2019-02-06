@@ -1,3 +1,47 @@
+<script>
+import * as years from '~/utils/thai-years'
+import pageTitle from '~/components/page-title'
+import inputNumber from '~/components/input-number'
+
+export default {
+  name: `page-year`,
+  components: {
+    't-input': inputNumber,
+  },
+  data() {
+    return {
+      i10lYear: years.i10l,
+    }
+  },
+  methods: {
+    reset() {
+      this.i10lYear = years.i10l
+    },
+  },
+  computed: {
+    isNotCurrentYear() {
+      return this.i10lYear !== years.i10l
+    },
+    thaiYear: {
+      get() {
+        return years.toThaiYear(this.i10lYear)
+      },
+      set(thaiYear) {
+        this.i10lYear = years.toI10lYear(thaiYear)
+      },
+    },
+    age: {
+      get() {
+        return years.toAge(this.i10lYear)
+      },
+      set(age) {
+        this.i10lYear = years.fromAge(age)
+      },
+    },
+  },
+}
+</script>
+
 <template lang="pug">
 section.page-content
   t-page-title(title="years")
@@ -51,49 +95,3 @@ button {
   stroke: white;
 }
 </style>
-
-<script>
-import pageTitle from '../ui/page-title'
-import inputNumber from './input-number'
-
-import * as years from '../thai-years'
-
-export default {
-  name: `page-year`,
-  components: {
-    't-input': inputNumber,
-  },
-  data() {
-    return {
-      i10lYear: years.i10l,
-    }
-  },
-  methods: {
-    reset() {
-      this.i10lYear = years.i10l
-    },
-  },
-  computed: {
-    isNotCurrentYear() {
-      return this.i10lYear !== years.i10l
-    },
-    thaiYear: {
-      get() {
-        return years.toThaiYear(this.i10lYear)
-      },
-      set(thaiYear) {
-        this.i10lYear = years.toI10lYear(thaiYear)
-      },
-    },
-    age: {
-      get() {
-        return years.toAge(this.i10lYear)
-      },
-      set(age) {
-        this.i10lYear = years.fromAge(age)
-      },
-    },
-  },
-}
-</script>
-

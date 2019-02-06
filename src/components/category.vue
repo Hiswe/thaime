@@ -1,3 +1,12 @@
+<script>
+export default {
+  name: `category`,
+  props: {
+    title: String,
+  },
+}
+</script>
+
 <template lang="pug">
 dl.category
   dt.category__title {{title}}
@@ -6,7 +15,7 @@ dl.category
 </template>
 
 <style lang="scss" scoped>
-@import '../config';
+@import '~/config';
 
 .category,
 .category__content {
@@ -49,12 +58,3 @@ dl.category
   }
 }
 </style>
-
-<script>
-export default {
-  name: `category`,
-  props: {
-    title: String,
-  },
-}
-</script>

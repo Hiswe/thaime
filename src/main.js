@@ -3,19 +3,21 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueNotifications from 'vue-notification'
 
-import Layout from './layout'
-import TimePage from './page-time'
-import CalendarPage from './page-calendar'
-import InformationPage from './page-information'
-import YearPage from './page-year'
-import NotFound from './page-not-found'
-import registerServiceWorker from './register-service-worker'
-
-import svgIcon from './ui/svg-symbols'
-import pageTitle from './ui/page-title'
-import category from './ui/category'
-import buttonIcon from './ui/button-icon'
-import ListTransition from './ui/list-transition'
+import Layout from '~/layout'
+// pages
+import TimePage from '~/views/time'
+import CalendarPage from '~/views/calendar'
+import InformationPage from '~/views/information'
+import YearPage from '~/views/year'
+import NotFound from '~/views/not-found'
+// SW
+import registerServiceWorker from '~/register-service-worker'
+// Application global components
+import svgIcon from '~/components/svg-symbols'
+import pageTitle from '~/components/page-title'
+import category from '~/components/category'
+import buttonIcon from '~/components/button-icon'
+import ListTransition from '~/components/list-transition'
 
 vhCheck()
 registerServiceWorker()

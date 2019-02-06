@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "yarn build && yarn serve",
-    "dev": "yarn build:assets && parcel application/index.pug",
+    "dev": "yarn build:assets && parcel src/index.pug",
     "bump": "gulp bump",
     "build": "cross-env NODE_ENV=production RELEASE=true gulp build",
     "build:app": "cross-env NODE_ENV=production gulp build:app",
@@ -28,7 +28,7 @@
   "cache": {
     "inDev": true,
     "strategy": "inject",
-    "swSrc": "application/service-worker-templates.js",
+    "swSrc": "src/service-worker-templates.js",
     "swDest": "thaime-service-worker.js"
   },
   "dependencies": {

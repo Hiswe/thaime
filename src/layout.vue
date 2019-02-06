@@ -1,3 +1,14 @@
+<script>
+import theNavigation from '~/components/the-navigation'
+
+export default {
+  name: `layout`,
+  components: {
+    'thaime-navigation': theNavigation,
+  },
+}
+</script>
+
 <template lang="pug">
 main
   thaime-navigation
@@ -136,15 +147,3 @@ body:not(.user-is-tabbing) {
   }
 }
 </style>
-
-<script>
-import mainNav from './navigation'
-
-export default {
-  name: `layout`,
-  components: {
-    'thaime-navigation': mainNav,
-  },
-}
-</script>
-

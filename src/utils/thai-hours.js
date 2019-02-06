@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
-import { shallowClone } from './clone'
 
-import THAI_NUMBERS from './thai-numbers'
+import { shallowClone } from '~/utils/clone'
+import THAI_NUMBERS from '~/utils/thai-numbers'
 
 /* spell-checker: disable */
 
@@ -42,8 +42,8 @@ const basePeriod = {
     const displayHour = !Number.isFinite(thaiHour)
       ? ``
       : isFirstHourInPeriod && this.hideFirstThaiHour
-        ? ``
-        : `${this._numbers[thaiHour].rtgs} (${thaiHour})`
+      ? ``
+      : `${this._numbers[thaiHour].rtgs} (${thaiHour})`
     const padStart = this.rtgsPadStart ? ` ` : ``
     const padEnd = this.rtgsPadEnd ? ` ` : ``
     return `${padStart}${displayHour}${padEnd}`.replace(`  `, ` `)

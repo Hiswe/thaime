@@ -1,3 +1,25 @@
+<script>
+import { DateTime } from 'luxon'
+
+import { getThaiTime } from '~/utils/thai-hours'
+
+export default {
+  name: `timer-thai`,
+  props: {
+    currentTime: DateTime,
+    currentPeriod: Object,
+  },
+  computed: {
+    rtgs() {
+      return getThaiTime(this.currentTime).rtgs()
+    },
+    thai() {
+      return getThaiTime(this.currentTime).thai()
+    },
+  },
+}
+</script>
+
 <template lang="pug">
 .timer-text(:class="`timer-text--${currentPeriod.id}`")
   p.timer-text__rtgs {{ rtgs }}
@@ -75,26 +97,3 @@ p {
   font-size: 1.2rem;
 }
 </style>
-
-<script>
-import { DateTime } from 'luxon'
-
-import { getThaiTime } from '../thai-hours'
-
-export default {
-  name: `timer-thai`,
-  props: {
-    currentTime: DateTime,
-    currentPeriod: Object,
-  },
-  computed: {
-    rtgs() {
-      return getThaiTime(this.currentTime).rtgs()
-    },
-    thai() {
-      return getThaiTime(this.currentTime).thai()
-    },
-  },
-}
-</script>
-

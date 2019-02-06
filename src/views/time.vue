@@ -1,74 +1,10 @@
-<template lang="pug">
-section.page-content
-  t-page-title(title="clock")
-  .content-body
-    t-timer-24(:currentTime="currentTime" @change="setHour")
-    t-clock(
-      :currentTime="currentTime"
-      @change="setHour"
-    )
-      transition(name="fade")
-        t-icon.restore-button(
-          name="restore"
-          v-if="isManualHour"
-          :scale="3"
-        )
-    t-timer-thai(
-      :currentTime="currentTime"
-      :currentPeriod="currentPeriod"
-    )
-</template>
-
-<style lang="scss">
-.restore-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 2;
-  color: var(--c-accent);
-  stroke-width: 0.5;
-  stroke: white;
-}
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.25s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
-
-<style scoped lang="scss">
-.page-content {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - var(--vh-offset));
-}
-.content-body {
-  flex: 1 0 auto;
-  display: flex;
-  flex-direction: column;
-}
-.clock {
-  width: 100%;
-  flex: 1 1 auto;
-  height: calc(100vh - 250px - var(--vh-offset));
-}
-.restore-button {
-  --svg-icon-scale: 3;
-}
-</style>
-
 <script>
 import { DateTime } from 'luxon'
 
-import { getThaiTime } from '../thai-hours'
-import Timer24 from './timer-24'
-import Clock from './clock'
-import TimerThai from './timer-thai'
+import { getThaiTime } from '~/utils/thai-hours'
+import Timer24 from '~/components/timer-24'
+import Clock from '~/components/clock'
+import TimerThai from '~/components/timer-thai'
 
 export default {
   name: `page-time`,
@@ -136,3 +72,66 @@ export default {
 }
 </script>
 
+<template lang="pug">
+section.page-content
+  t-page-title(title="clock")
+  .content-body
+    t-timer-24(:currentTime="currentTime" @change="setHour")
+    t-clock(
+      :currentTime="currentTime"
+      @change="setHour"
+    )
+      transition(name="fade")
+        t-icon.restore-button(
+          name="restore"
+          v-if="isManualHour"
+          :scale="3"
+        )
+    t-timer-thai(
+      :currentTime="currentTime"
+      :currentPeriod="currentPeriod"
+    )
+</template>
+
+<style lang="scss">
+.restore-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
+  color: var(--c-accent);
+  stroke-width: 0.5;
+  stroke: white;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
+
+<style scoped lang="scss">
+.page-content {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--vh-offset));
+}
+.content-body {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.clock {
+  width: 100%;
+  flex: 1 1 auto;
+  height: calc(100vh - 250px - var(--vh-offset));
+}
+.restore-button {
+  --svg-icon-scale: 3;
+}
+</style>

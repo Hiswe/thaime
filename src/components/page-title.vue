@@ -5,7 +5,7 @@ header.header
 </template>
 
 <style scoped lang="scss">
-@import '../config';
+@import '~/config';
 
 .header {
   --c-background: var(--c-primary-lightest);

@@ -1,3 +1,15 @@
+<script>
+export default {
+  name: `button-icon`,
+  props: {
+    icon: {
+      type: String,
+      required: true,
+    },
+  },
+}
+</script>
+
 <template lang="pug">
 button.button-icon(type="button" @click="$emit(`click`)")
   t-icon(:name="icon" :scale="1.5")
@@ -23,17 +35,3 @@ button.button-icon(type="button" @click="$emit(`click`)")
   }
 }
 </style>
-
-
-<script>
-export default {
-  name: `button-icon`,
-  props: {
-    icon: {
-      type: String,
-      required: true,
-    },
-  },
-}
-</script>
-

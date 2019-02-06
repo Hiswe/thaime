@@ -1,3 +1,44 @@
+<script>
+import { DateTime } from 'luxon'
+
+const formats = {
+  time: DateTime.TIME_WITH_SECONDS,
+  'time-24': DateTime.TIME_24_WITH_SECONDS,
+}
+
+export default {
+  name: `timer-24`,
+  props: {
+    currentTime: DateTime,
+  },
+  data() {
+    return {
+      timeFormat: `time-24`,
+    }
+  },
+  computed: {
+    displayedTime() {
+      const isLuxonDateTime = this.currentTime instanceof DateTime
+      if (!isLuxonDateTime) return `00:00:00`
+      return this.currentTime
+        .setLocale(`en`)
+        .toLocaleString(formats[this.timeFormat])
+    },
+  },
+  methods: {
+    toggleFormat() {
+      this.timeFormat = this.timeFormat === `time-24` ? `time` : `time-24`
+    },
+    increase() {
+      this.$emit(`change`, this.currentTime.hour + 1)
+    },
+    decrease() {
+      this.$emit(`change`, this.currentTime.hour - 1)
+    },
+  },
+}
+</script>
+
 <template lang="pug">
 .timer-24
   t-button-icon.timer-24__button(icon="remove-circle" @click="decrease")
@@ -45,44 +86,3 @@
   }
 }
 </style>
-
-<script>
-import { DateTime } from 'luxon'
-
-const formats = {
-  time: DateTime.TIME_WITH_SECONDS,
-  'time-24': DateTime.TIME_24_WITH_SECONDS,
-}
-
-export default {
-  name: `timer-24`,
-  props: {
-    currentTime: DateTime,
-  },
-  data() {
-    return {
-      timeFormat: `time-24`,
-    }
-  },
-  computed: {
-    displayedTime() {
-      const isLuxonDateTime = this.currentTime instanceof DateTime
-      if (!isLuxonDateTime) return `00:00:00`
-      return this.currentTime
-        .setLocale(`en`)
-        .toLocaleString(formats[this.timeFormat])
-    },
-  },
-  methods: {
-    toggleFormat() {
-      this.timeFormat = this.timeFormat === `time-24` ? `time` : `time-24`
-    },
-    increase() {
-      this.$emit(`change`, this.currentTime.hour + 1)
-    },
-    decrease() {
-      this.$emit(`change`, this.currentTime.hour - 1)
-    },
-  },
-}
-</script>

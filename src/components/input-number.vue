@@ -1,3 +1,34 @@
+<script>
+export default {
+  name: `input-number`,
+  props: {
+    title: String,
+    value: Number,
+  },
+  computed: {
+    id() {
+      return this.title
+        .trim()
+        .toLowerCase()
+        .replace(/\s/g, `-`)
+    },
+    localValue: {
+      get() {
+        return this.value
+      },
+      set(value) {
+        this.$emit(`input`, value)
+      },
+    },
+  },
+  methods: {
+    removeInputFocus() {
+      this.$refs.input.blur()
+    },
+  },
+}
+</script>
+
 <template lang="pug">
 form(@submit.prevent="removeInputFocus")
   label(:for="id") {{title}}
@@ -57,35 +88,3 @@ input {
   }
 }
 </style>
-
-<script>
-export default {
-  name: `input-number`,
-  props: {
-    title: String,
-    value: Number,
-  },
-  computed: {
-    id() {
-      return this.title
-        .trim()
-        .toLowerCase()
-        .replace(/\s/g, `-`)
-    },
-    localValue: {
-      get() {
-        return this.value
-      },
-      set(value) {
-        this.$emit(`input`, value)
-      },
-    },
-  },
-  methods: {
-    removeInputFocus() {
-      this.$refs.input.blur()
-    },
-  },
-}
-</script>
-
