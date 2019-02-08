@@ -10,8 +10,8 @@ Thai time & date web-application
 
 - [about](#about)
 - [website](#website)
-- [Sources & references](#sources--references)
-- [Developers](#developers)
+- [sources & references](#sources--references)
+- [developers](#developers)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
